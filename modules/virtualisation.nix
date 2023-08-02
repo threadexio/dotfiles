@@ -13,5 +13,10 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [ seabios OVMFFull win-virtio ];
+  environment.systemPackages = with pkgs; [
+    virt-manager
+    seabios
+    OVMFFull
+    win-virtio
+  ];
 }
