@@ -66,6 +66,7 @@
     ripgrep
     file
     neofetch
+    tmux
 
     firefox
     keepassxc
