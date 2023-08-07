@@ -31,6 +31,7 @@
   networking.hostName = "redstarOS";
 
   services.xserver.displayManager.gdm.wayland = true;
+  services.xserver.displayManager.defaultSession = "plasmawayland";
 
   services.flatpak.enable = true;
   hardware.ckb-next.enable = true;

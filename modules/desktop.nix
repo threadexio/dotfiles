@@ -67,7 +67,7 @@
     file
     neofetch
 
-    ungoogled-chromium
+    firefox
     keepassxc
   ];
 }

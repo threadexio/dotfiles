@@ -14,7 +14,7 @@
 
   environment.systemPackages = with pkgs; [
     # IDEs
-    vscode
+    vscodium-fhs
 
     ## Nix
     nixpkgs-fmt
@@ -34,5 +34,6 @@
     valgrind
     nmap # ncat
     dig
+    wireshark
   ];
 }
