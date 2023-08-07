@@ -1,0 +1,273 @@
+// Place your key bindings in this file to override the defaults
+[
+	{
+		"key": "ctrl+alt+t",
+		"command": "workbench.action.terminal.focus"
+	},
+	{
+		"key": "ctrl+alt+j",
+		"command": "-code-runner.runByLanguage"
+	},
+	{
+		"key": "ctrl+.",
+		"command": "-problems.action.showQuickFixes",
+		"when": "problemFocus"
+	},
+	{
+		"key": "ctrl+.",
+		"command": "-settings.action.editFocusedSetting",
+		"when": "inSettingsSearch"
+	},
+	{
+		"key": "ctrl+.",
+		"command": "-editor.action.quickFix",
+		"when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+shift+5",
+		"command": "-workbench.action.terminal.split",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+/ right",
+		"command": "workbench.action.splitEditorRight"
+	},
+	{
+		"key": "ctrl+/ left",
+		"command": "workbench.action.splitEditorLeft"
+	},
+	{
+		"key": "ctrl+/ down",
+		"command": "workbench.action.splitEditorDown"
+	},
+	{
+		"key": "ctrl+/ up",
+		"command": "workbench.action.splitEditorUp"
+	},
+	{
+		"key": "ctrl+alt+up",
+		"command": "workbench.action.focusAboveGroup"
+	},
+	{
+		"key": "ctrl+k ctrl+up",
+		"command": "-workbench.action.focusAboveGroup"
+	},
+	{
+		"key": "ctrl+alt+down",
+		"command": "workbench.action.focusBelowGroup"
+	},
+	{
+		"key": "ctrl+k ctrl+down",
+		"command": "-workbench.action.focusBelowGroup"
+	},
+	{
+		"key": "ctrl+alt+left",
+		"command": "workbench.action.focusLeftGroup"
+	},
+	{
+		"key": "ctrl+k ctrl+left",
+		"command": "-workbench.action.focusLeftGroup"
+	},
+	{
+		"key": "ctrl+alt+right",
+		"command": "workbench.action.focusRightGroup"
+	},
+	{
+		"key": "ctrl+k ctrl+right",
+		"command": "-workbench.action.focusRightGroup"
+	},
+	{
+		"key": "ctrl+shift+w",
+		"command": "-workbench.action.closeWindow"
+	},
+	{
+		"key": "ctrl+shift+c",
+		"command": "-workbench.action.terminal.openNativeConsole",
+		"when": "!terminalFocus"
+	},
+	{
+		"key": "ctrl+\\",
+		"command": "-workbench.action.splitEditor"
+	},
+	{
+		"key": "ctrl+alt+,",
+		"command": "editor.action.inPlaceReplace.up",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+shift+,",
+		"command": "-editor.action.inPlaceReplace.up",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+.",
+		"command": "workbench.action.openSettings"
+	},
+	{
+		"key": "ctrl+,",
+		"command": "-workbench.action.openSettings"
+	},
+	{
+		"key": "ctrl+shift+d",
+		"command": "workbench.panel.repl.view.focus"
+	},
+	{
+		"key": "ctrl+l",
+		"command": "-expandLineSelection",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "ctrl+l",
+		"command": "workbench.action.terminal.clear"
+	},
+	{
+		"key": "ctrl+v",
+		"command": "workbench.action.terminal.paste",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+shift+v",
+		"command": "-workbench.action.terminal.paste",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+alt+s",
+		"command": "workbench.action.quickOpenTerm"
+	},
+	{
+		"key": "ctrl+shift+pagedown",
+		"command": "-workbench.action.moveEditorRightInGroup"
+	},
+	{
+		"key": "ctrl+shift+down",
+		"command": "workbench.action.terminal.resizePaneDown"
+	},
+	{
+		"key": "ctrl+shift+pagedown",
+		"command": "workbench.action.terminal.scrollDown",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+shift+down",
+		"command": "-workbench.action.terminal.scrollDown",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+shift+down",
+		"command": "-editor.action.insertCursorBelow",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+shift+up",
+		"command": "workbench.action.terminal.resizePaneUp"
+	},
+	{
+		"key": "ctrl+shift+pageup",
+		"command": "workbench.action.terminal.scrollUp",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+shift+up",
+		"command": "-workbench.action.terminal.scrollUp",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+shift+up",
+		"command": "-editor.action.insertCursorAbove",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+shift+pageup",
+		"command": "-workbench.action.moveEditorLeftInGroup"
+	},
+	{
+		"key": "ctrl+shift+d",
+		"command": "-workbench.view.debug",
+		"when": "viewContainer.workbench.view.debug.enabled"
+	},
+	{
+		"key": "ctrl+shift+-",
+		"command": "-notebook.cell.split",
+		"when": "config.jupyter.enableKeyboardShortcuts && editorTextFocus && inputFocus && notebookEditorFocused && notebookViewType == 'jupyter-notebook'"
+	},
+	{
+		"key": "ctrl+k ctrl+shift+\\",
+		"command": "-notebook.cell.split",
+		"when": "notebookCellEditable && notebookEditable && notebookEditorFocused"
+	},
+	{
+		"key": "ctrl+shift+/",
+		"command": "workbench.action.terminal.split"
+	},
+	{
+		"key": "ctrl+c",
+		"command": "-problems.action.copy",
+		"when": "problemFocus"
+	},
+	{
+		"key": "ctrl+l",
+		"command": "workbench.debug.panel.action.clearReplAction"
+	},
+	{
+		"key": "ctrl+alt+f",
+		"command": "-liveshare.follow",
+		"when": "liveshare:hasCollaborators && !liveshare:isFollowing"
+	},
+	{
+		"key": "ctrl+alt+f",
+		"command": "-liveshare.unfollow",
+		"when": "liveshare:hasCollaborators && liveshare:isFollowing"
+	},
+	{
+		"key": "ctrl+alt+p",
+		"command": "workbench.panel.markers.view.focus"
+	},
+	{
+		"key": "ctrl+q",
+		"command": "-workbench.action.quit"
+	},
+	{
+		"key": "ctrl+alt+z",
+		"command": "workbench.action.toggleMaximizedPanel"
+	},
+	{
+		"key": "shift+alt+up",
+		"command": "-markdown.extension.onCopyLineUp",
+		"when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'markdown'"
+	},
+	{
+		"key": "shift+alt+down",
+		"command": "-markdown.extension.onCopyLineDown",
+		"when": "editorTextFocus && !editorReadonly && !suggestWidgetVisible && editorLangId == 'markdown'"
+	},
+	{
+		"key": "ctrl+shift+.",
+		"command": "-breadcrumbs.focusAndSelect",
+		"when": "breadcrumbsPossible"
+	},
+	{
+		"key": "ctrl+shift+.",
+		"command": "-breadcrumbs.toggleToOn",
+		"when": "!config.breadcrumbs.enabled"
+	},
+	{
+		"key": "ctrl+up",
+		"command": "editor.action.copyLinesUpAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+shift+alt+up",
+		"command": "-editor.action.copyLinesUpAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+down",
+		"command": "editor.action.copyLinesDownAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+shift+alt+down",
+		"command": "-editor.action.copyLinesDownAction",
+		"when": "editorTextFocus && !editorReadonly"
+	}
+]

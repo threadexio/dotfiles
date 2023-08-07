@@ -1,0 +1,169 @@
+{
+  //
+  // Window
+  //
+  "window.dialogStyle": "custom",
+  "window.restoreWindows": "none",
+  "window.commandCenter": true,
+  "window.menuBarVisibility": "compact",
+  "window.titleBarStyle": "custom",
+  //
+  // Editor
+  //
+  "editor.fontFamily": "CaskaydiaCove Nerd Font Mono",
+  "editor.cursorStyle": "line-thin",
+  "editor.insertSpaces": false,
+  "editor.accessibilitySupport": "off",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.comments.ignoreEmptyLines": false,
+  "editor.emptySelectionClipboard": false,
+  "editor.hover.delay": 150,
+  "editor.lightbulb.enabled": false,
+  "editor.lineNumbers": "relative",
+  "editor.linkedEditing": true,
+  "editor.mouseWheelZoom": true,
+  "editor.padding.top": 20,
+  "editor.padding.bottom": 20,
+  "editor.renderLineHighlight": "gutter",
+  "editor.scrollbar.horizontalScrollbarSize": 6,
+  "editor.scrollbar.vertical": "hidden",
+  "editor.scrollBeyondLastColumn": 0,
+  "editor.smoothScrolling": true,
+  "editor.stickyTabStops": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.find.autoFindInSelection": "multiline",
+  "editor.fontLigatures": true,
+  "editor.minimap.size": "fill",
+  "editor.snippetSuggestions": "bottom",
+  "editor.suggest.preview": true,
+  "editor.quickSuggestions": {
+    "other": "off",
+    "comments": "off",
+    "strings": "off"
+  },
+  "editor.tabCompletion": "on",
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
+  "editor.inlineSuggest.showToolbar": "always",
+  "files.hotExit": "off",
+  "files.insertFinalNewline": true,
+  "files.simpleDialog.enable": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "explorer.confirmDelete": false,
+  "explorer.compactFolders": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.formatOnSave": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  //
+  // Workbench
+  //
+  "workbench.editor.untitled.hint": "hidden",
+  "workbench.commandPalette.history": 5,
+  "workbench.enableExperiments": false,
+  "workbench.list.smoothScrolling": true,
+  "workbench.panel.opensMaximized": "never",
+  "workbench.sideBar.location": "right",
+  "workbench.iconTheme": "eq-material-theme-icons-light",
+  //
+  // Terminal
+  //
+  "terminal.integrated.enablePersistentSessions": false,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.enableFileLinks": "off",
+  //
+  // Misc
+  //
+  "telemetry.telemetryLevel": "off",
+  "update.mode": "none",
+  "problems.sortOrder": "position",
+  //
+  // Extensions
+  //
+  "extensions.autoUpdate": "onlyEnabledExtensions",
+  "extensions.ignoreRecommendations": true,
+  //
+  // Git/Github
+  //
+  "git.alwaysSignOff": true,
+  "git.enableCommitSigning": true,
+  "git.allowNoVerifyCommit": true,
+  "git.alwaysShowStagedChangesResourceGroup": true,
+  "git.branchProtection": [
+    "master"
+  ],
+  "git.openRepositoryInParentFolders": "never",
+  "github.gitAuthentication": false,
+  //
+  // Markdown
+  //
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+  },
+  "markdown.extension.toc.orderedList": false,
+  "markdown.extension.toc.slugifyMode": "github",
+  "markdown.extension.toc.updateOnSave": false,
+  "markdown.extension.toc.unorderedList.marker": "*",
+  "markdown.extension.tableFormatter.delimiterRowNoPadding": true,
+  "markdown.extension.tableFormatter.normalizeIndentation": true,
+  "markdown.extension.preview.autoShowPreviewToSide": true,
+  "markdown.extension.syntax.plainTheme": true,
+  "markdown.extension.theming.decoration.renderParagraph": true,
+  "markdownlint.config": {
+    "no-inline-html": false,
+    "first-line-h1": false
+  },
+  //
+  // Rust
+  //
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+  "rust-analyzer.checkOnSave": true,
+  "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.inlayHints.chainingHints.enable": false,
+  "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "with_block",
+  "rust-analyzer.inlayHints.parameterHints.enable": false,
+  "rust-analyzer.diagnostics.useRustcErrorCode": true,
+  "rust-analyzer.debug.engine": "vadimcn.vscode-lldb",
+  "rust-analyzer.restartServerOnConfigChange": true,
+  "lldb.suppressUpdateNotifications": true,
+  //
+  // C/C++
+  //
+  "[c]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "[cpp]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "cmake.configureOnOpen": false,
+  //
+  // Nix
+  //
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nil",
+  "[nix]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "jnoortheen.nix-ide"
+  },
+  //
+  // Json
+  //
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  //
+  // Draw.io
+  //
+  "hediet.vscode-drawio.resizeImages": null,
+  "hediet.vscode-drawio.codeLinkActivated": false,
+}
