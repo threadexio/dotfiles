@@ -13,8 +13,16 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # Man pages
+    man-pages
+    man-pages-posix
+
     # IDEs
     vscodium-fhs
+    neovim
+
+    ## C/C++
+    gcc
 
     ## Nix
     nixpkgs-fmt
