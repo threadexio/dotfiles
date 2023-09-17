@@ -70,5 +70,6 @@
 
     firefox
     keepassxc
+    libreoffice
   ];
 }
