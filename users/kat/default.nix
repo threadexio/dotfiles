@@ -1,4 +1,8 @@
 { pkgs, ... }: {
+  imports = [
+    ./zsh.nix
+  ];
+
   home = {
     username = "kat";
     stateVersion = "23.05";
