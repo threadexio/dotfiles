@@ -1,20 +1,33 @@
-{ nixpkgs }: {
-  redstarOS = nixpkgs.lib.nixosSystem {
+{ inputs, users }:
+let
+  mkSystem =
+    { hostname
+    , system
+    , users ? [ ]
+    }:
+    let
+      inherit (inputs.nixpkgs) lib;
+    in
+    lib.nixosSystem {
+      inherit system;
+
+      modules = [
+        ./${hostname}
+
+        { networking.hostName = lib.mkForce hostname; }
+        inputs.hm.nixosModules.home-manager
+      ] ++ users;
+    };
+in
+{
+  redstarOS = mkSystem {
+    hostname = "redstarOS";
     system = "x86_64-linux";
-    modules = [
-      ./redstarOS
+    users = [ users.kat ];
+  };
 
-      ../modules/core.nix
-      ../modules/network.nix
-      ../modules/security.nix
-      ../modules/nvidia.nix
-      ../modules/desktop.nix
-
-      ../modules/development.nix
-      ../modules/art.nix
-
-      ../modules/virtualisation.nix
-      ../modules/containers.nix
-    ];
+  testVM = mkSystem {
+    hostname = "testVM";
+    system = "x86_64-linux";
   };
 }

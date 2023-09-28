@@ -45,7 +45,7 @@ in
   };
 
   boot.initrd.secrets = {
-    "/hdd.key" = "/cryptkeys.d/hdd.key";
+    "/hdd.key" = /cryptkeys.d/hdd.key;
   };
 
   #environment.etc.crypttab = {
