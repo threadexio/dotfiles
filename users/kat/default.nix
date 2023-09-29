@@ -1,6 +1,8 @@
 { pkgs, ... }: {
   imports = [
     ./zsh.nix
+    ./git.nix
+    ./ide.nix
   ];
 
   home = {
