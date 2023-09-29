@@ -1,19 +1,7 @@
 { pkgs, ... }: {
-  sound.enable = true;
-  security.rtkit.enable = true;
-
-  services.pipewire = {
-    enable = true;
-
-    pulse.enable = true;
-    jack.enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-  };
-
-  xdg.portal.enable = true;
+  imports = [
+    ./desktop.nix
+  ];
 
   services.xserver = {
     enable = true;
@@ -56,6 +44,4 @@
   programs.kdeconnect.enable = true;
 
   qt.platformTheme = "kde";
-
-  fonts.packages = [ pkgs.noto-fonts-emoji ];
 }
