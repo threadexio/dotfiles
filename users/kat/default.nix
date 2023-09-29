@@ -1,8 +1,9 @@
-{ pkgs, ... }: {
+{ ... }: {
   imports = [
     ./zsh.nix
     ./git.nix
     ./ide.nix
+    ./credentials.nix
   ];
 
   home = {
