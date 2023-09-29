@@ -35,6 +35,7 @@
     dash-to-dock
     caffeine
     just-perfection
+    focus-changer
   ]);
 
   fonts.packages = with pkgs; [
