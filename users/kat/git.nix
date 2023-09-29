@@ -10,11 +10,5 @@
 
     userName = "threadexio";
     userEmail = "pzarganitis@gmail.com";
-
-    extraConfig = {
-      push = {
-        gpgSign = true;
-      };
-    };
   };
 }
