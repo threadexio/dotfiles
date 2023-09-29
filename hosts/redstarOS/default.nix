@@ -11,7 +11,8 @@
       ../modules/virtualisation.nix
       ../modules/containers.nix
 
-      ../modules/plasma.nix
+      #../modules/plasma.nix
+      ../modules/gnome.nix
     ];
 
   boot = {

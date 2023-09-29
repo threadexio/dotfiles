@@ -31,4 +31,12 @@
       keyserver = "hkps://keys.openpgp.org";
     };
   };
+
+  services.gpg-agent = {
+    enable = true;
+
+    enableZshIntegration = true;
+    grabKeyboardAndMouse = true;
+    pinentryFlavor = "gnome3";
+  };
 }

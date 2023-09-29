@@ -4,6 +4,7 @@
 
   xdg.portal.enable = true;
 
+  hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
 

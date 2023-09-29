@@ -10,14 +10,7 @@
     xkbVariant = "";
 
     desktopManager.plasma5.enable = true;
-    displayManager = {
-      gdm = {
-        enable = true;
-        wayland = true;
-      };
-
-      defaultSession = "plasmawayland";
-    };
+    displayManager.gdm.enable = true;
   };
 
   # Apparently KDE does not start the polkit authentication agent.
