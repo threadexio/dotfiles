@@ -8,13 +8,10 @@
       ../modules/network.nix
       ../modules/security.nix
       ../modules/nvidia.nix
-      ../modules/desktop.nix
-
-      ../modules/development.nix
-      ../modules/art.nix
-
       ../modules/virtualisation.nix
       ../modules/containers.nix
+
+      ../modules/plasma.nix
     ];
 
   boot = {
@@ -53,15 +50,18 @@
     '';
   };
 
-  services.xserver.displayManager.gdm.wayland = true;
-  services.xserver.displayManager.defaultSession = "plasmawayland";
-
-  services.flatpak.enable = true;
-  hardware.ckb-next.enable = true;
-
   powerManagement = {
     enable = lib.mkForce false;
     cpuFreqGovernor = "powersave";
     powertop.enable = true;
+  };
+
+  services.flatpak.enable = true;
+  hardware.ckb-next.enable = true;
+
+  documentation = {
+    man.enable = true;
+    nixos.enable = true;
+    dev.enable = true;
   };
 }

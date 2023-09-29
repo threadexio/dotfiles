@@ -35,8 +35,12 @@ in
       subUidRanges = [{ startUid = 100000; count = 65536; }];
       subGidRanges = [{ startGid = 100000; count = 65536; }];
     };
-    extraSystemConfig = { ... }: {
+    extraSystemConfig = { pkgs, ... }: {
       environment.pathsToLink = [ "/share/zsh" ];
+      programs.zsh.enable = true;
+
+      programs.wireshark.enable = true;
+      environment.systemPackages = with pkgs; [ wireshark ];
     };
   };
 }

@@ -21,8 +21,15 @@
     layout = "us";
     xkbVariant = "";
 
-    displayManager.gdm.enable = true;
     desktopManager.plasma5.enable = true;
+    displayManager = {
+      gdm = {
+        enable = true;
+        wayland = true;
+      };
+
+      defaultSession = "plasmawayland";
+    };
   };
 
   # Apparently KDE does not start the polkit authentication agent.
@@ -46,30 +53,9 @@
     };
   };
 
-  programs = {
-    zsh.enable = true;
-    gnupg.agent.enable = true;
-    kdeconnect.enable = true;
-  };
+  programs.kdeconnect.enable = true;
 
   qt.platformTheme = "kde";
 
-  fonts.packages = with pkgs; [
-    noto-fonts-emoji
-    nerdfonts
-  ];
-
-  environment.systemPackages = with pkgs; [
-    starship
-    bat
-    lsd
-    ripgrep
-    file
-    neofetch
-    tmux
-
-    firefox
-    keepassxc
-    libreoffice
-  ];
+  fonts.packages = [ pkgs.noto-fonts-emoji ];
 }

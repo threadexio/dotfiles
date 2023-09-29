@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ pkgs, lib, ... }: {
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
@@ -155,10 +155,13 @@
     syntaxHighlighting.enable = true;
   };
 
-  home.packages = [
-    pkgs.lsd
-    pkgs.bat
-    pkgs.ripgrep
-    pkgs.rsync
+  home.packages = with pkgs; [
+    lsd
+    bat
+    ripgrep
+    rsync
+    file
+    neofetch
+    tmux
   ];
 }
