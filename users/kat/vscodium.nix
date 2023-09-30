@@ -26,6 +26,7 @@
       #ms-python.python
       rust-lang.rust-analyzer
       gruntfuggly.todo-tree
+      pkief.material-icon-theme
     ];
     mutableExtensionsDir = true;
 
@@ -189,7 +190,7 @@
       "workbench.commandPalette.history" = 5;
       "workbench.editor.untitled.hint" = "hidden";
       "workbench.enableExperiments" = false;
-      "workbench.iconTheme" = "eq-material-theme-icons-light";
+      "workbench.iconTheme" = "material-icon-theme";
       "workbench.list.smoothScrolling" = true;
       "workbench.panel.opensMaximized" = "never";
       "workbench.sideBar.location" = "right";
