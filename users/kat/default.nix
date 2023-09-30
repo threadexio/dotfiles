@@ -27,6 +27,7 @@
 
     ## C/C++
     gcc
+    clang
 
     ## Nix
     nixpkgs-fmt
