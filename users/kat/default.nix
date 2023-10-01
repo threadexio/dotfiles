@@ -55,5 +55,8 @@
     gimp
     kdenlive
     obs-studio
+
+    pop-icon-theme
+    pop-gtk-theme
   ];
 }
