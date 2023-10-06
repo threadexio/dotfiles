@@ -54,7 +54,6 @@
   powerManagement = {
     enable = lib.mkForce false;
     cpuFreqGovernor = "powersave";
-    powertop.enable = true;
   };
 
   services.flatpak.enable = true;
