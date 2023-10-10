@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ./shell.nix
+    ./zsh
     ./dev.nix
     ./vscodium.nix
     ./credentials
