@@ -47,7 +47,6 @@
       allow id 0bda:8153 serial "421561000000" name "USB 10/100/1000 LAN" hash "jv+MMdE6Mjhgs7rDsv2P5lj4nWbUxVxKbon7FAA40Tg=" parent-hash "zYs+AzHULIcaBfrw1iIaej077riqAR/Sb+ec6dViGc0=" with-interface { ff:ff:00 02:06:00 0a:00:00 0a:00:00 } with-connect-type "unknown"
       allow id 04b4:6572 serial "000000000000" name "HX2VL" hash "5pBuOzuU+UhNO345IOhyMWvsJglAeYYcNhtO8w+rR1E=" parent-hash "4Sr2ku5SbYdd094Tf5zsxxuDHv+qT5+5np03tKXBLis=" with-interface 09:00:00 with-connect-type "unknown"
       allow id 0bda:482a serial "201405280001" name "USB Audio" hash "b41aclcyt8xC5ZbQZq0zxBcvqzenczErRuGJyktmU3U=" parent-hash "4Sr2ku5SbYdd094Tf5zsxxuDHv+qT5+5np03tKXBLis=" with-interface { 01:01:00 01:02:00 01:02:00 01:02:00 01:02:00 01:02:00 01:02:00 01:02:00 01:02:00 01:02:00 01:02:00 03:00:00 } with-connect-type "unknown"
-      allow id 2717:ff40 serial "18cf508f" name "Redmi Note 8T" hash "kQS3cvakjSDjBA/+utSgdG5yq5motAnqBEbfH1cSVM8=" parent-hash "5pBuOzuU+UhNO345IOhyMWvsJglAeYYcNhtO8w+rR1E=" with-interface ff:ff:00 with-connect-type "unknown"
     '';
   };
 

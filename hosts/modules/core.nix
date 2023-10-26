@@ -88,11 +88,13 @@
       experimental-features = [ "nix-command" "flakes" ];
     };
 
-    gc = {
+    /*
+      gc = {
       automatic = true;
       persistent = true;
       dates = "weekly";
-    };
+      };
+    */
 
     optimise = {
       automatic = true;

@@ -24,19 +24,19 @@
   qt.platformTheme = "gtk";
 
   environment.systemPackages =
-  (with pkgs; [
-    gnome.adwaita-icon-theme
-    gnome.gnome-tweaks
-  ]) ++
-  (with pkgs.gnomeExtensions; [
-    gsconnect
-    clipboard-indicator
-    blur-my-shell
-    dash-to-dock
-    caffeine
-    just-perfection
-    focus-changer
-  ]);
+    (with pkgs; [
+      gnome.adwaita-icon-theme
+      gnome.gnome-tweaks
+    ]) ++
+    (with pkgs.gnomeExtensions; [
+      gsconnect
+      clipboard-indicator
+      blur-my-shell
+      dash-to-dock
+      caffeine
+      just-perfection
+      focus-changer
+    ]);
 
   fonts.packages = with pkgs; [
     noto-fonts
