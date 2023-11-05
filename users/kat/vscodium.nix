@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
+    package = pkgs.vscodium-fhs;
 
     enableUpdateCheck = false;
     extensions = with pkgs.vscode-extensions; [
@@ -27,6 +27,7 @@
       rust-lang.rust-analyzer
       gruntfuggly.todo-tree
       pkief.material-icon-theme
+      vadimcn.vscode-lldb
     ];
     mutableExtensionsDir = true;
 
