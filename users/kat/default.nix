@@ -4,6 +4,7 @@
     ./dev.nix
     ./vscodium.nix
     ./credentials
+    ./syncthing.nix
   ];
 
   home = {
