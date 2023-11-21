@@ -5,28 +5,42 @@
 
     enableUpdateCheck = false;
     extensions = with pkgs.vscode-extensions; [
+      # General
       alefragnani.bookmarks
-      xaver.clang-format
-      llvm-vs-code-extensions.vscode-clangd
-      twxs.cmake
-      ms-vscode.cmake-tools
-      streetsidesoftware.code-spell-checker
-      vadimcn.vscode-lldb
-      serayuzgur.crates
       editorconfig.editorconfig
-      usernamehw.errorlens
-      tamasfe.even-better-toml
-      oderwat.indent-rainbow
-      yzhang.markdown-all-in-one
-      davidanson.vscode-markdownlint
-      equinusocio.vsc-material-theme
-      jnoortheen.nix-ide
-      # Causes hang on `sudo nixos-rebuild switch`.
-      # https://github.com/NixOS/nixpkgs/issues/230030#issuecomment-1536647106
-      #ms-python.python
-      rust-lang.rust-analyzer
       gruntfuggly.todo-tree
+      ms-vscode.hexeditor
+      streetsidesoftware.code-spell-checker
+      usernamehw.errorlens
+
+      # Theming
+      equinusocio.vsc-material-theme
+      oderwat.indent-rainbow
       pkief.material-icon-theme
+
+      # Markdown
+      bierner.emojisense
+      bierner.markdown-mermaid
+      davidanson.vscode-markdownlint
+      yzhang.markdown-all-in-one
+
+      # C/C++
+      llvm-vs-code-extensions.vscode-clangd
+      ms-vscode.cmake-tools
+      twxs.cmake
+      xaver.clang-format
+
+      # Nix
+      jnoortheen.nix-ide
+
+      # Python
+      ms-python.black-formatter
+      ms-python.python
+
+      # Rust
+      rust-lang.rust-analyzer
+      serayuzgur.crates
+      tamasfe.even-better-toml
       vadimcn.vscode-lldb
     ];
     mutableExtensionsDir = true;
