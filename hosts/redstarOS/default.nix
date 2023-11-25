@@ -5,6 +5,7 @@
       ./hardware-configuration.nix
 
       ../modules/core.nix
+      ../modules/efi.nix
       ../modules/network.nix
       ../modules/security.nix
       ../modules/nvidia.nix
@@ -42,4 +43,6 @@
     nixos.enable = true;
     dev.enable = true;
   };
+
+  system.stateVersion = "23.05";
 }

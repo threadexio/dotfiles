@@ -26,8 +26,9 @@ in
     users = [ users.kat ];
   };
 
-  testVM = mkSystem {
-    hostname = "testVM";
+  venus = mkSystem {
+    hostname = "venus";
     system = "x86_64-linux";
+    users = [ users.io ];
   };
 }

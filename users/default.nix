@@ -2,6 +2,7 @@
 let
   mkUser =
     { name
+    , homeConfig
     , extraUserConfig ? { ... }: { }
     , extraSystemConfig ? { ... }: { }
     }:
@@ -21,12 +22,13 @@ let
 
       home-manager.useUserPackages = true;
       home-manager.useGlobalPkgs = true;
-      home-manager.users.${name} = import ./${name};
+      home-manager.users.${name} = homeConfig;
     } // (extraSystemConfig args);
 in
 {
   kat = mkUser {
     name = "kat";
+    homeConfig = import ./kat;
     extraUserConfig = { pkgs, ... }: {
       shell = pkgs.zsh;
       extraGroups = [ "wheel" "networkmanager" "libvirtd" "podman" "wireshark" ];
@@ -43,4 +45,23 @@ in
       environment.systemPackages = with pkgs; [ wireshark ];
     };
   };
+
+  io = mkUser {
+    name = "io";
+    homeConfig = import ./io;
+    extraUserConfig = { pkgs, ... }: {
+      initialPassword = "password";
+      shell = pkgs.zsh;
+      extraGroups = [ "wheel" "networkmanager" "libvirtd" "podman" ];
+
+      # Rootless podman containers
+      subUidRanges = [{ startUid = 100000; count = 65536; }];
+      subGidRanges = [{ startGid = 100000; count = 65536; }];
+    };
+    extraSystemConfig = { pkgs, ... }: {
+      environment.pathsToLink = [ "/share/zsh" ];
+      programs.zsh.enable = true;
+    };
+  };
+
 }
