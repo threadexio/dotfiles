@@ -1,4 +1,4 @@
-# Edit this configuration file to define what should be installed on
+# Edit this configuration fime to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 
@@ -27,14 +27,19 @@
     mount -n -t vfat -o ro /dev/disk/by-label/BOOTKEY /key
   '';
 
-  boot.initrd.luks.devices."root" = {
+  boot.initrd.luks.devices."cryptroot" = {
     keyFile = "/key/venus.key";
+    preLVM = false;
+  };
+
+  boot.initrd.luks.devices."cryptdata" = {
+    keyFile = "/key/venus.hdd.key";
     preLVM = false;
   };
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/disk/by-id/ata-WDC_WD2500AAJS-75M0A0_WD-WMAV20978000";
+  boot.loader.grub.device = "/dev/disk/by-id/ata-SanDisk_SDSSDA240G_172475459411";
 
   system.stateVersion = "23.05";
 }
