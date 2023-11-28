@@ -31,4 +31,10 @@ in
     system = "x86_64-linux";
     users = [ users.io ];
   };
+
+  ares = mkSystem {
+    hostname = "ares";
+    system = "x86_64-linux";
+    users = [ users.kat ];
+  };
 }
