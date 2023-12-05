@@ -40,6 +40,12 @@
     dev.enable = true;
   };
 
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    extraPackages = with pkgs; [ intel-media-driver ];
+  };
+
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   system.stateVersion = "23.11";
