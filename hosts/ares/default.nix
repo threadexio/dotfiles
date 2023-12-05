@@ -29,6 +29,11 @@
   services.flatpak.enable = true;
   hardware.ckb-next.enable = true;
 
+  services.usbguard = {
+    enable = true;
+    rules = lib.readFile ./usbguard-rules.conf;
+  };
+
   documentation = {
     man.enable = true;
     nixos.enable = true;
