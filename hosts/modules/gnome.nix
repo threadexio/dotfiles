@@ -36,6 +36,7 @@
       caffeine
       just-perfection
       focus-changer
+      tailscale-qs
     ]);
 
   fonts.packages = with pkgs; [
