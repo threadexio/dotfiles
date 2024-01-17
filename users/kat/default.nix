@@ -1,11 +1,14 @@
 { pkgs, ... }: {
   imports = [
+    ../modules/zsh
+
     ./dev.nix
     ./vscodium.nix
     ./credentials
     ./syncthing.nix
 
-    ../modules/zsh
+    ./gtk.nix
+    ./gnome.nix
   ];
 
   home = {

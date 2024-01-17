@@ -27,16 +27,6 @@
     (with pkgs; [
       gnome.adwaita-icon-theme
       gnome.gnome-tweaks
-    ]) ++
-    (with pkgs.gnomeExtensions; [
-      gsconnect
-      clipboard-indicator
-      blur-my-shell
-      dash-to-dock
-      caffeine
-      just-perfection
-      focus-changer
-      tailscale-qs
     ]);
 
   fonts.packages = with pkgs; [
