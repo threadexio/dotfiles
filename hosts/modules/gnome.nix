@@ -34,4 +34,6 @@
     noto-fonts-emoji
     liberation_ttf
   ];
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }
