@@ -97,7 +97,7 @@ in
       toggle-tiled-right = [ "<Control><Super>Right" ];
     };
     "org/gnome/settings-daemon/plugins/color" = {
-      night-light-enabled = true;
+      night-light-enabled = false;
     };
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
