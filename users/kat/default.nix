@@ -63,5 +63,7 @@
 
     pop-icon-theme
     pop-gtk-theme
+
+    moonlight-qt
   ];
 }
