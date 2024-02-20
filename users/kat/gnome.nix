@@ -146,7 +146,7 @@ in
     "org/gnome/shell/extensions/blur-my-shell/panel" = {
       override-background = true;
       override-background-dynamically = true;
-      static-blur = true;
+      static-blur = false;
       style-panel = 0;
     };
     "org/gnome/shell/extensions/caffeine" = {
