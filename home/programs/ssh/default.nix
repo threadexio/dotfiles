@@ -1,16 +1,18 @@
 { ... }: {
   programs.ssh = {
-    # SSH complains about bad permissions on the config file.
     enable = false;
 
-    /*
-      compression = true;
-      matchBlocks = {
+    compression = true;
+    matchBlocks = {
       "github.com" = {
-      user = "git";
-      identityFile = "~/.ssh/github";
+        user = "git";
+        identityFile = "~/.ssh/github";
       };
-      };
-    */
+    };
+  };
+
+  home.file.".ssh/authorized_keys" = {
+    enable = true;
+    source = ./authorized_keys;
   };
 }

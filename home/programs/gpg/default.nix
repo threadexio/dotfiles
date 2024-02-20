@@ -8,7 +8,7 @@
     publicKeys = [
       {
         trust = "ultimate";
-        source = ./${"pzarganitis_gmail.com.public.asc"};
+        source = ./pzarganitis_gmail.com.public.asc;
       }
     ];
 
