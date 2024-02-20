@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ./desktop.nix
+    ../common.nix
   ];
 
   services.xserver = {
@@ -26,12 +26,6 @@
   environment.systemPackages = with pkgs; [
     gnome.adwaita-icon-theme
     gnome.gnome-tweaks
-  ];
-
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-emoji
-    liberation_ttf
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";

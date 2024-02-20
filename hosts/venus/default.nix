@@ -1,17 +1,11 @@
-# Edit this configuration fime to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running `nixos-help`).
 { pkgs, ... }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    ../modules/core.nix
-    ../modules/network.nix
-    ../modules/security.nix
-    ../modules/virtualisation.nix
-    ../modules/containers.nix
-    ../modules/gnome.nix
+    ../modules/core
+    ../modules/virt/kvm
+    ../modules/virt/podman
+    ../modules/desktop/gnome
   ];
 
   boot.kernelParams = [ "net.ifnames=0" ];

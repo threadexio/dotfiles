@@ -1,24 +1,27 @@
 { ... }: {
-  # Network manager
-  services.avahi.enable = false;
-  networking.nameservers = [ "9.9.9.9#dns.quad9.net" "1.1.1.1#one.one.one.one" ];
   networking.networkmanager = {
     enable = true;
     dns = "systemd-resolved";
   };
 
   # DNS
+  networking.nameservers = [ "9.9.9.9#dns.quad9.net" "1.1.1.1#one.one.one.one" ];
   services.resolved = {
     enable = true;
     dnssec = "true";
     llmnr = "resolve";
-    extraConfig = ''
-      DNSOverTLS=yes
-    '';
+    dnsovertls = "true";
   };
 
+  # systemd-resolved handles mDNS
+  services.avahi.enable = false;
+
   # Remote access
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    extraUpFlags = [ "--accept-routes" ];
+  };
+
   services.openssh = {
     enable = true;
     settings = {

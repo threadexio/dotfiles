@@ -1,20 +1,24 @@
 { config
 , pkgs
+, lib
 , ...
 }: {
   virtualisation.podman = {
     enable = true;
 
-    dockerSocket.enable = true;
+    defaultNetwork.settings = {
+      dns_enabled = true;
+    };
 
+    dockerSocket.enable = true; # for docker-compose
     enableNvidia = config.hardware ? nvidia;
   };
 
   environment.systemPackages = with pkgs; [ docker-compose ];
 
-  boot.kernel.sysctl = {
+  boot.kernel.sysctl = lib.mkForce {
     # Rootless podman
-    "kernel.unprivileged_userns_clone" = 1;
+    "kernel.unprivileged_userns_clone" = 1; # TODO: check that this doesnt overwrite the hardning options
   };
 
   # In order for rootless podman to work you must add:
