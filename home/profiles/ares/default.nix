@@ -1,25 +1,16 @@
 { pkgs, ... }: {
   imports = [
-    ../modules/zsh
+    ../../gtk
 
-    ./dev.nix
-    ./vscodium.nix
-    ./credentials
-    ./syncthing.nix
+    ../../programs/git
+    ../../programs/gnome
+    ../../programs/gpg
+    ../../programs/ssh
+    ../../programs/vscodium
+    ../../programs/zsh
 
-    ./gtk.nix
-    ./gnome.nix
+    ../../services/syncthing
   ];
-
-  home = {
-    username = "kat";
-    stateVersion = "23.11";
-  };
-
-  programs.home-manager.enable = true;
-  programs.git.enable = true;
-
-  systemd.user.startServices = "sd-switch";
 
   home.packages = with pkgs; [
     firefox
@@ -60,9 +51,6 @@
     gimp
     kdenlive
     obs-studio
-
-    pop-icon-theme
-    pop-gtk-theme
 
     moonlight-qt
   ];

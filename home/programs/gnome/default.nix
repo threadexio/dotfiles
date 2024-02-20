@@ -1,6 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config
+, lib
+, pkgs
+, ...
+}:
 let
-  wallpaperPath = ./wallpaper.webp;
+  wallpaperPath = ../../wallpapers/1.webp;
 in
 {
   dconf.enable = true;

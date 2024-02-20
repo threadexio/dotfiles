@@ -23,11 +23,10 @@
 
   qt.platformTheme = "gtk";
 
-  environment.systemPackages =
-    (with pkgs; [
-      gnome.adwaita-icon-theme
-      gnome.gnome-tweaks
-    ]);
+  environment.systemPackages = with pkgs; [
+    gnome.adwaita-icon-theme
+    gnome.gnome-tweaks
+  ];
 
   fonts.packages = with pkgs; [
     noto-fonts

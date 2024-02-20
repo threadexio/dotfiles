@@ -1,4 +1,7 @@
-{ config, pkgs, ... }: {
+{ config
+, pkgs
+, ...
+}: {
   virtualisation.podman = {
     enable = true;
 

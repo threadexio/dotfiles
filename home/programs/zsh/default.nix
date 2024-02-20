@@ -1,4 +1,8 @@
-{ config, pkgs, lib, ... }: {
+{ config
+, pkgs
+, lib
+, ...
+}: {
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
@@ -72,7 +76,6 @@
       l = "lsd -lAFh --color=auto";
       la = "lsd -ha --color=auto";
       ll = "lsd -hl --color=auto";
-
 
       cp = "rsync -pogbr -hhh -e /dev/null --progress";
       rm = "rm -i";

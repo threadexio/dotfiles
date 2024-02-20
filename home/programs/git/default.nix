@@ -1,4 +1,8 @@
 { ... }: {
+  imports = [
+    ../gpg
+  ];
+
   programs.git = {
     enable = true;
 

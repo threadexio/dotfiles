@@ -8,13 +8,35 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   outputs = inputs:
-    let
-      users = import ./users { inherit inputs; };
-    in
-    {
-      nixosConfigurations = import ./hosts { inherit inputs users; };
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        ./home/profiles
+        ./hosts
+      ];
+
+      systems = [
+        "x86_64-linux"
+      ];
+      perSystem =
+        { system
+        , pkgs
+        , config
+        , ...
+        }:
+        let
+          formatterPkg = pkgs.nixpkgs-fmt;
+        in
+        {
+          formatter = formatterPkg;
+
+          devShells.default = pkgs.mkShell {
+            packages = [ formatterPkg ];
+          };
+        };
     };
 }
