@@ -1,11 +1,9 @@
-{ config
-, ...
-}: {
+{ ... }: {
   imports = [
+    ./fwupd.nix
     ./edk2-shell.nix
     ./memtest86plus.nix
-  ] ++
-  (if config.services.fwupd.enable then [ ./fwupd.nix ] else [ ]);
+  ];
 
   boot = {
     loader = {

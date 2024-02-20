@@ -16,10 +16,8 @@
 
   environment.systemPackages = with pkgs; [ docker-compose ];
 
-  boot.kernel.sysctl = lib.mkForce {
-    # Rootless podman
-    "kernel.unprivileged_userns_clone" = 1; # TODO: check that this doesnt overwrite the hardning options
-  };
+  # Rootless podman
+  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = lib.mkForce 1;
 
   # In order for rootless podman to work you must add:
   #
