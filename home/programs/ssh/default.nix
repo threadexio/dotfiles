@@ -1,6 +1,6 @@
 { ... }: {
   programs.ssh = {
-    enable = true;
+    enable = false;
 
     compression = true;
     matchBlocks = {
