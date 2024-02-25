@@ -6,16 +6,19 @@
     enableUpdateCheck = false;
     extensions = with pkgs.vscode-extensions; [
       # General
+      aaron-bond.better-comments
       alefragnani.bookmarks
+      christian-kohler.path-intellisense
+      eamodio.gitlens
       editorconfig.editorconfig
       gruntfuggly.todo-tree
       ms-vscode.hexeditor
+      ms-vscode-remote.remote-ssh
       streetsidesoftware.code-spell-checker
       usernamehw.errorlens
 
       # Theming
       equinusocio.vsc-material-theme
-      oderwat.indent-rainbow
       pkief.material-icon-theme
 
       # Markdown
@@ -367,6 +370,7 @@
         strings = "off";
       };
       "editor.renderLineHighlight" = "gutter";
+      "editor.rulers" = [ 80 ];
       "editor.scrollBeyondLastColumn" = 0;
       "editor.scrollbar.horizontalScrollbarSize" = 6;
       "editor.scrollbar.vertical" = "hidden";
