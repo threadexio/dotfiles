@@ -46,7 +46,7 @@
       tamasfe.even-better-toml
       vadimcn.vscode-lldb
     ];
-    mutableExtensionsDir = false;
+    mutableExtensionsDir = true;
 
     keybindings = [
       {
