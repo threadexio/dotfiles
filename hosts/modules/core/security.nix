@@ -134,7 +134,6 @@
     "mce=0"
     "quiet"
     "loglevel=2"
-    "ipv6.disable=1"
     "spectre_v2=on"
     "spec_store_bypass_disable=on"
   ];
