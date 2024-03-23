@@ -30,7 +30,7 @@
 
         boot.initrd.postDeviceCommands = lib.mkBefore ''
           mkdir -m 0755 -p '${usbMountPath}'
-          sleep '${waitForDevice}'
+          sleep '${builtins.toString waitForDevice}s'
           mount -n -t '${usbFsType}' -o ro '${usbDevice}' '${usbMountPath}'
         '';
 
