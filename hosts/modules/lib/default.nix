@@ -22,7 +22,7 @@
     }:
     (
       let
-        usbMountPath = "/key/" ++ (builtins.hashString "md5" usbDevice);
+        usbMountPath = "/key/" + (builtins.hashString "md5" usbDevice);
         usbFsType = "vfat";
       in
       { lib, ... }:
