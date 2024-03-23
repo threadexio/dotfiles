@@ -2,26 +2,27 @@
   # Generate a NixOS module that configures booting from a USB device.
   #
   # Parameters:
-  # - `luksDevice`: Name of the LUKS device as shown in `/dev/mapper`.
-  # - `keyPath`: Path to the keyfile inside the USB device. (/ is the USB root)
-  # - `usbDevicePath`: Path to the USB device. This is given as an argument to
-  #                    `mount` so it can by anything. Usually, it should be a
-  #                    path in `/dev/disk`.
+  # - `devices`: Map of LUKS device names to set `Device`.
+  # - `usbDevice`: Path to the USB device. This is given as an argument to
+  #                `mount` so it can by anything. Usually, it should be a
+  #                path in `/dev/disk`.
   # - `waitForDevice`: How many seconds to wait for the USB device to
   #                    be detected by the kernel. Defaults to 5 seconds.
   #                    (Optional)
-  # - `allowPassword`: Allow unlocking with a password if the USB device cannot
-  #                    be found. (Optional)
+  #
+  # Device:
+  # - `keyPath`: Path to the key file inside of the USB device. (/ is device root)
+  # - `allowPassword`: Allow unlocking by a password if the key cannot be found.
+  #                    Defaults to `true`. (Optional)
+  #
   unlockLuksWithUsbKey =
-    { luksDevice
-    , keyPath
+    { devices
     , usbDevice
     , waitForDevice ? 5
-    , allowPassword ? true
     }:
     (
       let
-        usbMountPath = "/key/${luksDevice}";
+        usbMountPath = "/key/${usbDevice}";
         usbFsType = "vfat";
       in
       { lib, ... }:
@@ -32,18 +33,25 @@
           mkdir -m 0755 -p '${usbMountPath}'
           sleep '${builtins.toString waitForDevice}s'
           mount -n -t '${usbFsType}' -o ro '${usbDevice}' '${usbMountPath}'
-        '';
-
-        boot.initrd.postMountCommands = lib.mkBefore ''
-          umount -t '${usbFsType}' '${usbMountPath}'
           eject '${usbDevice}'
         '';
 
-        boot.initrd.luks.devices."${luksDevice}" = {
-          keyFile = "${usbMountPath}/${keyPath}";
-          fallbackToPassword = allowPassword;
-          preLVM = false;
-        };
+        boot.initrd.postMountCommands = lib.mkBefore ''
+          umount '${usbMountPath}'
+        '';
+
+        boot.initrd.luks.devices =
+          let
+            f =
+              { keyPath
+              , allowPassword ? true
+              }: {
+                keyFile = "${usbMountPath}/${keyPath}";
+                fallbackToPassword = allowPassword;
+                preLVM = false;
+              };
+          in
+          builtins.mapAttrs (luksname: f) devices;
       }
     );
 }

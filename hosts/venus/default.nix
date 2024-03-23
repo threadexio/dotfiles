@@ -1,7 +1,6 @@
 { ... }:
 let
   hlib = import ../modules/lib;
-  usbDevice = "/dev/disk/by-label/BOOTKEY";
 in
 {
   imports = [
@@ -14,16 +13,12 @@ in
 
     (hlib.unlockLuksWithUsbKey
       {
-        luksDevice = "cryptroot";
-        keyPath = "venus.key";
-        inherit usbDevice;
-      }
-    )
-    (hlib.unlockLuksWithUsbKey
-      {
-        luksDevice = "cryptdata";
-        keyPath = "venus.hdd.key";
-        inherit usbDevice;
+        devices = {
+          "cryptroot".keyPath = "venus.key";
+          "cryptdata".keyPath = "venus.hdd.key";
+        };
+
+        usbDevice = "/dev/disk/by-label/BOOTKEY";
       }
     )
   ];
