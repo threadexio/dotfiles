@@ -35,5 +35,5 @@ in
   boot.loader.grub.device = "/dev/disk/by-id/ata-SanDisk_SDSSDA240G_172475459411";
 
   networking.hostName = "venus";
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 }
