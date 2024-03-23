@@ -35,7 +35,8 @@
         '';
 
         boot.initrd.postMountCommands = lib.mkBefore ''
-          umount -t '${usbFsType}' '${usbMountPath}' || true
+          umount -t '${usbFsType}' '${usbMountPath}'
+          eject '${usbDevice}'
         '';
 
         boot.initrd.luks.devices."${luksDevice}" = {
