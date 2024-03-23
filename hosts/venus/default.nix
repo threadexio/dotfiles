@@ -29,6 +29,10 @@ in
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/disk/by-id/ata-SanDisk_SDSSDA240G_172475459411";
 
+  swapDevices = [
+    { device = "/swap/main"; }
+  ];
+
   networking.hostName = "venus";
   system.stateVersion = "23.11";
 }
