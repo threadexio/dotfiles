@@ -3,6 +3,7 @@ let
   hashedPassword = "$2b$05$5tpaRElUawEPUuIiWmZDtOpf6l0HmZNHoJsgRBQuGW2T4Wxu.nUE6";
 in
 {
+  users.mutableUsers = false;
   users.users.kat = {
     description = "kat";
     isNormalUser = true;
