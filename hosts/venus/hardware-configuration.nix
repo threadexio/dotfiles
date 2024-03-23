@@ -30,12 +30,6 @@
     options = [ "subvol=@home" ];
   };
 
-  fileSystems."/var/log" = {
-    device = "/dev/disk/by-uuid/d4c5202e-0780-4467-8588-fa319f2fb31d";
-    fsType = "btrfs";
-    options = [ "subvol=@var_log" ];
-  };
-
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/be6ecf9f-e0d0-4588-9ba5-691b78f0803c";
     fsType = "ext4";
