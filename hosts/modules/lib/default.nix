@@ -33,11 +33,11 @@
           mkdir -m 0755 -p '${usbMountPath}'
           sleep '${builtins.toString waitForDevice}s'
           mount -n -t '${usbFsType}' -o ro '${usbDevice}' '${usbMountPath}'
-          eject '${usbDevice}'
         '';
 
         boot.initrd.postMountCommands = lib.mkBefore ''
           umount '${usbMountPath}'
+          eject '${usbDevice}'
         '';
 
         boot.initrd.luks.devices =
