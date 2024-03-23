@@ -1,32 +1,34 @@
-{ pkgs, ... }: {
+{ ... }:
+let
+  hlib = import ../modules/lib;
+  usbDevice = "/dev/disk/by-label/BOOTKEY";
+in
+{
   imports = [
     ./hardware-configuration.nix
-
     ../modules/core
+    ../modules/hardware/nvidia
+    ../modules/desktop/gnome
     ../modules/virt/kvm
     ../modules/virt/podman
-    ../modules/desktop/gnome
+
+    (hlib.unlockLuksWithUsbKey
+      {
+        luksDevice = "cryptroot";
+        keyPath = "venus.key";
+        inherit usbDevice;
+      }
+    )
+    (hlib.unlockLuksWithUsbKey
+      {
+        luksDevice = "cryptdata";
+        keyPath = "venus.hdd.key";
+        inherit usbDevice;
+      }
+    )
   ];
 
   boot.kernelParams = [ "net.ifnames=0" ];
-
-  # Boot from external USB key
-  boot.initrd.kernelModules = [ "uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1" ];
-  boot.initrd.postDeviceCommands = pkgs.lib.mkBefore ''
-    mkdir -m 0755 -p /key
-    sleep 5
-    mount -n -t vfat -o ro /dev/disk/by-label/BOOTKEY /key
-  '';
-
-  boot.initrd.luks.devices."cryptroot" = {
-    keyFile = "/key/venus.key";
-    preLVM = false;
-  };
-
-  boot.initrd.luks.devices."cryptdata" = {
-    keyFile = "/key/venus.hdd.key";
-    preLVM = false;
-  };
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
