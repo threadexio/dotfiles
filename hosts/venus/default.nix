@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 let
   hlib = import ../modules/lib;
 in
@@ -32,6 +32,8 @@ in
   swapDevices = [
     { device = "/swap/main"; }
   ];
+
+  services.xserver.videoDrivers = lib.mkForce [ "nvidiaLegacy340" ];
 
   networking.hostName = "venus";
   system.stateVersion = "23.11";
