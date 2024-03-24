@@ -1,6 +1,9 @@
 { pkgs, ... }: {
   imports = [
+    ../../gtk
+
     ../../programs/git
+    ../../programs/gnome
     ../../programs/gpg
     ../../programs/ssh
     ../../programs/vscodium
