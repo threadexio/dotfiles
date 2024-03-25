@@ -1,7 +1,11 @@
 { pkgs
 , lib
 , ...
-}: {
+}:
+let
+  hlib = import ../modules/lib;
+in
+{
   imports = [
     ./hardware-configuration.nix
 
@@ -11,6 +15,13 @@
     ../modules/desktop/gnome
     ../modules/virt/kvm
     ../modules/virt/podman
+
+    (hlib.unlockLuksWithUsbKey
+      {
+        devices."cryptroot".keyPath = "ares.key";
+        usbDevice = "/dev/disk/by-label/BOOTKEY";
+      }
+    )
   ];
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
