@@ -30,7 +30,7 @@ in
   ];
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-  boot.kernelParams = [ "net.ifnames=0" "intel_iommu=on" "iommu=pt" "intel_pstate=disable" ];
+  boot.kernelParams = [ "net.ifnames=0" "intel_iommu=on" "iommu=pt" ];
 
   fileSystems."/".options = [ "noatime" ];
   fileSystems."/boot".options = [ "noatime" ];
