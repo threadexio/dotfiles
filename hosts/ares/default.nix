@@ -30,7 +30,7 @@ in
   ];
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-  boot.kernelParams = [ "net.ifnames=0" "intel_iommu=on" "iommu=pt" ];
+  boot.kernelParams = [ "net.ifnames=0" "intel_iommu=on" "iommu=pt" "intel_pstate=disable" ];
 
   fileSystems."/".options = [ "noatime" ];
   fileSystems."/boot".options = [ "noatime" ];
@@ -40,6 +40,18 @@ in
 
   powerManagement.enable = lib.mkForce true;
   powerManagement.cpuFreqGovernor = "ondemand";
+
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+    };
+  };
 
   services.flatpak.enable = true;
   hardware.ckb-next.enable = true;
