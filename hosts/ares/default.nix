@@ -16,12 +16,17 @@ in
     ../modules/virt/kvm
     ../modules/virt/podman
 
-    (hlib.unlockLuksWithUsbKey
-      {
-        devices."cryptroot".keyPath = "ares.key";
-        usbDevice = "/dev/disk/by-label/BOOTKEY";
-      }
-    )
+    (hlib.unlockLuksWithUsbKey {
+      devices."cryptroot".keyPath = "ares.key";
+      usbDevice = "/dev/disk/by-label/BOOTKEY";
+    })
+
+    (hlib.mountTmpfs {
+      path = "/home/kat/.cache";
+      size = "16g";
+      owner = "kat";
+      group = "users";
+    })
   ];
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
