@@ -22,15 +22,15 @@ in
     })
 
     (hlib.mountTmpfs {
-      path = "/home/kat/.cache";
-      size = "16g";
+      path = "/home/kat/build";
+      size = "10g";
       owner = "kat";
       group = "users";
     })
   ];
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-  boot.kernelParams = [ "net.ifnames=0" "intel_iommu=on" "iommu=pt" ];
+  boot.kernelParams = [ "net.ifnames=0" "intel_iommu=on" "iommu=pt" "intel_pstate=disable" ];
 
   fileSystems."/".options = [ "noatime" ];
   fileSystems."/boot".options = [ "noatime" ];
