@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.gpg = {
     enable = true;
 
@@ -22,6 +22,6 @@
 
     enableZshIntegration = true;
     grabKeyboardAndMouse = true;
-    pinentryFlavor = "gnome3";
+    pinentryPackage = pkgs.pinentry-gnome3;
   };
 }

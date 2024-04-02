@@ -11,7 +11,6 @@
     };
 
     dockerSocket.enable = true; # for docker-compose
-    enableNvidia = config.hardware ? nvidia;
   };
 
   environment.systemPackages = with pkgs; [ docker-compose ];

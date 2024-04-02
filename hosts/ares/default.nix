@@ -39,7 +39,7 @@ in
   services.fwupd.enable = true;
 
   powerManagement.enable = lib.mkForce true;
-  powerManagement.cpuFreqGovernor = "schedutil";
+  powerManagement.cpuFreqGovernor = "ondemand";
 
   services.power-profiles-daemon.enable = false;
   services.tlp = {
