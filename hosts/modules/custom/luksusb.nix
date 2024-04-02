@@ -29,30 +29,28 @@ in
         example = {
           cryptroot.keyPath = "/path/to/the/key";
         };
-        type = types.attrsOf (types.submodule (
-          { name, ... }: {
-            options = {
-              keyPath = mkOption {
-                example = "/mykey.key";
-                description = mdDoc ''
-                  Path to the key file inside the USB device's filesystem.
-                  `/` is relative to the device's filesystem root.
-                '';
-                type = types.str;
-              };
-
-              allowPassword = mkOption {
-                default = true;
-                example = false;
-                description = mdDoc ''
-                  Whether to allow using a passphrase to unlock the volume if
-                  the device or the key could not be accessed.
-                '';
-                type = types.bool;
-              };
+        type = types.submodule {
+          options = {
+            keyPath = mkOption {
+              example = "/mykey.key";
+              description = mdDoc ''
+                Path to the key file inside the USB device's filesystem.
+                `/` is relative to the device's filesystem root.
+              '';
+              type = types.str;
             };
-          }
-        ));
+
+            allowPassword = mkOption {
+              default = true;
+              example = false;
+              description = mdDoc ''
+                Whether to allow using a passphrase to unlock the volume if
+                the device or the key could not be accessed.
+              '';
+              type = types.bool;
+            };
+          };
+        };
       };
     };
   };
