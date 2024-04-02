@@ -1,27 +1,31 @@
-{ inputs, homeModules, ... }: {
+{ inputs, homeExports, ... }: {
   flake.nixosConfigurations =
     let
-      mkNixosSystem = { configurationPath, homeProfile, extraModules ? [ ], ... }:
+      mkNixosSystem = { configuration, homeProfile }:
+        let
+          homeExport = homeExports.${homeProfile};
+        in
         inputs.nixpkgs.lib.nixosSystem {
           modules = [
-            configurationPath
-            ./modules/users
+            ./modules/custom
             inputs.hm.nixosModules.default
+            configuration
+
             {
-              home-manager.users.kat.imports = homeModules.${homeProfile};
+              home-manager.users.kat.imports = homeExport.hm-modules;
               home-manager.useGlobalPkgs = true;
             }
-          ] ++ extraModules;
+          ] ++ homeExport.system-modules;
         };
     in
     {
       ares = mkNixosSystem {
-        configurationPath = ./ares;
+        configuration = ./ares;
         homeProfile = "kat@ares";
       };
 
       venus = mkNixosSystem {
-        configurationPath = ./venus;
+        configuration = ./venus;
         homeProfile = "kat@venus";
       };
     };

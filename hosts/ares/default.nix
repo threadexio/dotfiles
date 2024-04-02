@@ -1,11 +1,7 @@
 { pkgs
 , lib
 , ...
-}:
-let
-  hlib = import ../modules/lib;
-in
-{
+}: {
   imports = [
     ./hardware-configuration.nix
 
@@ -15,14 +11,13 @@ in
     ../modules/desktop/gnome
     ../modules/virt/kvm
     ../modules/virt/podman
-    ../modules/custom
 
-    (hlib.mountTmpfs {
-      path = "/home/kat/build";
-      size = "10g";
-      owner = "kat";
-      group = "users";
-    })
+    #(hlib.mountTmpfs {
+    #  path = "/home/kat/build";
+    #  size = "10g";
+    #  owner = "kat";
+    #  group = "users";
+    #})
   ];
 
   custom.boot.luksUsbUnlock = {

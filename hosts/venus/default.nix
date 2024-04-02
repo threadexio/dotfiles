@@ -6,7 +6,6 @@
     ../modules/desktop/gnome
     ../modules/virt/kvm
     ../modules/virt/podman
-    ../modules/custom
   ];
 
   custom.boot.luksUsbUnlock = {

@@ -5,22 +5,28 @@ let
     pkgs = inputs.nixpkgs.legacyPackages.${system};
   };
 
-  homeModules = {
-    "kat@ares" = [ ../. ./ares ];
-    "kat@venus" = [ ../. ./venus ];
+  homeExports = {
+    "kat@ares" = {
+      system-modules = [ ../system.nix ./ares/system.nix ];
+      hm-modules = [ ../. ./ares ];
+    };
+    "kat@venus" = {
+      system-modules = [ ../system.nix ];
+      hm-modules = [ ../. ./venus ];
+    };
   };
 in
 {
-  _module.args = { inherit homeModules; };
+  _module.args = { inherit homeExports; };
 
   flake.homeConfigurations = {
     "kat@ares" = mkHomeConfiguration {
-      modules = homeModules."kat@ares";
+      modules = homeExports."kat@ares";
       system = "x86_64-linux";
     };
 
     "kat@venus" = mkHomeConfiguration {
-      modules = homeModules."kat@venus";
+      modules = homeExports."kat@venus";
       system = "x86_64-linux";
     };
   };
