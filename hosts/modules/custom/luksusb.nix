@@ -63,20 +63,25 @@ in
     {
       boot.initrd.kernelModules = [ "uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1" ];
 
-      boot.initrd.postDeviceCommands = mkBefore ''
-        mkdir -m 0755 -p ${escapeShellArg usbMountPath}
-        sleep ${escapeShellArg cfg.waitForDevice}s
-        mount -n -t ${escapeShellArg usbFsType} -o ro ${escapeShellArg cfg.usbDevice} ${escapeShellArg usbMountPath}
-      '';
-
       boot.initrd.postMountCommands = mkBefore ''
-        umount ${escapeShellArg usbMountPath}
         eject ${escapeShellArg cfg.usbDevice}
       '';
 
       boot.initrd.luks.devices = builtins.mapAttrs
         (_: { keyPath, allowPassword }: {
+          preOpenCommands = mkBefore ''
+            mkdir -m 0755 -p ${escapeShellArg usbMountPath}
+            sleep ${escapeShellArg cfg.waitForDevice}s
+            mount -n -t ${escapeShellArg usbFsType} -o ro ${escapeShellArg cfg.usbDevice} ${escapeShellArg usbMountPath}
+          '';
+
+          postOpenCommands = mkBefore ''
+            umount ${escapeShellArg usbMountPath}
+          '';
+
           keyFile = "${usbMountPath}/${keyPath}";
+          keyFileTimeout = null;
+
           fallbackToPassword = allowPassword;
         })
         cfg.devices;

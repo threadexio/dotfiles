@@ -17,6 +17,11 @@
     };
   };
 
+  boot.initrd.luks.devices = {
+    "cryptroot".preLVM = false;
+    "cryptdata".preLVM = false;
+  };
+
   boot.kernelParams = [ "net.ifnames=0" ];
 
   # Use the GRUB 2 boot loader.
