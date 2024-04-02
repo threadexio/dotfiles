@@ -29,7 +29,7 @@ in
         example = {
           cryptroot.keyPath = "/path/to/the/key";
         };
-        type = types.submodule {
+        type = types.attrsOf (types.submodule {
           options = {
             keyPath = mkOption {
               example = "/mykey.key";
@@ -50,7 +50,7 @@ in
               type = types.bool;
             };
           };
-        };
+        });
       };
     };
   };
