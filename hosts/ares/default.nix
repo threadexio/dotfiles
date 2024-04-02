@@ -15,11 +15,7 @@ in
     ../modules/desktop/gnome
     ../modules/virt/kvm
     ../modules/virt/podman
-
-    (hlib.unlockLuksWithUsbKey {
-      devices."cryptroot".keyPath = "ares.key";
-      usbDevice = "/dev/disk/by-label/BOOTKEY";
-    })
+    ../modules/custom
 
     (hlib.mountTmpfs {
       path = "/home/kat/build";
@@ -28,6 +24,12 @@ in
       group = "users";
     })
   ];
+
+  custom.boot.luksUsbUnlock = {
+    enable = true;
+    usbDevice = "/dev/disk/by-label/BOOTKEY";
+    devices."cryptroot".keyPath = "ares.key";
+  };
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   boot.kernelParams = [ "net.ifnames=0" "intel_iommu=on" "iommu=pt" "intel_pstate=disable" ];

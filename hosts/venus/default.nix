@@ -1,8 +1,4 @@
-{ lib, ... }:
-let
-  hlib = import ../modules/lib;
-in
-{
+{ lib, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../modules/core
@@ -10,18 +6,17 @@ in
     ../modules/desktop/gnome
     ../modules/virt/kvm
     ../modules/virt/podman
-
-    (hlib.unlockLuksWithUsbKey
-      {
-        devices = {
-          "cryptroot".keyPath = "venus.key";
-          "cryptdata".keyPath = "venus.hdd.key";
-        };
-
-        usbDevice = "/dev/disk/by-label/BOOTKEY";
-      }
-    )
+    ../modules/custom
   ];
+
+  custom.boot.luksUsbUnlock = {
+    enable = true;
+    usbDevice = "/dev/disk/by-label/BOOTKEY";
+    devices = {
+      "cryptroot".keyPath = "venus.key";
+      "cryptdata".keyPath = "venus.hdd.key";
+    };
+  };
 
   boot.kernelParams = [ "net.ifnames=0" ];
 
