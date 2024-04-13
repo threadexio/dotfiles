@@ -7,6 +7,7 @@
     ../../programs/gpg
     ../../programs/ssh
     ../../programs/vscodium
+    ../../programs/chromium
     ../../programs/zsh
 
     ../../services/syncthing
