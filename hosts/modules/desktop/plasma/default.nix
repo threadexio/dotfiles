@@ -3,11 +3,11 @@
     ../common.nix
   ];
 
-  services.xserver = {
+  services.xserver.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm = {
     enable = true;
-
-    desktopManager.plasma5.enable = true;
-    displayManager.gdm.enable = true;
+    wayland.enable = true;
   };
 
   # Apparently KDE does not start the polkit authentication agent.
@@ -31,7 +31,10 @@
     };
   };
 
-  programs.kdeconnect.enable = true;
-
   qt.platformTheme = "kde";
+
+  environment.plasma6.excludePackages = with pkgs; [
+    oxygen
+    konsole
+  ];
 }

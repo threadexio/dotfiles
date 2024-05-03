@@ -1,13 +1,13 @@
 { pkgs, ... }: {
   imports = [
-    ../../gtk
+    ../../plasma
 
     ../../programs/git
-    ../../programs/gnome
     ../../programs/gpg
     ../../programs/ssh
     ../../programs/vscodium
     ../../programs/chromium
+    ../../programs/alacritty
     ../../programs/zsh
 
     ../../services/syncthing

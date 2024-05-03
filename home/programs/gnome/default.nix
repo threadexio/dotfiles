@@ -4,7 +4,7 @@
 , ...
 }:
 let
-  wallpaperPath = ../../wallpapers/1.webp;
+  wallpaperPath = ../../wallpapers/1.png;
 in
 {
   dconf.enable = true;
@@ -178,6 +178,40 @@ in
       download-updated = false;
       download-updates-notify = true;
       first-run = false;
+    };
+  };
+
+  gtk = {
+    enable = true;
+
+    cursorTheme = {
+      package = pkgs.pop-gtk-theme;
+      name = "Pop";
+    };
+
+    iconTheme = {
+      package = pkgs.pop-icon-theme;
+      name = "Pop";
+    };
+
+    theme = {
+      package = pkgs.pop-gtk-theme;
+      name = "Pop";
+    };
+
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = {
+      name = "gtk3";
     };
   };
 

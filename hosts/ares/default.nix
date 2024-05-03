@@ -8,7 +8,7 @@
     ../modules/core
     ../modules/efi
     ../modules/hardware/intel
-    ../modules/desktop/gnome
+    ../modules/desktop/plasma
     ../modules/virt/kvm
     ../modules/virt/podman
   ];
@@ -27,6 +27,11 @@
 
   services.hardware.bolt.enable = true;
   services.fwupd.enable = true;
+
+  hardware.bluetooth = {
+    enable = true;
+    settings.General.Experimental = true;
+  };
 
   powerManagement.enable = lib.mkForce true;
   powerManagement.cpuFreqGovernor = "ondemand";
