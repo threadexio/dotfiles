@@ -35,15 +35,7 @@
 
   powerManagement.enable = lib.mkForce true;
   powerManagement.cpuFreqGovernor = "ondemand";
-
-  services.power-profiles-daemon.enable = false;
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-    };
-  };
+  services.power-profiles-daemon.enable = true;
 
   services.flatpak.enable = true;
   hardware.ckb-next.enable = true;

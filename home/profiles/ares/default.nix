@@ -47,12 +47,5 @@
 
     ffmpeg
     imagemagick
-    krita
-    inkscape
-    gimp
-    kdenlive
-    obs-studio
-
-    moonlight-qt
   ];
 }
