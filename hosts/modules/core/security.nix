@@ -92,7 +92,7 @@
     "kernel.core_uses_pid" = "1";
     "kernel.core_pattern" = "|/bin/false";
     "kernel.kptr_restrict" = "2";
-    "kernel.yama.ptrace_scope" = "3";
+    "kernel.yama.ptrace_scope" = "2";
     "kernel.dmesg_restrict" = "1";
     "kernel.printk" = "3 3 3 3";
     "kernel.unprivileged_bpf_disabled" = "1";
