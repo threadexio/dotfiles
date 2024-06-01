@@ -132,7 +132,6 @@
     "module.sig_enforce=1"
     "lockdown=off"
     "mce=0"
-    "quiet"
     "loglevel=2"
     "spectre_v2=on"
     "spec_store_bypass_disable=on"
