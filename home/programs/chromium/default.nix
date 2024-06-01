@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   programs.chromium = {
     enable = true;
-    package = pkgs.chromium;
+    package = pkgs.chromium.override { enableWideVine = true; };
 
     commandLineArgs = [
       "--enable-logging=stderr"
