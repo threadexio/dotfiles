@@ -33,6 +33,10 @@
 
   qt.platformTheme = "kde";
 
+  environment.systemPackages = with pkgs; [
+    discover
+  ];
+
   environment.plasma6.excludePackages = with pkgs; [
     oxygen
     konsole
