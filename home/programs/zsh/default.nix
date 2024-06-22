@@ -133,6 +133,10 @@
     syntaxHighlighting.enable = true;
   };
 
+  programs.tmux = {
+    shell = "${pkgs.zsh}/bin/zsh";
+  };
+
   home.packages = with pkgs; [
     lsd
     bat
@@ -140,6 +144,5 @@
     rsync
     file
     neofetch
-    tmux
   ];
 }
