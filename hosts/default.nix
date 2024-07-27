@@ -1,4 +1,4 @@
-{ inputs, homeExports, ... }: {
+{ self, inputs, homeExports, ... }: {
   flake.nixosConfigurations =
     let
       mkNixosSystem = { configuration, homeProfile }:
@@ -16,6 +16,8 @@
               home-manager.useGlobalPkgs = true;
             }
           ] ++ homeExport.system-modules;
+
+          specialArgs = { inherit self inputs; };
         };
     in
     {

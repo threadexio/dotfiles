@@ -1,4 +1,5 @@
-{ pkgs
+{ self
+, pkgs
 , lib
 , ...
 }: {
@@ -49,6 +50,10 @@
     enable = true;
     rules = lib.readFile ./usbguard-rules.conf;
   };
+
+  environment.systemPackages = [
+    self.packages.${pkgs.system}.usbguard-utils
+  ];
 
   documentation = {
     man.enable = true;

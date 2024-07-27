@@ -17,6 +17,7 @@
       imports = [
         ./home/profiles
         ./hosts
+        ./pkgs
       ];
 
       systems = [
