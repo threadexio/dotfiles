@@ -9,6 +9,7 @@
     ../../programs/chromium
     ../../programs/alacritty
     ../../programs/zsh
+    ../../programs/tmux
 
     ../../services/syncthing
   ];
