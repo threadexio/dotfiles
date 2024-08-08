@@ -1,11 +1,11 @@
 { inputs, ... }: {
-  perSystem = {
-    pkgs,
-    inputs',
-    ...
-  }: {
-    packages = {
-      usbguard-utils = pkgs.callPackage ./usbguard-utils {};
+  perSystem =
+    { pkgs
+    , inputs'
+    , ...
+    }: {
+      packages = {
+        usbguard-utils = pkgs.callPackage ./usbguard-utils { };
+      };
     };
-  };
 }

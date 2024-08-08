@@ -1,11 +1,10 @@
-{
-  lib,
-  pkgs,
-  stdenv,
-  ...
+{ lib
+, pkgs
+, stdenv
+, ...
 }:
 let
-  writeScript =dest: contents:
+  writeScript = dest: contents:
     ''
       cat << EOF > ${dest}
       ${contents}
