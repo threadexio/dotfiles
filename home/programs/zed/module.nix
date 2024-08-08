@@ -21,14 +21,6 @@ in
         '';
       };
 
-      extraPackages = lib.mkOption {
-        default = [ ];
-        type = lib.types.listOf lib.types.package;
-        description = ''
-          Extra packages available to zed.
-        '';
-      };
-
       settings = lib.mkOption {
         default = { };
         type = lib.types.attrs;
