@@ -38,6 +38,15 @@
       project_panel.dock = "right";
       git.inline_blame.delay_ms = 2000;
 
+      inlay_hints = {
+        enabled = true;
+        show_type_hints = true;
+        show_parameter_hints = true;
+        show_other_hints = true;
+        edit_debounce_ms = 700;
+        scroll_debounce_ms = 50;
+      };
+
       /*
        * ==== Formatting ====
        */
@@ -91,6 +100,14 @@
             completion.fullFunctionSignatures.enable = true;
             hover.actions.run.enable = false;
             hover.memoryLayout.niches = true;
+
+            inlayHints.maxLength = null;
+            inlayHints.lifetimeElisionHints = {
+              enable = "skip_trivial";
+              useParameterNames = true;
+            };
+            inlayHints.closureReturnTypeHints.enable = "always";
+            inlayHints.parameterHints.enable = false;
           };
         };
 
