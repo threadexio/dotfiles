@@ -3,22 +3,11 @@
 , stdenv
 , ...
 }:
-let
-  writeScript = dest: contents:
-    ''
-      cat << EOF > ${dest}
-      ${contents}
-      EOF
-      chmod -v +x ${dest}
-    '';
-in
 stdenv.mkDerivation {
   pname = "usbguard-utils";
   version = "0.1.0";
 
   src = ./.;
-
-  dontConfigure = true;
 
   buildInputs = with pkgs; [
     bash
@@ -26,34 +15,24 @@ stdenv.mkDerivation {
     usbguard
   ];
 
-  buildPhase =
-    lib.concatLines [
-      ''
-        mkdir -p $out/bin
-      ''
-      (writeScript "$out/bin/disable-usbguard"
-        ''
-          #!${pkgs.bash}/bin/bash
-          pkexec ${pkgs.usbguard}/bin/usbguard set-parameter ImplicitPolicyTarget allow
-        ''
-      )
-      (writeScript "$out/bin/enable-usbguard"
-        ''
-          #!${pkgs.bash}/bin/bash
-          pkexec ${pkgs.usbguard}/bin/usbguard set-parameter ImplicitPolicyTarget block
-        ''
-      )
-    ];
-
-  doCheck = true;
-
   nativeCheckInputs = with pkgs; [
     shellcheck
   ];
 
+  dontConfigure = true;
+  doCheck = true;
+  dontBuild = true;
+
   checkPhase = ''
-    shellcheck -ax $out/bin/*
+    shellcheck -ax usbguard-utils.sh
   '';
 
-  dontInstall = true;
+  installPhase = ''
+    mkdir -p $out/bin
+    install -Dm755 ./usbguard-utils.sh $out/bin/usbguard-utils
+
+    ln -rsf $out/bin/usbguard-utils $out/bin/enable-usbguard
+    ln -rsf $out/bin/usbguard-utils $out/bin/disable-usbguard
+  '';
+
 }
