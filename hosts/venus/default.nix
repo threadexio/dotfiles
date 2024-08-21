@@ -8,14 +8,24 @@
     ../modules/virt/podman
   ];
 
-  custom.boot.luksUsbUnlock = {
-    enable = true;
-    usbDevice = "/dev/disk/by-label/BOOTKEY";
-    devices = {
-      "cryptroot".keyPath = "venus.key";
-      "cryptdata".keyPath = "venus.hdd.key";
+  custom.boot.luksUsbUnlock =
+    let
+      usbDevice = "/dev/disk/by-label/BOOTKEY";
+    in
+    {
+      enable = true;
+      devices = {
+        "cryptroot" = {
+          keyPath = "venus.key";
+          inherit usbDevice;
+        };
+
+        "cryptdata" = {
+          keyPath = "venus.hdd.key";
+          inherit usbDevice;
+        };
+      };
     };
-  };
 
   boot.initrd.luks.devices = {
     "cryptroot".preLVM = false;

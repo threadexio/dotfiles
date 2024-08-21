@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ./locale.nix
     ./network.nix
@@ -7,6 +7,9 @@
   ];
 
   boot.tmp.cleanOnBoot = true;
+
+  boot.initrd.systemd.enable = true;
+  boot.initrd.systemd.emergencyAccess = config.users.users.kat.hashedPassword;
 
   environment.systemPackages = with pkgs; [
     util-linux

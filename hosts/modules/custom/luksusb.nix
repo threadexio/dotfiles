@@ -1,4 +1,5 @@
-{ config, lib, ... }: with lib; let
+{ config, lib, ... }: with lib;
+let
   cfg = config.custom.boot.luksUsbUnlock;
 in
 {
@@ -6,28 +7,13 @@ in
     custom.boot.luksUsbUnlock = {
       enable = mkEnableOption "unlock LUKS volumes with a USB device on boot";
 
-      usbDevice = mkOption {
-        example = "/dev/disk/by-label/BOOTKEY";
-        description = mdDoc ''
-          Path to the USB device that contains the keys.
-        '';
-        type = types.str;
-      };
-
-      waitForDevice = mkOption {
-        default = 5;
-        example = 10;
-        description = mdDoc ''
-          How many seconds to wait for the USB device to be detected by the
-          kernel.
-        '';
-        type = types.ints.unsigned;
-      };
-
       devices = mkOption {
         default = { };
         example = {
-          cryptroot.keyPath = "/path/to/the/key";
+          cryptroot = {
+            keyPath = "/path/to/the/key";
+            usbDevice = "by-label/MY_USB";
+          };
         };
         type = types.attrsOf (types.submodule {
           options = {
@@ -40,14 +26,22 @@ in
               type = types.str;
             };
 
-            allowPassword = mkOption {
-              default = true;
-              example = false;
+            usbDevice = mkOption {
+              example = "by-label/BOOTKEY";
               description = mdDoc ''
-                Whether to allow using a passphrase to unlock the volume if
-                the device or the key could not be accessed.
+                Path to the USB device that contains the keys. (Path relative to `/dev/disk/`)
               '';
-              type = types.bool;
+              type = types.str;
+            };
+
+            waitForDevice = mkOption {
+              default = 5;
+              example = 10;
+              description = mdDoc ''
+                How many seconds to wait for the USB device to be detected by the
+                kernel.
+              '';
+              type = types.ints.unsigned;
             };
           };
         });
@@ -55,36 +49,67 @@ in
     };
   };
 
-  config = mkIf cfg.enable (
-    let
-      usbMountPath = "/key/" + (builtins.hashString "md5" cfg.usbDevice);
-      usbFsType = "vfat";
-    in
-    {
-      boot.initrd.kernelModules = [ "uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1" ];
+  config = mkIf cfg.enable
+    (
+      let
+        makeUsbDevPath = usbDevice: "/dev/disk/" + usbDevice;
+        makeMountPath = usbDevice: "/key/" + (builtins.hashString "md5" usbDevice);
+        usbFsType = "vfat";
 
-      boot.initrd.postMountCommands = mkBefore ''
-        eject ${escapeShellArg cfg.usbDevice}
-      '';
+        mapAttrsNameValue = f: set:
+          listToAttrs (map f (attrsToList set));
+      in
+      {
+        boot.initrd.kernelModules = [ "uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1" ];
 
-      boot.initrd.luks.devices = builtins.mapAttrs
-        (_: { keyPath, allowPassword }: {
-          preOpenCommands = mkBefore ''
-            mkdir -m 0755 -p ${escapeShellArg usbMountPath}
-            sleep ${escapeShellArg cfg.waitForDevice}s
-            mount -n -t ${escapeShellArg usbFsType} -o ro ${escapeShellArg cfg.usbDevice} ${escapeShellArg usbMountPath}
-          '';
+        boot.initrd.systemd.services =
+          let
+            makeService = name: { keyPath, usbDevice, waitForDevice }:
+              let
+                usbDevPath = makeUsbDevPath usbDevice;
+                usbMountPath = makeMountPath usbDevice;
+              in
+              {
+                description = "Mount ${name} key";
+                wantedBy = [ "cryptsetup.target" ];
+                before = [ "systemd-cryptsetup@${name}.service" ];
+                after = [ "systemd-modules-load.service" ];
+                unitConfig.DefaultDependencies = "no";
+                serviceConfig.Type = "oneshot";
 
-          postOpenCommands = mkBefore ''
-            umount ${escapeShellArg usbMountPath}
-          '';
+                script = ''
+                  if mountpoint -q ${escapeShellArg usbMountPath}; then
+                    exit 0
+                  fi
 
-          keyFile = "${usbMountPath}/${keyPath}";
-          keyFileTimeout = null;
+                  if [ ! -e ${escapeShellArg usbDevPath} ]; then
+                    sleep ${escapeShellArg waitForDevice}s
+                  fi
 
-          fallbackToPassword = allowPassword;
-        })
-        cfg.devices;
-    }
-  );
+                  if [ -e ${escapeShellArg usbDevPath} ]; then
+                    mkdir -m0500 -p ${escapeShellArg usbMountPath}
+                    mount -n -t ${escapeShellArg usbFsType} -o ro ${escapeShellArg usbDevPath} ${escapeShellArg usbMountPath}
+                  fi
+                '';
+              };
+          in
+          mapAttrsNameValue
+            ({ name, value }: {
+              name = "luksusb-${name}";
+              value = makeService name value;
+            })
+            cfg.devices;
+
+        boot.initrd.luks.devices = builtins.mapAttrs
+          (name: { keyPath, usbDevice, ... }:
+            let
+              usbMountPath = makeMountPath usbDevice;
+            in
+            {
+              keyFile = "${usbMountPath}/${keyPath}";
+              keyFileTimeout = 1;
+            })
+          cfg.devices;
+      }
+    );
 }

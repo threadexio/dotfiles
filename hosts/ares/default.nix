@@ -16,8 +16,10 @@
 
   custom.boot.luksUsbUnlock = {
     enable = true;
-    usbDevice = "/dev/disk/by-label/BOOTKEY";
-    devices."cryptroot".keyPath = "ares.key";
+    devices."cryptroot" = {
+      keyPath = "ares.key";
+      usbDevice = "by-label/BOOTKEY";
+    };
   };
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
