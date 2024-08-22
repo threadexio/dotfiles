@@ -11,6 +11,8 @@
   boot.initrd.systemd.enable = true;
   boot.initrd.systemd.emergencyAccess = config.users.users.kat.hashedPassword;
 
+  boot.plymouth.enable = true;
+
   environment.systemPackages = with pkgs; [
     util-linux
     usbutils
