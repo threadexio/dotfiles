@@ -18,6 +18,9 @@ stdenv.mkDerivation {
     sha256 = "sha256-R/S2toAatIMoyebmvdSn2BsrvgHaCgP1um5yG31QQmM=";
   };
 
+  dontConfigure = true;
+  dontBuild = true;
+
   installPhase =
     let
       copyToChrome = [ "userChrome.css" "userContent.css" ]
