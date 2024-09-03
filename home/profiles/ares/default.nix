@@ -8,6 +8,7 @@
     ../../programs/vscodium
     ../../programs/zed
     ../../programs/chromium
+    ../../programs/librewolf
     ../../programs/alacritty
     ../../programs/zsh
     ../../programs/tmux

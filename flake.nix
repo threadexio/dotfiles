@@ -24,11 +24,7 @@
         "x86_64-linux"
       ];
       perSystem =
-        { system
-        , pkgs
-        , config
-        , ...
-        }:
+        { pkgs, ... }:
         let
           formatterPkg = pkgs.nixpkgs-fmt;
         in

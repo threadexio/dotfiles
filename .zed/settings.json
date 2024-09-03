@@ -1,0 +1,8 @@
+{
+  "languages": {
+    "Nix": {
+      "hard_tabs": false,
+      "tab_size": 2
+    }
+  }
+}
