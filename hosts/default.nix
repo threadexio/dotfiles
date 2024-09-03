@@ -1,9 +1,6 @@
-{ self, inputs, homeExports, ... }:
+{ self, inputs, homeModules, ... }:
 let
   mkNixosSystem = { configuration, homeProfile }:
-    let
-      homeExport = homeExports.${homeProfile};
-    in
     inputs.nixpkgs.lib.nixosSystem {
       modules = [
         ./modules/custom
@@ -11,11 +8,11 @@ let
         configuration
 
         {
-          home-manager.users.kat.imports = homeExport.hm-modules;
+          home-manager.users.kat.imports = homeModules."${homeProfile}";
           home-manager.useGlobalPkgs = true;
           home-manager.extraSpecialArgs = { inherit self inputs; };
         }
-      ] ++ homeExport.system-modules;
+      ];
 
       specialArgs = { inherit self inputs; };
     };

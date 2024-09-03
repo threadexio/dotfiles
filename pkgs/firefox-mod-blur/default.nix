@@ -1,9 +1,9 @@
 { lib
 , pkgs
 , stdenv
-# Additional theme mods to install. List of paths to the CSS files relative to the repo's
-# `EXTRA MODS/` directory.
-, extraMods ? []
+  # Additional theme mods to install. List of paths to the CSS files relative to the repo's
+  # `EXTRA MODS/` directory.
+, extraMods ? [ ]
 , ...
 }:
 stdenv.mkDerivation {
@@ -19,16 +19,17 @@ stdenv.mkDerivation {
   };
 
   installPhase =
-  let
-    copyToChrome = [ "userChrome.css" "userContent.css" ]
-      ++ (map (x: "EXTRA MODS/${x}") extraMods);
+    let
+      copyToChrome = [ "userChrome.css" "userContent.css" ]
+        ++ (map (x: "EXTRA MODS/${x}") extraMods);
 
-    copyToChromePaths = map (x: "./${x}") copyToChrome;
-  in ''
-    mkdir -p $out/chrome
+      copyToChromePaths = map (x: "./${x}") copyToChrome;
+    in
+    ''
+      mkdir -p $out/chrome
 
-    cp -vr ./ASSETS $out/chrome
-    install -v -m644 -t $out/chrome \
-      ${lib.escapeShellArgs copyToChromePaths}
-  '';
+      cp -vr ./ASSETS $out/chrome
+      install -v -m644 -t $out/chrome \
+        ${lib.escapeShellArgs copyToChromePaths}
+    '';
 }

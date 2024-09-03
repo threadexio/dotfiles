@@ -50,7 +50,7 @@ with lib;
     mkIf cfg.enable {
       programs.librewolf = {
         enable = true;
-        package  = cfg.package;
+        package = cfg.package;
 
         settings = cfg.overrides // {
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;

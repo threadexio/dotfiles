@@ -4,6 +4,7 @@
     ./network.nix
     ./nix.nix
     ./security.nix
+    ./user.nix
   ];
 
   boot.tmp.cleanOnBoot = true;

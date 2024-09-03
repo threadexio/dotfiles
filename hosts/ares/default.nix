@@ -29,6 +29,11 @@
   fileSystems."/".options = [ "noatime" ];
   fileSystems."/boot".options = [ "noatime" ];
 
+  fileSystems."/home/kat/build" = {
+    fsType = "tmpfs";
+    options = [ "size=10g" "mode=700" "huge=always" "uid=kat" "gid=users" ];
+  };
+
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
   hardware.bluetooth = {
@@ -53,7 +58,13 @@
     rules = lib.readFile ./usbguard-rules.conf;
   };
 
-  environment.systemPackages = [
+  programs.ydotool.enable = true;
+  programs.wireshark.enable = true;
+
+  users.users.kat.extraGroups = [ "ydotool" "wireshark" ];
+
+  environment.systemPackages = with pkgs; [
+    wireshark-qt
     self.packages.${pkgs.system}.usbguard-utils
   ];
 

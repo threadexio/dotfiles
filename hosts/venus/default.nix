@@ -43,6 +43,7 @@
   ];
 
   services.xserver.videoDrivers = lib.mkForce [ "nvidiaLegacy340" ];
+  services.xserver.displayManager.gdm.autoSuspend = false;
 
   networking.hostName = "venus";
   system.stateVersion = "23.11";
