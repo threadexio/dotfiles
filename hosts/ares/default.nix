@@ -75,5 +75,4 @@
   };
 
   networking.hostName = "ares";
-  system.stateVersion = "23.11";
 }

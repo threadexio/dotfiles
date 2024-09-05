@@ -24,4 +24,6 @@
     htop
     file
   ];
+
+  system.stateVersion = "24.05";
 }

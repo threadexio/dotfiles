@@ -46,5 +46,5 @@
   services.xserver.displayManager.gdm.autoSuspend = false;
 
   networking.hostName = "venus";
-  system.stateVersion = "23.11";
+  system.stateVersion = lib.mkForce "23.11";
 }
