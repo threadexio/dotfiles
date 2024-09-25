@@ -42,6 +42,12 @@ in
       options = btrfsMountOpts ++ [ "subvol=@nix" ];
     };
 
+  fileSystems."/.snapshots" =
+    { device = rootDevice;
+      fsType = "btrfs";
+      options = btrfsMountOpts ++ [ "subvol=@snapshots" ];
+    };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
