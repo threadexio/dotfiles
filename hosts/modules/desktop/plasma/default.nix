@@ -34,6 +34,7 @@
   qt.platformTheme = "kde";
 
   environment.systemPackages = with pkgs; [
+    kdePackages.kolourpaint
     discover
   ];
 

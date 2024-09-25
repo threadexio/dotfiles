@@ -17,9 +17,12 @@
   ];
 
   home.packages = with pkgs; [
-    firefox
     keepassxc
     libreoffice
+    inkscape
+    gimp
+    mpv
+    easyeffects
 
     # Man pages
     man-pages
