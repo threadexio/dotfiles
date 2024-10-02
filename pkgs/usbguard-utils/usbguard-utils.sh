@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
 
-enable_usbguard() {
-    pkexec usbguard set-parameter ImplicitPolicyTarget allow
+cmd_enable_usbguard() {
+    pkexec usbguard set-parameter ImplicitPolicyTarget block
 }
 
-disable_usbguard() {
-    pkexec usbguard set-parameter ImplicitPolicyTarget block
+cmd_disable_usbguard() {
+    pkexec usbguard set-parameter ImplicitPolicyTarget allow
 }
 
 usage() {
@@ -23,8 +23,8 @@ run_command() {
     shift
 
     case "$cmd" in
-        "enable-usbguard") enable_usbguard "$@";;
-        "disable-usbguard") disable-usbguard "$@";;
+        "enable-usbguard") cmd_enable_usbguard "$@";;
+        "disable-usbguard") cmd_disable_usbguard "$@";;
         *) usage;;
     esac
 }
