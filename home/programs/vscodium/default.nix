@@ -1,4 +1,8 @@
 { pkgs, ... }: {
+  imports = [
+    ../../fonts
+  ];
+
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium-fhs;
@@ -442,6 +446,4 @@
       "workbench.sideBar.location" = "right";
     };
   };
-
-  home.packages = [ pkgs.nerdfonts ];
 }

@@ -1,4 +1,8 @@
 { pkgs, ... }: {
+  imports = [
+    ../../fonts
+  ];
+
   programs.alacritty = {
     enable = true;
 
@@ -34,8 +38,4 @@
         };
       };
   };
-
-  home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
-  ];
 }
