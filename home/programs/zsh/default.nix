@@ -131,6 +131,10 @@
     ];
 
     syntaxHighlighting.enable = true;
+
+    completionInit = ''
+      zstyle ':completion:*:*:*:default' menu yes select search
+    '';
   };
 
   programs.tmux = {
