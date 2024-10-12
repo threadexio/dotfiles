@@ -1,0 +1,54 @@
+theme = "base16_transparent"
+
+[editor]
+line-number = "relative"
+mouse = false
+gutters = ["diff", "spacer", "line-numbers", "spacer"]
+auto-format = true
+completion-replace = true
+rulers = [80, 90]
+bufferline = "always"
+color-modes = true
+text-width = 100
+insert-final-newline = true
+popup-border = "all"
+indent-heuristic = "hybrid"
+
+[editor.statusline]
+left = ["mode", "version-control", "spacer", "file-name", "spinner"]
+center = ["diagnostics"]
+right = ["register", "primary-selection-length", "position"]
+separator = "|"
+mode.normal = "NO"
+mode.insert = "IN"
+mode.select = "SE"
+
+[editor.lsp]
+enable = true
+display-messages = true
+display-inlay-hints = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+
+[editor.file-picker]
+hidden = false
+parents = false
+
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+nbsp = "none"
+nnbsp = "none"
+newline = "none"
+
+[editor.indent-guides]
+render = true
+skip-levels = 1
+
+[keys.normal]
+C-space = "code_action"
+
+[keys.insert]
+C-space = "code_action"

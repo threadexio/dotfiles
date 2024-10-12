@@ -13,6 +13,8 @@
     ../../programs/zsh
     ../../programs/tmux
 
+    ../../programs/helix
+
     ../../services/syncthing
   ];
 
