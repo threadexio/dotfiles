@@ -5,7 +5,6 @@
     ../../programs/git
     ../../programs/gpg
     ../../programs/ssh
-    ../../programs/vscodium
     ../../programs/zed
     ../../programs/chromium
     ../../programs/librewolf

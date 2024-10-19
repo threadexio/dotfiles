@@ -11,7 +11,7 @@
         fontFamily = "CaskaydiaCove Nerd Font Mono";
       in
       {
-        live_config_reload = false;
+        general.live_config_reload = false;
 
         window = {
           padding = { x = 5; y = 5; };
