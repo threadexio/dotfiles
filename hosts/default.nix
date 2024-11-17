@@ -1,32 +1,52 @@
-{ self, inputs, homeModules, ... }:
+{ self, inputs, homeConfigurations, ... }:
 let
-  mkNixosSystem = { configuration, homeProfile }:
-    inputs.nixpkgs.lib.nixosSystem {
-      modules = [
-        ./modules/custom
-        inputs.hm.nixosModules.default
-        configuration
+  lib = inputs.nixpkgs.lib;
 
-        {
-          home-manager.users.kat.imports = homeModules."${homeProfile}";
-          home-manager.useGlobalPkgs = true;
-          home-manager.extraSpecialArgs = { inherit self inputs; };
-        }
+  nixosSystem = {
+    modules,
+    homeConfigurations,
+  }:
+  let
+    specialArgs = { inherit self inputs; };
+  in
+  inputs.nixpkgs.lib.nixosSystem {
+    inherit specialArgs;
+
+    modules = [
+      inputs.hm.nixosModules.default
+      {
+        home-manager.useGlobalPkgs = true;
+        home-manager.extraSpecialArgs = specialArgs;
+      }
+
+      ./modules/custom # TODO: remove
+    ]
+    ++ modules
+    ++ (lib.flatten (map ({ modules }: {
+      home-manager.users.kat.imports = modules;
+    }) homeConfigurations));
+  };
+
+  nixosSystems = {
+    ares = {
+      modules = [ ./ares ];
+      homeConfigurations = [
+        homeConfigurations."kat@ares"
       ];
-
-      specialArgs = { inherit self inputs; };
-    };
-in
-{
-  flake.nixosConfigurations = {
-    ares = mkNixosSystem {
-      configuration = ./ares;
-      homeProfile = "kat@ares";
     };
 
-    venus = mkNixosSystem {
-      configuration = ./venus;
-      homeProfile = "kat@venus";
+    venus = {
+      modules = [ ./venus ];
+      homeConfigurations = [
+        homeConfigurations."kat@venus"
+      ];
     };
   };
+in
+{
+  _module.args = { inherit nixosSystems; };
+
+  flake.nixosConfigurations = builtins.mapAttrs
+    (_: nixosSystem)
+    nixosSystems;
 }

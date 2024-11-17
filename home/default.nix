@@ -1,10 +1,27 @@
-{ ... }: {
-  home.username = "kat";
-  home.homeDirectory = "/home/kat";
-  home.stateVersion = "24.05";
+{ self, inputs, ... }:
+let
+  homeConfiguration = { modules }:
+  inputs.hm.lib.homeManagerConfiguration {
+    extraSpecialArgs = { inherit self inputs; };
+    pkgs = import inputs.nixpkgs {};
 
-  programs.home-manager.enable = true;
-  programs.git.enable = true;
+    inherit modules;
+  };
 
-  systemd.user.startServices = "sd-switch";
+  homeConfigurations = {
+    "kat@ares" = {
+      modules = [ ./ares ];
+    };
+
+    "kat@venus" = {
+      modules = [ ./venus ];
+    };
+  };
+in
+{
+  _module.args = { inherit homeConfigurations; };
+
+  flake.homeConfigurations = builtins.mapAttrs
+    (_: homeConfiguration)
+    homeConfigurations;
 }

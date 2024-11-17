@@ -1,7 +1,7 @@
-
 { pkgs
 , stdenv
-, ...}:
+, ...
+}:
 stdenv.mkDerivation {
   pname = "bali-firefoxcss";
   version = "0.1.0";

@@ -1,6 +1,7 @@
 { pkgs
 , stdenv
-, ...}:
+, ...
+}:
 # This theme needs specific options set in the browser via `about:config`. This package
 # cannot apply them automatically. Please see:
 # <https://github.com/rafaelmardojai/firefox-gnome-theme?tab=readme-ov-file#required-firefox-preferences>

@@ -20,30 +20,35 @@ in
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/CRYPTROOT";
 
   fileSystems."/" =
-    { device = rootDevice;
+    {
+      device = rootDevice;
       fsType = "btrfs";
       options = btrfsMountOpts ++ [ "subvol=@" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/BOOT";
+    {
+      device = "/dev/disk/by-label/BOOT";
       fsType = "vfat";
     };
 
   fileSystems."/home" =
-    { device = rootDevice;
+    {
+      device = rootDevice;
       fsType = "btrfs";
       options = btrfsMountOpts ++ [ "subvol=@home" ];
     };
 
   fileSystems."/nix" =
-    { device = rootDevice;
+    {
+      device = rootDevice;
       fsType = "btrfs";
       options = btrfsMountOpts ++ [ "subvol=@nix" ];
     };
 
   fileSystems."/.snapshots" =
-    { device = rootDevice;
+    {
+      device = rootDevice;
       fsType = "btrfs";
       options = btrfsMountOpts ++ [ "subvol=@snapshots" ];
     };

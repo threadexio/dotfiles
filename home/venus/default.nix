@@ -1,11 +1,12 @@
 { pkgs, ... }: {
   imports = [
-    ../../programs/git
-    ../../programs/gnome
-    ../../programs/gpg
-    ../../programs/ssh
-    ../../programs/vscodium
-    ../../programs/zsh
+    ../modules/core
+    ../modules/programs/git
+    ../modules/programs/gnome
+    ../modules/programs/gpg
+    ../modules/programs/ssh
+    ../modules/programs/vscodium
+    ../modules/programs/zsh
   ];
 
   home.packages = with pkgs; [

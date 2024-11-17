@@ -4,7 +4,7 @@
 , ...
 }:
 let
-  wallpaperPath = ../../wallpapers/1.png;
+  wallpaperPath = ../wallpapers/wallpapers/1.png;
 in
 {
   dconf.enable = true;

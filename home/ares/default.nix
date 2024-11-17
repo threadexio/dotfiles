@@ -1,20 +1,23 @@
 { pkgs, ... }: {
   imports = [
-    ../../plasma
+    ../modules/core
 
-    ../../programs/git
-    ../../programs/gpg
-    ../../programs/ssh
-    ../../programs/zed
-    ../../programs/chromium
-    ../../programs/librewolf
-    ../../programs/alacritty
-    ../../programs/zsh
-    ../../programs/tmux
+    ../modules/programs/zsh
+    ../modules/programs/tmux
 
-    ../../programs/helix
+    ../modules/programs/git
+    ../modules/programs/gpg
+    ../modules/programs/ssh
 
-    ../../services/syncthing
+    ../modules/plasma
+    ../modules/programs/alacritty
+    ../modules/programs/helix
+    ../modules/programs/zed
+
+    ../modules/programs/chromium
+    ../modules/programs/librewolf
+
+    ../modules/services/syncthing
   ];
 
   home.packages = with pkgs; [
