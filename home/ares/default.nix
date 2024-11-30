@@ -11,6 +11,7 @@
 
     ../modules/plasma
     ../modules/programs/alacritty
+    ../modules/programs/yakuake
     ../modules/programs/helix
     ../modules/programs/zed
 
