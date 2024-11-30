@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "CascadiaCode" ]; })
+    cascadia-code
     inter
   ];
 
@@ -12,7 +12,7 @@
         emoji = [ "Noto Color Emoji" ];
         serif = [ "Noto Serif" ];
         sansSerif = [ "Inter" ];
-        monospace = [ "CaskaydiaMono Nerd Font Mono" ];
+        monospace = [ "Cascadia Code" ];
       };
     };
   };

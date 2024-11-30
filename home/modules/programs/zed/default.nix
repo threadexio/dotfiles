@@ -15,7 +15,7 @@
       ui_font_family = "Noto Sans";
       ui_font_size = 16;
 
-      buffer_font_family = "CaskaydiaCove Nerd Font Mono";
+      buffer_font_family = "Cascadia Code";
       buffer_font_Size = 16;
 
       /*

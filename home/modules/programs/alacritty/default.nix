@@ -8,7 +8,7 @@
 
     settings =
       let
-        fontFamily = "CaskaydiaCove Nerd Font Mono";
+        fontFamily = "Cascadia Code";
       in
       {
         general.live_config_reload = false;

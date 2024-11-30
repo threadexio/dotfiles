@@ -35,11 +35,9 @@
 
   environment.systemPackages = with pkgs; [
     kdePackages.kolourpaint
-    discover
   ];
 
   environment.plasma6.excludePackages = with pkgs; [
     oxygen
-    konsole
   ];
 }

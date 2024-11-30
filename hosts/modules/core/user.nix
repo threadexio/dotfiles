@@ -13,7 +13,7 @@ in
     homeMode = "700";
 
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" "podman" "wireshark" ];
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" "podman" "wireshark" "i2c" ];
 
     # Rootless podman containers
     subUidRanges = [

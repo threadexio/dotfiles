@@ -355,7 +355,7 @@
       "editor.cursorStyle" = "line-thin";
       "editor.emptySelectionClipboard" = false;
       "editor.find.autoFindInSelection" = "multiline";
-      "editor.fontFamily" = "CaskaydiaCove Nerd Font Mono";
+      "editor.fontFamily" = "Cascadia Code";
       "editor.fontLigatures" = true;
       "editor.formatOnSave" = true;
       "editor.hover.delay" = 150;
