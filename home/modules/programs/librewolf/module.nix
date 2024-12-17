@@ -32,7 +32,8 @@ with lib;
       };
 
       themePackage = mkOption {
-        type = types.package;
+        default = null;
+        type = types.nullOr types.package;
         description = mdDoc ''
           Package which contains the `userChrome.css` and `userContent.css`. The output
           of the package's `chrome/` directory will be linked to the `chrome/` directory
@@ -46,6 +47,7 @@ with lib;
     let
       librewolfDir = ".librewolf";
       defaultProfile = "profile.default";
+      hasThemePackage = cfg.themePackage != null;
     in
     mkIf cfg.enable {
       programs.librewolf = {
@@ -57,23 +59,25 @@ with lib;
         };
       };
 
-      home.file."${librewolfDir}/profiles.ini".text = ''
-        [Profile0]
-        Name=default
-        IsRelative=1
-        Path=${defaultProfile}
-        Default=1
+      home.file = {
+        "${librewolfDir}/profiles.ini".text = ''
+          [Profile0]
+          Name=default
+          IsRelative=1
+          Path=${defaultProfile}
+          Default=1
 
-        [General]
-        StartWithLastProfile=1
-        Version=2
-      '';
+          [General]
+          StartWithLastProfile=1
+          Version=2
+        '';
+      } //
+      (if hasThemePackage
+        then { "${librewolfDir}/${defaultProfile}/chrome".source = "${cfg.themePackage}/chrome"; }
+        else { });
 
-      home.file."${librewolfDir}/${defaultProfile}/chrome".source = "${cfg.themePackage}/chrome";
 
-
-      home.packages = [
-        cfg.themePackage
-      ];
+      home.packages =
+        if hasThemePackage then [ cfg.themePackage ] else [ ];
     };
 }
