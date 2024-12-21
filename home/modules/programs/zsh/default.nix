@@ -94,7 +94,7 @@
     envExtra = lib.concatLines [
       "export GPG_TTY=$(tty)"
       "export PATH=\"$HOME/.bin:$PATH\""
-      "export EDITOR=vim"
+      "export EDITOR=hx"
     ];
 
     history = {
