@@ -13,9 +13,9 @@ stdenv.mkDerivation {
   src = pkgs.fetchFromGitHub {
     owner = "datguypiko";
     repo = "Firefox-Mod-Blur";
-    rev = "651c33cdaef9a48ad272205f6db7fcf686856ba4";
+    rev = "02f4de894d94a79505b5b10a42c9af06aa7e4819";
     name = "theme";
-    sha256 = "sha256-R/S2toAatIMoyebmvdSn2BsrvgHaCgP1um5yG31QQmM=";
+    sha256 = "sha256-Pc2BQuHYDtKexQKwT2wpphRAFuW29grZoCuqzG/xYLM=";
   };
 
   dontConfigure = true;
