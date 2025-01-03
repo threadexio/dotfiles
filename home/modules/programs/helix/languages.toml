@@ -1,0 +1,10 @@
+[language-server.rust-analyzer.config]
+check.command = "clippy"
+completion.fullFunctionSignatures.enable = true
+hover.actions.run.enable = false
+hover.memoryLayout.niches = true
+inlayHints.maxLength = "null"
+inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+inlayHints.lifetimeElisionHints.useParameterNames = true
+inlayHints.closureReturnTypeHints.enable = "always"
+inlayHints.parameterHints.enable = false
