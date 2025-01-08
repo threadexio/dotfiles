@@ -16,6 +16,10 @@ let
     "kat@venus" = {
       modules = [ ./venus ];
     };
+
+    "kat@hermes" = {
+      modules = [ ./hermes ];
+    };
   };
 in
 {
