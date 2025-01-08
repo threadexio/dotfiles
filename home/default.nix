@@ -1,12 +1,12 @@
 { self, inputs, ... }:
 let
-  homeConfiguration = { modules }:
-  inputs.hm.lib.homeManagerConfiguration {
-    extraSpecialArgs = { inherit self inputs; };
-    pkgs = import inputs.nixpkgs {};
+  homeConfiguration = { modules, system ? null }:
+    inputs.hm.lib.homeManagerConfiguration {
+      extraSpecialArgs = { inherit self inputs; };
+      pkgs = import inputs.nixpkgs { inherit system; };
 
-    inherit modules;
-  };
+      inherit modules;
+    };
 
   homeConfigurations = {
     "kat@ares" = {
@@ -19,6 +19,7 @@ let
 
     "hermes" = {
       modules = [ ./hermes ];
+      system = "aarch64-linux";
     };
   };
 in

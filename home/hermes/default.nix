@@ -41,5 +41,6 @@
   home.homeDirectory = "/home/kat";
   home.stateVersion = "24.05";
 
+  nix.package = pkgs.nix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
