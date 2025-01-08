@@ -17,7 +17,7 @@ let
       modules = [ ./venus ];
     };
 
-    "kat@hermes" = {
+    "hermes" = {
       modules = [ ./hermes ];
     };
   };

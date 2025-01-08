@@ -34,9 +34,12 @@
     imagemagick
   ];
 
-  home.stateVersion = "24.05";
   programs.home-manager.enable = true;
   programs.git.enable = true;
+
+  home.username = "kat";
+  home.homeDirectory = "/home/kat";
+  home.stateVersion = "24.05";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
