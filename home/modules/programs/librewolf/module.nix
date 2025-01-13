@@ -73,8 +73,8 @@ with lib;
         '';
       } //
       (if hasThemePackage
-        then { "${librewolfDir}/${defaultProfile}/chrome".source = "${cfg.themePackage}/chrome"; }
-        else { });
+      then { "${librewolfDir}/${defaultProfile}/chrome".source = "${cfg.themePackage}/chrome"; }
+      else { });
 
 
       home.packages =

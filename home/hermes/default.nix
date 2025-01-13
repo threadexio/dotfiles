@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ../modules/core
-  
+
     ../modules/programs/zsh
     ../modules/programs/tmux
     ../modules/programs/git

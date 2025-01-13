@@ -3,7 +3,7 @@
     keepassxc
     libreoffice
     mpv
-    
+
     inkscape
     gimp
     ffmpeg

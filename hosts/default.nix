@@ -2,30 +2,33 @@
 let
   lib = inputs.nixpkgs.lib;
 
-  nixosSystem = {
-    modules,
-    homeConfigurations,
-  }:
-  let
-    specialArgs = { inherit self inputs; };
-  in
-  inputs.nixpkgs.lib.nixosSystem {
-    inherit specialArgs;
+  nixosSystem =
+    { modules
+    , homeConfigurations
+    ,
+    }:
+    let
+      specialArgs = { inherit self inputs; };
+    in
+    inputs.nixpkgs.lib.nixosSystem {
+      inherit specialArgs;
 
-    modules = [
-      inputs.hm.nixosModules.default
-      {
-        home-manager.useGlobalPkgs = true;
-        home-manager.extraSpecialArgs = specialArgs;
-      }
+      modules = [
+        inputs.hm.nixosModules.default
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.extraSpecialArgs = specialArgs;
+        }
 
-      ./modules/custom # TODO: remove
-    ]
-    ++ modules
-    ++ (lib.flatten (map ({ modules }: {
-      home-manager.users.kat.imports = modules;
-    }) homeConfigurations));
-  };
+        ./modules/custom # TODO: remove
+      ]
+      ++ modules
+      ++ (lib.flatten (map
+        ({ modules }: {
+          home-manager.users.kat.imports = modules;
+        })
+        homeConfigurations));
+    };
 
   nixosSystems = {
     ares = {
