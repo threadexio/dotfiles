@@ -93,7 +93,6 @@
 
     envExtra = lib.concatLines [
       "export GPG_TTY=$(tty)"
-      "export PATH=\"$HOME/.bin:$HOME/.cargo/bin:$PATH\""
       "export EDITOR=hx"
     ];
 
