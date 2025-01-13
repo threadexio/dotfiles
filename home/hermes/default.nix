@@ -21,4 +21,5 @@
   ];
 
   nix.package = pkgs.nix;
+  home.stateVersion = "24.05";
 }
