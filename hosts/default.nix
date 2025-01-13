@@ -44,6 +44,11 @@ let
         homeConfigurations."kat@venus"
       ];
     };
+
+    hades = {
+      modules = [ ./hades ];
+      homeConfigurations = [ homeConfigurations.hades ];
+    };
   };
 in
 {

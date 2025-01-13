@@ -21,6 +21,10 @@ let
       modules = [ ./hermes ];
       system = "aarch64-linux";
     };
+
+    "hades" = {
+      modules = [ ./hades ];
+    };
   };
 in
 {
