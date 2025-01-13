@@ -110,8 +110,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
           repo = "zsh-autosuggestions";
-          rev = "v0.7.0";
-          sha256 = "NhOEHgwInvR62XyyHXo7eWtcsky9mTisf9JjPwllZ78=";
+          rev = "v0.7.1";
+          sha256 = "sha256-vpTyYq9ZgfgdDsWzjxVAE7FZH4MALMNZIFyEOBLm5Qo=";
         };
       }
       {
@@ -119,8 +119,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
           repo = "zsh-syntax-highlighting";
-          rev = "0.8.0-alpha1-pre-redrawhook";
-          sha256 = "NhOEHgwInvR62XyyHXo7eWtcsky9mTisf9JjPwllZ78=";
+          rev = "0.8.0";
+          sha256 = "sha256-iJdWopZwHpSyYl5/FQXEW7gl/SrKaYDEtTH9cGP7iPo=";
         };
       }
       {
