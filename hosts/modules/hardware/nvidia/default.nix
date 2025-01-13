@@ -1,19 +1,14 @@
 { lib, ... }: {
-  hardware = {
-    opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-    };
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
-    nvidia = {
-      modesetting.enable = true;
-      nvidiaSettings = false;
+  hardware.nvidia = {
+    modesetting.enable = true;
+    nvidiaSettings = false;
 
-      prime = {
-        offload.enable = lib.mkForce false;
-      };
-    };
+    prime.offload.enable = lib.mkForce false;
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];

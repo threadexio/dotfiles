@@ -47,7 +47,9 @@ let
 
     hades = {
       modules = [ ./hades ];
-      homeConfigurations = [ homeConfigurations.hades ];
+      homeConfigurations = [
+        homeConfigurations."hades"
+      ];
     };
   };
 in

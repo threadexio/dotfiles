@@ -1,9 +1,9 @@
 { self, inputs, ... }:
 let
-  homeConfiguration = { modules, system ? null }:
+  homeConfiguration = { modules }:
     inputs.hm.lib.homeManagerConfiguration {
       extraSpecialArgs = { inherit self inputs; };
-      pkgs = import inputs.nixpkgs { inherit system; };
+      pkgs = import inputs.nixpkgs {};
 
       inherit modules;
     };
@@ -19,7 +19,6 @@ let
 
     "hermes" = {
       modules = [ ./hermes ];
-      system = "aarch64-linux";
     };
 
     "hades" = {

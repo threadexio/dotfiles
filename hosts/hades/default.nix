@@ -9,10 +9,11 @@
     ../modules/core
     ../modules/efi
     ../modules/hardware/intel
-    ../modules/hardware/nvidia
     ../modules/virt/kvm
     ../modules/virt/podman
   ];
+
+  boot.plymouth.enable = lib.mkForce false;
 
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
@@ -27,5 +28,5 @@
   powerManagement.cpuFreqGovernor = "performance";
 
   networking.hostName = "hades";
-  system.stateVersion = "24.11";
+  system.stateVersion = "24.05";
 }
