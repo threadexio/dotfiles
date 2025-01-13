@@ -11,6 +11,8 @@
       add_newline = true;
       format = lib.concatStrings [
         " "
+        "$hostname"
+        " "
         "$nix_shell"
         "$directory"
         "$git_branch"
@@ -19,6 +21,15 @@
         "$git_status"
         "[»](red bold) "
       ];
+
+      hostname = {
+        format = lib.concatStrings [
+          "["
+          "$ssh_symbol"
+          "$hostname"
+          "](dimmed yellow)"
+        ];
+      };
 
       nix_shell = {
         heuristic = true;
