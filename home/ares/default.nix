@@ -1,4 +1,4 @@
-{ ... }: {
+{ self, pkgs, ... }: {
   imports = [
     ../modules/core
     ../modules/desktop
@@ -24,6 +24,10 @@
 
     ../modules/programs/easyeffects
     ../modules/services/syncthing
+  ];
+
+  home.packages = [
+    self.packages.${pkgs.system}.wol
   ];
 
   home.stateVersion = "24.05";
