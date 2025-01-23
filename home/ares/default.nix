@@ -26,9 +26,11 @@
     ../modules/services/syncthing
   ];
 
-  home.packages = [
-    self.packages.${pkgs.system}.wol
-  ];
+  home.packages = (with self.packages.${pkgs.system}; [
+    wol
+  ]) ++ (with pkgs; [
+    discord
+  ]);
 
   home.stateVersion = "24.05";
 }
