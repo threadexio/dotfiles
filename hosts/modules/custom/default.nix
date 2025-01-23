@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
     ./luksusb.nix
+    ./watchpuppy
   ];
 }

@@ -25,6 +25,12 @@
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
 
+  custom.services.watchpuppy = {
+    enable = true;
+    user = "kat";
+    timeout = 2 * 60;
+  };
+
   systemd.services.wol = {
     description = "Wake-On-LAN";
     requires = [ "network.target" ];
