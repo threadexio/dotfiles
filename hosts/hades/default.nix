@@ -19,7 +19,6 @@
   hardware.bluetooth.enable = false;
 
   services.hardware.bolt.enable = true;
-  services.fwupd.enable = true;
   services.fstrim.enable = true;
   services.tailscale.useRoutingFeatures = "client";
 
