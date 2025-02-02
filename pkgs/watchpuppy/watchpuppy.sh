@@ -1,20 +1,24 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
 
-is_user_logged_in() {
-  local user="${1:?expected user}"
-  who | cut -d' ' -f1 | grep -qFx "${user}"
-}
-
 usage() {
   echo "usage: $0 -u <user> -t <duration>"
   exit 1
 }
 
-main() {
-  local user
-  local timeout
+local_logins() {
+  who | cut -d' ' -f1 | grep -qFx "${user}"
+}
 
+active_ssh_sessions() {
+  pgrep -ai sshd-session | grep -q "$user"
+}
+
+should_sleep() {
+  (! local_logins) && (! active_ssh_sessions)
+}
+
+main() {
   while getopts ":u:t:" opt; do
     case "$opt" in
       u) user="$OPTARG";;
@@ -34,7 +38,8 @@ main() {
   while true; do
     sleep "${timeout}"
 
-    if ! is_user_logged_in "$user"; then
+    if should_sleep; then
+      echo "Putting the system to sleep..."
       systemctl suspend -i
     fi
   done
