@@ -25,6 +25,8 @@
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
 
+  security.sudo.wheelNeedsPassword = false;
+
   custom.services.watchpuppy = {
     enable = true;
     user = "kat";
