@@ -7,7 +7,6 @@
 
     # Debuggers & Profilers
     gdb
-    lldb
     strace
     ltrace
     valgrind
