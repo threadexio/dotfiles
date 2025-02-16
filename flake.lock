@@ -45,11 +45,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1739714724,
-        "narHash": "sha256-AuMUw9wmZcrvuPXbKrIxVyXGczmBRw0OBlkd20tnwm0=",
+        "lastModified": 1739730323,
+        "narHash": "sha256-TSWdrsZvuzLUUlb7F1g0hURZ1K8sLpr6/odJJ5QAa9w=",
         "owner": "threadexio",
         "repo": "helix-rich-presence",
-        "rev": "95223675c446e6b395e96d1e2bfff690cf741da4",
+        "rev": "0843b570c789c8d72b1873bcfbf5343fe36b1b89",
         "type": "github"
       },
       "original": {
