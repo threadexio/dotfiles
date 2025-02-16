@@ -1,6 +1,6 @@
 { self, inputs, ... }:
 let
-  homeConfiguration = { modules, system ? null }@args:
+  homeConfiguration = { modules, system ? null }:
     inputs.hm.lib.homeManagerConfiguration {
       extraSpecialArgs = { inherit self inputs; };
       pkgs = import inputs.nixpkgs { inherit system; };

@@ -10,6 +10,11 @@
     };
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+
+    helix-rich-presence = {
+      url = "github:threadexio/helix-rich-presence";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:

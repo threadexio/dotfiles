@@ -1,6 +1,7 @@
-{ pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   programs.helix = {
     enable = true;
+    package = inputs.helix-rich-presence.packages.${pkgs.system}.default;
 
     # https://github.com/helix-editor/helix/wiki/Troubleshooting#on-linux
     extraPackages = with pkgs; [
