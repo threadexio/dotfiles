@@ -36,28 +36,6 @@
         "type": "github"
       }
     },
-    "helix-rich-presence": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "rust-overlay": "rust-overlay"
-      },
-      "locked": {
-        "lastModified": 1739730323,
-        "narHash": "sha256-TSWdrsZvuzLUUlb7F1g0hURZ1K8sLpr6/odJJ5QAa9w=",
-        "owner": "threadexio",
-        "repo": "helix-rich-presence",
-        "rev": "0843b570c789c8d72b1873bcfbf5343fe36b1b89",
-        "type": "github"
-      },
-      "original": {
-        "owner": "threadexio",
-        "repo": "helix-rich-presence",
-        "type": "github"
-      }
-    },
     "hm": {
       "inputs": {
         "nixpkgs": [
@@ -106,18 +84,40 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/072a6db25e947df2f31aab9eccd0ab75d5b2da11.tar.gz"
       }
     },
+    "rich-presence-wrapper": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1740172131,
+        "narHash": "sha256-3GvYPYxu01Dz3g6zABbwbofd6NBUXwF9kKuOse5YSTg=",
+        "owner": "threadexio",
+        "repo": "rich-presence-wrapper",
+        "rev": "b6bd0b63a845a932ad85c8d2273010c1dade5310",
+        "type": "github"
+      },
+      "original": {
+        "owner": "threadexio",
+        "repo": "rich-presence-wrapper",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
-        "helix-rich-presence": "helix-rich-presence",
         "hm": "hm",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "rich-presence-wrapper": "rich-presence-wrapper"
       }
     },
     "rust-overlay": {
       "inputs": {
         "nixpkgs": [
-          "helix-rich-presence",
+          "rich-presence-wrapper",
           "nixpkgs"
         ]
       },
