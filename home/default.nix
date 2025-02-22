@@ -1,9 +1,9 @@
-{ self, inputs, ... }:
+{ self, inputs, overlays, ... }:
 let
   homeConfiguration = { modules, system ? null }:
     inputs.hm.lib.homeManagerConfiguration {
       extraSpecialArgs = { inherit self inputs; };
-      pkgs = import inputs.nixpkgs { inherit system; };
+      pkgs = import inputs.nixpkgs { inherit system overlays; };
 
       inherit modules;
     };

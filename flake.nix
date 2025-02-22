@@ -18,7 +18,20 @@
   };
 
   outputs = inputs:
+    let
+      overlays = [
+        (final: _: rec {
+          rich-presence-wrapper = inputs.rich-presence-wrapper.packages.${final.system}.default.override {
+            programs = [ "helix" ];
+          };
+
+          helix = rich-presence-wrapper;
+        })
+      ];
+    in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      _module.args = { inherit overlays; };
+
       imports = [
         ./home
         ./hosts

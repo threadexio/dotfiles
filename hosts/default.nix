@@ -1,14 +1,19 @@
-{ self, inputs, homeConfigurations, ... }:
+{ self, inputs, homeConfigurations, overlays, ... }:
 let
   lib = inputs.nixpkgs.lib;
 
   nixosSystem =
-    { modules
-    , homeConfigurations
-    ,
-    }:
+    { modules, homeConfigurations }:
     let
       specialArgs = { inherit self inputs; };
+
+      homeModules = lib.flatten (map
+        ({ modules }: {
+          home-manager.users.kat.nixpkgs.overlays = overlays;
+          home-manager.users.kat.imports = modules;
+        })
+        homeConfigurations
+      );
     in
     inputs.nixpkgs.lib.nixosSystem {
       inherit specialArgs;
@@ -16,18 +21,13 @@ let
       modules = [
         inputs.hm.nixosModules.default
         {
+          nixpkgs.overlays = overlays;
           home-manager.useGlobalPkgs = true;
           home-manager.extraSpecialArgs = specialArgs;
         }
 
         ./modules/custom # TODO: remove
-      ]
-      ++ modules
-      ++ (lib.flatten (map
-        ({ modules }: {
-          home-manager.users.kat.imports = modules;
-        })
-        homeConfigurations));
+      ] ++ modules ++ homeModules;
     };
 
   nixosSystems = {
