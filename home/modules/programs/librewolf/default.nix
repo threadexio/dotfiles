@@ -1,4 +1,4 @@
-{ self, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [ ./module.nix ];
 
   custom.programs.librewolf = {
@@ -15,7 +15,7 @@
         "privacy.clearOnShutdown.history" = false;
       };
 
-    themePackage = self.packages.${pkgs.system}.firefox-mod-blur.override {
+    themePackage = pkgs.firefox-mod-blur.override {
       extraMods = [
         "Search Bar Mods/Search box - No search engine buttons/no_search_engines_in_url_bar.css"
         "Icon and Button Mods/Menu icon change/menu_icon_change_to_firefox.css"

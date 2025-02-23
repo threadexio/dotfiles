@@ -1,4 +1,4 @@
-{ self, pkgs, ... }: {
+{ pkgs, ... }: {
   virtualisation.libvirtd = {
     enable = true;
     onBoot = "ignore";
@@ -13,12 +13,11 @@
     };
   };
 
-  environment.systemPackages = (with pkgs; [
+  environment.systemPackages = with pkgs; [
     virt-manager
+    virt-clone-cheap
     seabios
     OVMFFull
     win-virtio
-  ]) ++ (with self.packages.${pkgs.system}; [
-    virt-clone-cheap
-  ]);
+  ];
 }

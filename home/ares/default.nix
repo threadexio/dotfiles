@@ -1,4 +1,4 @@
-{ self, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ../modules/core
     ../modules/desktop
@@ -26,11 +26,10 @@
     ../modules/services/syncthing
   ];
 
-  home.packages = (with self.packages.${pkgs.system}; [
-    wol
-  ]) ++ (with pkgs; [
+  home.packages = with pkgs; [
     discord
-  ]);
+    wol
+  ];
 
   home.stateVersion = "24.05";
 }

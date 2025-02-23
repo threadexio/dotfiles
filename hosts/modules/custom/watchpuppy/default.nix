@@ -1,4 +1,4 @@
-{ self, config, pkgs, lib, ... }: with lib;
+{ config, pkgs, lib, ... }: with lib;
 let
   cfg = config.custom.services.watchpuppy;
 in
@@ -26,24 +26,19 @@ in
     };
   };
 
-  config = mkIf cfg.enable (
-    let
-      watchpuppy = self.packages.${pkgs.system}.watchpuppy;
-    in
-    {
-      systemd.services.watchpuppy = {
-        description = "Sleep when user not logged in";
-        after = [ "sshd.service" ];
+  config = mkIf cfg.enable {
+    systemd.services.watchpuppy = {
+      description = "Sleep when user not logged in";
+      after = [ "sshd.service" ];
 
-        serviceConfig = {
-          Type = "simple";
-          ExecStart = "${watchpuppy}/bin/watchpuppy -u ${escapeShellArg cfg.user} -t ${escapeShellArg cfg.timeout}";
-        };
-
-        wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.watchpuppy}/bin/watchpuppy -u ${escapeShellArg cfg.user} -t ${escapeShellArg cfg.timeout}";
       };
 
-      environment.systemPackages = [ watchpuppy ];
-    }
-  );
+      wantedBy = [ "multi-user.target" ];
+    };
+
+    environment.systemPackages = [ pkgs.watchpuppy ];
+  };
 }

@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-utils.url = "github:numtide/flake-utils";
 
     rich-presence-wrapper = {
       url = "github:threadexio/rich-presence-wrapper";
@@ -17,42 +17,43 @@
     };
   };
 
-  outputs = inputs:
+  outputs = { nixpkgs, flake-utils, ... }@inputs:
     let
-      overlays = [
-        (final: _: rec {
-          rich-presence-wrapper = inputs.rich-presence-wrapper.packages.${final.system}.default.override {
-            programs = [ "helix" ];
-          };
+      mkFlakePackages = import ./pkgs;
 
-          helix = rich-presence-wrapper;
-        })
-      ];
-    in
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      _module.args = { inherit overlays; };
-
-      imports = [
-        ./home
-        ./hosts
-        ./pkgs
-      ];
-
-      systems = [
-        "x86_64-linux"
-      ];
-
-      perSystem =
-        { pkgs, ... }:
+      perSystem = flake-utils.lib.eachDefaultSystem (system:
         let
-          formatterPkg = pkgs.nixpkgs-fmt;
+          pkgs = import nixpkgs { inherit system; };
         in
         {
-          formatter = formatterPkg;
+          formatter = pkgs.nixpkgs-fmt;
+          packages = mkFlakePackages pkgs;
+        });
 
-          devShells.default = pkgs.mkShell {
-            packages = [ formatterPkg ];
-          };
-        };
-    };
+      inputs' = inputs // {
+        overlays = [
+          (final: _: rec {
+            rich-presence-wrapper = inputs.rich-presence-wrapper.packages.${final.system}.default.override {
+              programs = [ "helix" ];
+            };
+
+            helix = rich-presence-wrapper;
+          })
+
+          (final: _: mkFlakePackages final)
+        ];
+      };
+
+      home = import ./home inputs';
+
+      inputs'' = inputs' // { inherit (home) homes; };
+
+      hosts = import ./hosts inputs'';
+
+      flake = {
+        inherit (home) homeConfigurations;
+        inherit (hosts) nixosConfigurations;
+      };
+    in
+    flake // perSystem;
 }

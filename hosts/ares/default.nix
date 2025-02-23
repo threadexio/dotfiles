@@ -1,5 +1,4 @@
-{ self
-, pkgs
+{ pkgs
 , lib
 , ...
 }: {
@@ -69,7 +68,7 @@
 
   environment.systemPackages = with pkgs; [
     wireshark-qt
-    self.packages.${pkgs.system}.usbguard-utils
+    usbguard-utils
   ];
 
   documentation = {

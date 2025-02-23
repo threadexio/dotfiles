@@ -12,14 +12,17 @@ in
     settings = readTOML ./config.toml;
     languages = readTOML ./languages.toml;
 
-    themes = let
-      themeFiles = attrNames (readDir ./themes);
+    themes =
+      let
+        themeFiles = attrNames (readDir ./themes);
 
-      themes = map (themeFile: {
-        name = lib.removeSuffix ".toml" themeFile;
-        value = readTOML ./themes/${themeFile};
-      }) themeFiles;
-    in
+        themes = map
+          (themeFile: {
+            name = lib.removeSuffix ".toml" themeFile;
+            value = readTOML ./themes/${themeFile};
+          })
+          themeFiles;
+      in
       listToAttrs themes;
   };
 
