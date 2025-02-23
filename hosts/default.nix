@@ -12,8 +12,6 @@ let
           home-manager.users.kat.nixpkgs.overlays = overlays;
           home-manager.users.kat.imports = home.modules;
         }
-
-        ./modules/custom # TODO: remove
       ] ++ modules;
     };
 in

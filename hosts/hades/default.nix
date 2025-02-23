@@ -10,6 +10,7 @@
     ../modules/hardware/intel
     ../modules/virt/kvm
     ../modules/virt/podman
+    ../modules/custom
   ];
 
   boot.plymouth.enable = lib.mkForce false;
