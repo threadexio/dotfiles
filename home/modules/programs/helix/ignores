@@ -1,0 +1,8 @@
+.cache/
+.build/
+.python/
+
+target/
+result
+
+!.gitignore

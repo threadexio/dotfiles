@@ -1,9 +1,12 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: with builtins; {
   programs.helix = {
     enable = true;
 
-    settings = builtins.fromTOML (builtins.readFile ./config.toml);
-    languages = builtins.fromTOML (builtins.readFile ./languages.toml);
+    ignores = filter (x: stringLength x > 0)
+      (lib.splitString "\n" (readFile ./ignores));
+
+    settings = fromTOML (readFile ./config.toml);
+    languages = fromTOML (readFile ./languages.toml);
   };
 
   home.packages = with pkgs; [
