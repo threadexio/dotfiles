@@ -2,6 +2,6 @@
   programs.tmux = {
     enable = true;
 
-    escapeTime = 0;
+    extraConfig = builtins.readFile ./tmux.conf;
   };
 }

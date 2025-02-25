@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
   imports = [
     ../../fonts
   ];
@@ -9,33 +9,29 @@
     settings =
       let
         fontFamily = "Cascadia Code";
+
+        mkFontStyle = style: { family = fontFamily; inherit style; };
       in
       {
         general.live_config_reload = false;
 
         window = {
-          padding = { x = 5; y = 5; };
+          padding = { x = 2; y = 2; };
           opacity = 0.5;
           blur = true;
           dynamic_title = true;
         };
 
-        font =
-          let
-            family = fontFamily;
-          in
-          {
-            size = 12;
+        font = {
+          size = 12;
 
-            normal = { inherit family; style = "Regular"; };
-            bold = { inherit family; style = "Bold"; };
-            italic = { inherit family; style = "Italic"; };
-            bold_italic = { inherit family; style = "Bold Italic"; };
-          };
-
-        cursor = {
-          thickness = 0.1;
+          normal = mkFontStyle "Regular";
+          bold = mkFontStyle "Bold";
+          italic = mkFontStyle "Italic";
+          bold_italic = mkFontStyle "Bold Italic";
         };
+
+        cursor.thickness = 0.1;
       };
   };
 }
