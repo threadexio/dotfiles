@@ -74,6 +74,12 @@
     };
   };
 
+  programs.fzf = {
+    enable = true;
+
+    enableZshIntegration = true;
+  };
+
   programs.zsh = {
     enable = true;
 
@@ -135,16 +141,21 @@
         };
       }
       {
+        name ="fzf-tab";
+        src = pkgs.fetchFromGitHub {
+          owner = "Aloxaf";
+          repo = "fzf-tab";
+          rev = "v1.2.0";
+          sha256 = "sha256-q26XVS/LcyZPRqDNwKKA9exgBByE0muyuNb0Bbar2lY=";
+        };
+      }
+      {
         name = "colored-man-pages";
         src = ./colored-man-pages.plugin.zsh;
       }
     ];
 
     syntaxHighlighting.enable = true;
-
-    completionInit = ''
-      zstyle ':completion:*:*:*:default' menu yes select search
-    '';
 
     initExtra = ''
       bindkey "^[[H"     beginning-of-line
