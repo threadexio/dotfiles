@@ -5,7 +5,7 @@ let
     name = "cargo-config";
     text = ''
       [build]
-      target-dir = "${config.home.homeDirectory}/build"
+      target-dir = "/tmp/${config.home.username}/target"
 
       [target.x86_64-unknown-linux-gnu]
       linker = "${pkgs.clang}/bin/clang"

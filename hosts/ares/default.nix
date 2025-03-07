@@ -29,14 +29,6 @@
     options snd_intel_dspcfg dsp_driver=1
   '';
 
-  fileSystems."/".options = [ "noatime" ];
-  fileSystems."/boot".options = [ "noatime" ];
-
-  fileSystems."/home/kat/build" = {
-    fsType = "tmpfs";
-    options = [ "size=10g" "mode=700" "huge=always" "uid=kat" "gid=users" ];
-  };
-
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
   hardware.bluetooth = {
