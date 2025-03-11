@@ -4,7 +4,7 @@
 , ...
 }:
 let
-  wallpaperPath = ../wallpapers/wallpapers/1.png;
+  wallpaperPath = "${pkgs.wallpapers}/share/wallpapers/gold-trails.png";
 in
 {
   dconf.enable = true;
@@ -222,5 +222,7 @@ in
     caffeine
     focus-changer
     tailscale-qs
+  ] ++ [
+    pkgs.wallpapers
   ];
 }

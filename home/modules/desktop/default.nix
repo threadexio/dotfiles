@@ -1,4 +1,9 @@
 { pkgs, ... }: {
+  xdg.dataFile."wallpapers" = {
+    recursive = true;
+    source = "${pkgs.wallpapers}/share/wallpapers";
+  };
+
   home.packages = with pkgs; [
     keepassxc
     libreoffice
@@ -8,5 +13,7 @@
     gimp
     ffmpeg
     imagemagick
+
+    wallpapers
   ];
 }
