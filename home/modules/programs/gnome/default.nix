@@ -4,7 +4,7 @@
 , ...
 }:
 let
-  wallpaperPath = "${pkgs.wallpapers}/share/wallpapers/gold-trails.png";
+  wallpaperPath = "${pkgs.wallpapers}/share/wallpapers/original/gold-trails.png";
 in
 {
   dconf.enable = true;
