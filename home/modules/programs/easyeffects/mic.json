@@ -1,14 +1,5 @@
 {
     "input": {
-        "autogain#0": {
-            "bypass": false,
-            "input-gain": 0.0,
-            "maximum-history": 15,
-            "output-gain": 0.0,
-            "reference": "Geometric Mean (MSI)",
-            "silence-threshold": -70.0,
-            "target": -23.0
-        },
         "blocklist": [],
         "gate#0": {
             "attack": 50.0,
@@ -63,7 +54,6 @@
         "plugins_order": [
             "rnnoise#0",
             "gate#0",
-            "autogain#0",
             "limiter#0"
         ],
         "rnnoise#0": {
