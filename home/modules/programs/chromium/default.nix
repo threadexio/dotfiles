@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   programs.chromium = {
     enable = true;
-    package = pkgs.ungoogled-chromium;
+    package = pkgs.chromium;
 
     commandLineArgs = [
       "--enable-logging=stderr"
@@ -18,14 +18,10 @@
     ];
 
     extensions = [
-      rec {
-        id = "ocaahdebbfolfmndjeplogmgcagdmblk";
-        version = "1.5.4.3";
-        crxPath = pkgs.fetchurl {
-          url = "https://github.com/NeverDecaf/chromium-web-store/releases/download/v${version}/Chromium.Web.Store.crx";
-          hash = "sha256-5ZO/IG1Ap7lH2HqEwgjzln4Oi5oqxNJ4wHyxoh+ZZTI=";
-        };
-      }
+      { id = "ddkjiahejlhfcafbddmgiahcphecmpfh"; } # uBOL
+      { id = "nngceckbapebfimnlniiiahkandclblb"; } # Bitwarden
+      { id = "lkbajdkdffdimiecmlkmoiepfccjnmkp"; } # Sponsorblock
+      { id = "hfbciigaadkcpkohaclgobbldpfjjhen"; } # Violentmonkey
     ];
   };
 }
