@@ -10,7 +10,6 @@
       "--no-default-browser-check"
       "--enable-features=VaapiVideoDecodeLinuxGL"
       "--disk-cache-dir=${config.xdg.cacheHome}/chromium-cache"
-      "--js-flags=--jitless"
     ];
 
     dictionaries = with pkgs.hunspellDictsChromium; [
