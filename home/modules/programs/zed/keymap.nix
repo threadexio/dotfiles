@@ -4,8 +4,8 @@
   {
     context = "Editor";
     bindings = {
-      "ctrl-space" = "editor::ToggleCodeActions";
-      "ctrl-x" = "editor::ShowCompletions";
+      "ctrl-space" = "editor::ShowCompletions";
+      "ctrl-x" = "editor::ToggleCodeActions";
     };
   }
   {

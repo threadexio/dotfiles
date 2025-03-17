@@ -3,7 +3,7 @@
 }:
 
 {
-  theme = "Ayu Dark";
+  theme = "Andromeda";
   base_keymap = "VSCode";
 
   ##
