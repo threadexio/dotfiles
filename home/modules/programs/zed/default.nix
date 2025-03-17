@@ -1,9 +1,20 @@
-{ pkgs, ... }@args: {
+{ pkgs, ... }: {
+  imports = [
+    ./settings.nix
+    ./keymap.nix
+  ];
+
   programs.zed-editor = {
     enable = true;
 
-    userSettings = import ./settings.nix args;
-    userKeymaps = import ./keymap.nix args;
+    extensions = [
+      "docker-compose"
+      "dockerfile"
+      "make"
+      "nix"
+      "toml"
+      "xcode-themes"
+    ];
   };
 
   home.packages = with pkgs; [
