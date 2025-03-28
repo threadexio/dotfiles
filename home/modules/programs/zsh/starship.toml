@@ -1,0 +1,38 @@
+add_newline = false
+
+format = " $username$hostname:$directory $nix_shell$git_branch$git_state$git_commit$git_status[»](white bold) "
+
+[username]
+format = "[$user](red bold)"
+show_always = true
+
+[hostname]
+format = "[@$hostname](red bold)"
+ssh_only = true
+
+[directory]
+format = "[$read_only]($read_only_style)[$path](blue bold)"
+truncation_length = 0
+
+[git_branch]
+format = "[$symbol$branch](yellow) "
+symbol = " "
+truncation_length = 5
+truncation_symbol = "…"
+
+[git_commit]
+commit_hash_length = 7
+format = "[$hash$tag](bold green) "
+only_detached = true
+tag_disabled = false
+tag_max_candidates = 1
+tag_symbol = " 🏷  "
+
+[git_status]
+format = "[$all_status$ahead_behind]($style) "
+style = "green underline"
+
+[nix_shell]
+format = "[$symbol]($style) "
+symbol = '❅'
+heuristic = true

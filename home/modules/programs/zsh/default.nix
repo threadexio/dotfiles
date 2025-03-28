@@ -3,80 +3,16 @@
 , lib
 , ...
 }: {
+  home.shell.enableZshIntegration = true;
+
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-
-    settings = {
-      add_newline = true;
-      format = lib.concatStrings [
-        " "
-        "$hostname"
-        " "
-        "$nix_shell"
-        "$directory"
-        "$git_branch"
-        "$git_state"
-        "$git_commit"
-        "$git_status"
-        "[»](red bold) "
-      ];
-
-      hostname = {
-        format = lib.concatStrings [
-          "["
-          "$ssh_symbol"
-          "$hostname"
-          "](dimmed yellow)"
-        ];
-      };
-
-      nix_shell = {
-        heuristic = true;
-      };
-
-      git_branch = {
-        symbol = " ";
-        truncation_length = 5;
-        truncation_symbol = "…";
-        ignore_branches = [ "master" "main" ];
-        format = lib.concatStrings [
-          "on ["
-          "$symbol"
-          "$branch"
-          "](yellow) "
-        ];
-      };
-
-      git_commit = {
-        commit_hash_length = 7;
-        only_detached = true;
-        tag_max_candidates = 1;
-        tag_disabled = false;
-        tag_symbol = " 🏷  ";
-        format = lib.concatStrings [
-          "["
-          "$hash"
-          "$tag"
-          "](bold green) "
-        ];
-      };
-
-      git_status = {
-        style = "green underline";
-        format = lib.concatStrings [
-          "(["
-          "$all_status"
-          "$ahead_behind"
-          "]($style)) "
-        ];
-      };
-    };
+    settings = builtins.fromTOML (builtins.readFile ./starship.toml);
   };
 
   programs.fzf = {
     enable = true;
-
     enableZshIntegration = true;
   };
 
@@ -163,6 +99,9 @@
       bindkey "^[[3~"    delete-char
       bindkey "^[[1;5D"  backward-word
       bindkey "^[[1;5C"  forward-word
+
+      bindkey "^H" backward-delete-word
+      bindkey "^[[3;5~" delete-word
     '';
   };
 
