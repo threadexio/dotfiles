@@ -43,11 +43,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1739298825,
-        "narHash": "sha256-q9CzTY7n8n9RK9mKUQ4VbaKdydhXQqzphahEG5Wt8sI=",
+        "lastModified": 1742530487,
+        "narHash": "sha256-yjBjRn294NpPagPAQCio20X5BzBXiOoz2+xF3/YmEkU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f0a31d38e6de48970ce1fe93e6ea343e20a9c80a",
+        "rev": "d61711497be9ad6a6633aaf203b038b5a970621f",
         "type": "github"
       },
       "original": {
@@ -58,11 +58,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1739020877,
-        "narHash": "sha256-mIvECo/NNdJJ/bXjNqIh8yeoSjVLAuDuTUzAo7dzs8Y=",
+        "lastModified": 1742422364,
+        "narHash": "sha256-mNqIplmEohk5jRkqYqG19GA8MbQ/D4gQSK0Mu4LvfRQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a79cfe0ebd24952b580b1cf08cd906354996d547",
+        "rev": "a84ebe20c6bc2ecbcfb000a50776219f48d134cc",
         "type": "github"
       },
       "original": {
@@ -81,11 +81,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1740229277,
-        "narHash": "sha256-dX9UP2LotEx9Ir3SSbiRRZ6Z2a5qYzbbSe9wsZA5PRk=",
+        "lastModified": 1742567327,
+        "narHash": "sha256-UQ/InLjlYAGnNtZdNs4cxZc3wMD2jK2O0zkLJSMz/Uk=",
         "owner": "threadexio",
         "repo": "rich-presence-wrapper",
-        "rev": "a36c0771ade9759edd0a8145c0de624a5a0e8a5e",
+        "rev": "9612e0a38b26069d3e069360cc6dbb181b9b22fb",
         "type": "github"
       },
       "original": {

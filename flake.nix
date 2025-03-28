@@ -34,10 +34,11 @@
         overlays = [
           (final: _: rec {
             rich-presence-wrapper = inputs.rich-presence-wrapper.packages.${final.system}.default.override {
-              programs = [ "helix" ];
+              programs = [ "helix" "zed" ];
             };
 
             helix = rich-presence-wrapper;
+            zed-editor = rich-presence-wrapper;
           })
 
           (final: _: mkFlakePackages final)

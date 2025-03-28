@@ -8,8 +8,6 @@ let
         {
           nixpkgs.overlays = overlays;
           home-manager.useGlobalPkgs = true;
-
-          home-manager.users.kat.nixpkgs.overlays = overlays;
           home-manager.users.kat.imports = home.modules;
         }
       ] ++ modules;

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   imports = [
     ../modules/core
 
@@ -19,6 +19,9 @@
     ffmpeg
     imagemagick
   ];
+
+  nix.package = lib.mkDefault pkgs.nix;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   home.stateVersion = "24.05";
 }

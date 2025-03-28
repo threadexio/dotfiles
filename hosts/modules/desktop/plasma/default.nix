@@ -21,7 +21,7 @@
           after = [ "graphical-session.target" ];
           serviceConfig = {
             Type = "simple";
-            ExecStart = "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+            ExecStart = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1";
             Restart = "on-failure";
             RestartSec = 1;
             TimeoutStopSec = 10;
@@ -37,7 +37,7 @@
     kdePackages.kolourpaint
   ];
 
-  environment.plasma6.excludePackages = with pkgs; [
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
     oxygen
   ];
 }

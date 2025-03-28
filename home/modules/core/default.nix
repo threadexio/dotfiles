@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, ... }: {
   home.username = "kat";
   home.homeDirectory = "/home/kat";
 
@@ -8,9 +8,6 @@
   home.sessionPath = [
     "${config.home.homeDirectory}/.bin"
   ];
-
-  nix.package = lib.mkDefault pkgs.nix;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   systemd.user.startServices = "sd-switch";
 }
