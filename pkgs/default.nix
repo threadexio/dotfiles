@@ -13,4 +13,5 @@ in
   bali-firefoxcxx = x ./bali-firefoxcss;
   virt-clone-cheap = x ./virt-clone-cheap;
   wallpapers = x ./wallpapers;
+  hackvm = x ./hackvm;
 }

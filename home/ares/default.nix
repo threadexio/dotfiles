@@ -29,6 +29,7 @@
   home.packages = with pkgs; [
     (discord.override { withVencord = true; })
     wol
+    hackvm
   ];
 
   home.stateVersion = "24.05";
