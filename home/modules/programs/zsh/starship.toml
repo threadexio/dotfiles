@@ -1,14 +1,5 @@
 add_newline = false
-
-format = " $username$hostname:$directory $nix_shell$git_branch$git_state$git_commit$git_status[»](white bold) "
-
-[username]
-format = "[$user](red bold)"
-show_always = true
-
-[hostname]
-format = "[@$hostname](red bold)"
-ssh_only = true
+format = "[$username@$hostname](red bold):$directory $nix_shell$git_branch$git_state$git_commit$git_status[»](white bold) "
 
 [directory]
 format = "[$read_only]($read_only_style)[$path](blue bold)"
@@ -32,7 +23,15 @@ tag_symbol = " 🏷  "
 format = "[$all_status$ahead_behind]($style) "
 style = "green underline"
 
+[hostname]
+format = "$hostname"
+ssh_only = false
+
 [nix_shell]
 format = "[$symbol]($style) "
-symbol = '❅'
 heuristic = true
+symbol = "❅"
+
+[username]
+format = "$user"
+show_always = true
