@@ -18,6 +18,8 @@
       automatic = true;
       dates = [ "weekly" ];
     };
+
+    trustedUsers = [ "@wheel" ];
   };
 
   nixpkgs.config.allowUnfree = true;
