@@ -13,7 +13,7 @@
     };
   };
 
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+  services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
   services.gnome.gnome-keyring.enable = true;
   services.gnome.core-shell.enable = true;
@@ -24,8 +24,8 @@
   qt.platformTheme = "gtk";
 
   environment.systemPackages = with pkgs; [
-    gnome.adwaita-icon-theme
-    gnome.gnome-tweaks
+    adwaita-icon-theme
+    gnome-tweaks
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";

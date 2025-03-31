@@ -8,7 +8,7 @@
     ../modules/core
     ../modules/efi
     ../modules/hardware/intel
-    ../modules/desktop/plasma
+    ../modules/desktop/gnome
     ../modules/virt/kvm
     ../modules/virt/podman
     ../modules/custom

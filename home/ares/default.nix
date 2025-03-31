@@ -2,7 +2,7 @@
   imports = [
     ../modules/core
     ../modules/desktop
-    ../modules/desktop/plasma
+    ../modules/programs/gnome
 
     ../modules/programs/zsh
     ../modules/programs/tmux
@@ -12,7 +12,6 @@
     ../modules/programs/helix
 
     ../modules/programs/alacritty
-    ../modules/programs/yakuake
     ../modules/programs/zed
     ../modules/programs/chromium
     ../modules/programs/librewolf
