@@ -1,4 +1,5 @@
 { pkgs
+, lib
 , ...
 }:
 {
@@ -74,7 +75,7 @@
     };
 
     "org/gnome/desktop/input-sources" = {
-      sources = [
+      sources = map lib.hm.gvariant.mkTuple [
         ["xkb" "us"]
         ["xkb" "gr"]
       ];
