@@ -13,8 +13,10 @@ RUN apt-get install -y \
       python3 python3-pip python3-pwntools python3-virtualenv \
       strace ltrace gdb lldb
 
-# GEF
-RUN bash -c "$(curl -fsSL https://gef.blah.cat/sh)"
+# GDB
+RUN set -eu;\
+      echo 'add-auto-load-safe-path /shared' >> /root/.gdbinit;\
+      bash -c "$(curl -fsSL https://gef.blah.cat/sh)"
 
 RUN touch ~/.hushlogin
 
