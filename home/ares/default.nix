@@ -1,8 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ../modules/core
-    ../modules/desktop
-    ../modules/programs/gnome
+    ../modules/desktop/plasma
 
     ../modules/programs/zsh
     ../modules/programs/tmux
@@ -14,7 +13,6 @@
     ../modules/programs/alacritty
     ../modules/programs/zed
     ../modules/programs/chromium
-    ../modules/programs/librewolf
 
     ../modules/dev/common
     ../modules/dev/c
