@@ -8,7 +8,7 @@ truncation_length = 0
 [git_branch]
 format = "[$symbol$branch](yellow) "
 symbol = " "
-truncation_length = 5
+truncation_length = 6
 truncation_symbol = "…"
 
 [git_commit]
