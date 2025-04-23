@@ -1,3 +1,7 @@
+[[language]]
+name = "markdown"
+soft-wrap.enable = true
+
 [language-server.rust-analyzer.config]
 check.command = "clippy"
 completion.fullFunctionSignatures.enable = true
