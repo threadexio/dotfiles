@@ -56,8 +56,9 @@
 
   programs.ydotool.enable = true;
   programs.wireshark.enable = true;
+  programs.adb.enable = true;
 
-  users.users.kat.extraGroups = [ "ydotool" "wireshark" ];
+  users.users.kat.extraGroups = [ "ydotool" "wireshark" "adbusers" ];
 
   environment.systemPackages = with pkgs; [
     wireshark-qt
