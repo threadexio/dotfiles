@@ -27,11 +27,6 @@
       window_padding_width = 2;
 
       notify_on_cmd_finish = "invisible";
-
-      shell = if config.programs.tmux.enable
-        then "${config.programs.tmux.package}/bin/tmux"
-        else ".";
-
       update_check_interval = 0;
     };
 
