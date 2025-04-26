@@ -10,6 +10,7 @@
     ../modules/programs/ssh
     ../modules/programs/helix
 
+    ../modules/programs/kitty
     ../modules/programs/alacritty
     ../modules/programs/zed
     ../modules/programs/chromium
