@@ -11,6 +11,7 @@
     ../modules/virt/kvm
     ../modules/virt/podman
     ../modules/custom
+    ../modules/builder
   ];
 
   boot.plymouth.enable = lib.mkForce false;
