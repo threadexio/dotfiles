@@ -2,18 +2,11 @@
   nix = {
     package = pkgs.nixVersions.latest;
 
-    settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "@wheel" ];
-    };
+    distributedBuilds = true;
+    settings.builders-use-substitutes = true;
 
-    /*
-      gc = {
-      automatic = true;
-      persistent = true;
-      dates = "weekly";
-      };
-    */
+    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.trusted-users = [ "root" "@wheel" ];
 
     optimise = {
       automatic = true;
