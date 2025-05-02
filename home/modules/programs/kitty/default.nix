@@ -19,6 +19,8 @@
       scrollback_lines = 10000;
       scrollback_fill_enlarged_window = true;
 
+      remember_window_size = false;
+
       mouse_hide_wait = -1;
       copy_on_select = true;
       clear_selection_on_clipboard_loss = true;
