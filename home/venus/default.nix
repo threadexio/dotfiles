@@ -1,9 +1,9 @@
 { ... }: {
   imports = [
     ../modules/core
+    ../modules/desktop/gnome
 
     ../modules/programs/git
-    ../modules/programs/gnome
     ../modules/programs/gpg
     ../modules/programs/ssh
     ../modules/programs/zsh

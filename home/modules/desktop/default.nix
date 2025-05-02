@@ -1,4 +1,8 @@
 { pkgs, ... }: {
+  imports = [
+    ./fonts.nix
+  ];
+
   xdg.dataFile."wallpapers" = {
     recursive = true;
     source = "${pkgs.wallpapers}/share/wallpapers";

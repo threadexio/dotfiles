@@ -1,8 +1,8 @@
-{ ... }: {
-  imports = [
-    ../../fonts
-  ];
+{ pkgs
+, ...
+}:
 
+{
   programs.alacritty = {
     enable = true;
 
@@ -34,4 +34,8 @@
         cursor.thickness = 0.1;
       };
   };
+
+  home.packages = [
+    pkgs.nerd-fonts.caskaydia-cove
+  ];
 }

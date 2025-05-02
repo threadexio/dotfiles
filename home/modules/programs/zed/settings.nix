@@ -3,10 +3,6 @@
 }:
 
 {
-  imports = [
-    ../../fonts
-  ];
-
   programs.zed-editor.userSettings = {
     theme = "Xcode High Contrast Darker";
     base_keymap = "VSCode";
@@ -120,4 +116,8 @@
       };
     };
   };
+
+  home.packages = [
+    pkgs.nerd-fonts.caskaydia-cove
+  ];
 }

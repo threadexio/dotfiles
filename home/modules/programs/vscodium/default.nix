@@ -1,8 +1,8 @@
-{ pkgs, ... }: {
-  imports = [
-    ../../fonts
-  ];
+{ pkgs
+, ...
+}:
 
+{
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium-fhs;
@@ -446,4 +446,8 @@
       "workbench.sideBar.location" = "right";
     };
   };
+
+  home.packages = [
+    pkgs.nerd-fonts.caskaydia-cove
+  ];
 }

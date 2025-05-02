@@ -1,7 +1,5 @@
 { pkgs, ... }: {
-  imports = [
-    ../../fonts
-  ];
+  imports = [ ../. ];
 
   services.kdeconnect = {
     enable = true;
