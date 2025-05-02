@@ -71,6 +71,19 @@
     dev.enable = true;
   };
 
+  nix.distributedBuilds = true;
+  nix.settings.builders-use-substitutes = true;
+
+  nix.buildMachines = [
+    {
+      hostName = "hades";
+      sshUser = "kat";
+      sshKey = "/home/kat/.ssh/id_rsa";
+      systems = [ "x86_64-linux" ];
+      supportedFeatures = [ "nixos-test" "big-parallel" "kvm" ];
+    }
+  ];
+
   networking.hostName = "ares";
   system.stateVersion = "24.05";
 }

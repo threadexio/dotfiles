@@ -15,7 +15,6 @@ in
     matchBlocks = {
       "github.com" = {
         user = "git";
-        identityFile = "${sshPath}/github"; 
       };
 
       "172.0.0.*" = {
