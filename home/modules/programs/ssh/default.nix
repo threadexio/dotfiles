@@ -1,4 +1,5 @@
 { config
+, hostname
 , ...
 }:
 
@@ -10,11 +11,16 @@ in
   programs.ssh = {
     enable = true;
 
+    extraConfig = ''
+      IdentityFile ${sshPath}/${hostname}
+    '';
+
     includes = [ "${sshPath}/config.local" ];
 
     matchBlocks = {
       "github.com" = {
         user = "git";
+        identityFile = "${sshPath}/github";
       };
 
       "172.0.0.*" = {

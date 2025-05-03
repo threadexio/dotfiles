@@ -1,4 +1,8 @@
 { pkgs, lib, ... }: {
+  _module.args = {
+    hostname = "hermes";
+  };
+
   imports = [
     ../modules/core
 

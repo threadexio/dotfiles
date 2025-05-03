@@ -1,4 +1,8 @@
 { pkgs, ... }: {
+  _module.args = {
+    hostname = "ares";
+  };
+
   imports = [
     ../modules/core
     ../modules/desktop/plasma

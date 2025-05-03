@@ -1,4 +1,8 @@
 { ... }: {
+  _module.args = {
+    hostname = "venus";
+  };
+
   imports = [
     ../modules/core
     ../modules/desktop/gnome
