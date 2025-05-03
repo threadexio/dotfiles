@@ -29,6 +29,11 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  users.users.kat.openssh.authorizedKeys.keyFiles = [
+    ../../home/ares/ssh.pub
+    ../../home/hermes/ssh.pub
+  ];
+
   custom.services.watchpuppy = {
     enable = true;
     user = "kat";
