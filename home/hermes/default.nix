@@ -26,6 +26,9 @@
 
   nix.package = lib.mkDefault pkgs.nix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix.settings.trusted-public-keys = [ "hades:j8p0UaxcNZ2UamilDop0OUYpwIfY4zFJROdo2kKib9Y=" ];
+  nix.settings.substituters = lib.mkBefore [ "http://hades:5000" ];
   nix.settings.builders = [ "ssh-ng://kat@hades aarch64-linux" ];
 
   home.stateVersion = "24.05";
