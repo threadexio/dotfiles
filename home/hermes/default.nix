@@ -26,6 +26,7 @@
 
   nix.package = lib.mkDefault pkgs.nix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.builders = [ "ssh-ng://kat@hades aarch64-linux" ];
 
   home.stateVersion = "24.05";
 }
