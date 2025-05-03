@@ -28,6 +28,12 @@ in
         extraOptions.StrictHostKeyChecking = "no";
         extraOptions.UserKnownHostsFile = "/dev/null";
       };
+
+      "172.1.0.*" = {
+        user = "user";
+        extraOptions.StrictHostKeyChecking = "no";
+        extraOptions.UserKnownHostsFile = "/dev/null";
+      };
     };
   };
 }
