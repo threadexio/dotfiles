@@ -30,7 +30,7 @@ in
       home = homes.ares;
     };
 
-    hades = {
+    hades = nixosSystem {
       modules = [ ./hades ];
       home = homes.hades;
     };
