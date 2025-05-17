@@ -1,5 +1,4 @@
 { config
-, hostname
 , ...
 }:
 
@@ -10,10 +9,6 @@ in
 {
   programs.ssh = {
     enable = true;
-
-    extraConfig = ''
-      IdentityFile ${sshPath}/${hostname}
-    '';
 
     includes = [ "${sshPath}/config.local" ];
 

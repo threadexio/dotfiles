@@ -1,38 +1,38 @@
-{ nixpkgs, hm, overlays, homes, ... }:
+{ self
+, inputs
+, homes
+, ...
+}:
 
 let
   nixosSystem = { modules, home }:
-    nixpkgs.lib.nixosSystem {
+    inputs.nixpkgs.lib.nixosSystem {
       modules = [
-        hm.nixosModules.default
+        { nixpkgs.overlays = [ self.overlays.packages ]; }
+      
+        inputs.hm.nixosModules.default
         {
-          nixpkgs.overlays = overlays;
-          home-manager.useGlobalPkgs = true;
-          home-manager.users.kat.imports = home.modules;
+          home-manager.extraSpecialArgs = { inherit self inputs; };
+          home-manager.users.kat.imports = [
+            { nixpkgs.overlays = [ self.overlays.packages ]; }
+          ] ++home.modules;
         }
       ] ++ modules;
+
+      specialArgs = { inherit self inputs; };
     };
 in
 
-rec {
-  nixosSystems = {
-    ares = {
+{
+  flake.nixosConfigurations = {
+    ares = nixosSystem {
       modules = [ ./ares ];
-      home = homes."kat@ares";
-    };
-
-    venus = {
-      modules = [ ./venus ];
-      home = homes."kat@venus";
+      home = homes.ares;
     };
 
     hades = {
       modules = [ ./hades ];
-      home = homes."hades";
+      home = homes.hades;
     };
   };
-
-  nixosConfigurations = builtins.mapAttrs
-    (_: nixosSystem)
-    nixosSystems;
 }

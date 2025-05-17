@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
     rich-presence-wrapper = {
       url = "github:threadexio/rich-presence-wrapper";
@@ -17,44 +17,21 @@
     };
   };
 
-  outputs = { nixpkgs, flake-utils, ... }@inputs:
-    let
-      mkFlakePackages = import ./pkgs;
+  outputs = { nixpkgs, flake-parts, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        ./hosts
+        ./home
+        ./pkgs
+      ];
 
-      perSystem = flake-utils.lib.eachDefaultSystem (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-        in
-        {
-          formatter = pkgs.nixpkgs-fmt;
-          packages = mkFlakePackages pkgs;
-        });
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
 
-      inputs' = inputs // {
-        overlays = [
-          (final: _: rec {
-            rich-presence-wrapper = inputs.rich-presence-wrapper.packages.${final.system}.default.override {
-              programs = [ "helix" "zed" ];
-            };
-
-            helix = rich-presence-wrapper;
-            zed-editor = rich-presence-wrapper;
-          })
-
-          (final: _: mkFlakePackages final)
-        ];
+      perSystem = { pkgs, ... }: {
+        formatter = pkgs.nixpkgs-fmt;
       };
-
-      home = import ./home inputs';
-
-      inputs'' = inputs' // { inherit (home) homes; };
-
-      hosts = import ./hosts inputs'';
-
-      flake = {
-        inherit (home) homeConfigurations;
-        inherit (hosts) nixosConfigurations;
-      };
-    in
-    flake // perSystem;
+    };
 }

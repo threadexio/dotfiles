@@ -1,8 +1,8 @@
-{ pkgs, ... }: {
-  _module.args = {
-    hostname = "ares";
-  };
+{ pkgs
+, ...
+}:
 
+{
   imports = [
     ../modules/core
     ../modules/desktop/plasma
@@ -18,6 +18,7 @@
     ../modules/programs/alacritty
     ../modules/programs/zed
     ../modules/programs/chromium
+    ../modules/programs/discord
 
     ../modules/dev/common
     ../modules/dev/c
@@ -29,7 +30,6 @@
   ];
 
   home.packages = with pkgs; [
-    discord
     wol
     hackvm
   ];

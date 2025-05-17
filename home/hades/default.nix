@@ -1,8 +1,4 @@
 { ... }: {
-  _module.args = {
-    hostname = "hades";
-  };
-
   imports = [
     ../modules/core
 

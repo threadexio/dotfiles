@@ -65,12 +65,6 @@
     usbguard-utils
   ];
 
-  documentation = {
-    man.enable = true;
-    nixos.enable = true;
-    dev.enable = true;
-  };
-
   networking.hostName = "ares";
   system.stateVersion = "24.05";
 }

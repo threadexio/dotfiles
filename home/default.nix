@@ -1,35 +1,41 @@
-{ nixpkgs, hm, overlays, ... }:
+{ self
+, inputs
+, homes
+, ...
+}:
 
 let
-  homeConfiguration = { modules, system ? null }:
-    hm.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs { inherit system overlays; };
+  homeConfiguration = { modules, system }:
+    inputs.hm.lib.homeManagerConfiguration {
+      pkgs = import inputs.nixpkgs { inherit system; };
 
-      inherit modules;
+      modules = [
+        { nixpkgs.overlays = [ self.overlays.packages ]; }
+      ] ++ modules;
+
+      extraSpecialArgs = { inherit self inputs; };
     };
 in
 
-rec {
-  homes = {
-    "kat@ares" = {
+{
+  _module.args.homes = {
+    ares = {
       modules = [ ./ares ];
+      system = "x86_64-linux";
     };
 
-    "kat@venus" = {
-      modules = [ ./venus ];
+    hades = {
+      modules = [ ./hades ];
+      system = "x86_64-linux";
     };
 
-    "hermes" = {
+    hermes = {
       modules = [ ./hermes ];
       system = "aarch64-linux";
     };
-
-    "hades" = {
-      modules = [ ./hades ];
-    };
   };
 
-  homeConfigurations = builtins.mapAttrs
+  flake.homeConfigurations = builtins.mapAttrs
     (_: homeConfiguration)
     homes;
 }
