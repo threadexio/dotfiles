@@ -9,13 +9,15 @@
 
     qemu = {
       package = pkgs.qemu_full;
-    
+
       ovmf = {
         enable = true;
-        packages = [ (pkgs.OVMFFull.override {
-          secureBoot = true;
-          tpmSupport = true;
-        }).fd ];
+        packages = [
+          (pkgs.OVMFFull.override {
+            secureBoot = true;
+            tpmSupport = true;
+          }).fd
+        ];
       };
 
       swtpm.enable = true;

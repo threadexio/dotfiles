@@ -9,13 +9,13 @@ let
     inputs.nixpkgs.lib.nixosSystem {
       modules = [
         { nixpkgs.overlays = [ self.overlays.packages ]; }
-      
+
         inputs.hm.nixosModules.default
         {
           home-manager.extraSpecialArgs = { inherit self inputs; };
           home-manager.users.kat.imports = [
             { nixpkgs.overlays = [ self.overlays.packages ]; }
-          ] ++home.modules;
+          ] ++ home.modules;
         }
       ] ++ modules;
 

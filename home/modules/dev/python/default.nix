@@ -10,5 +10,5 @@ let
 in
 
 {
-  home.packages =  [ python3 ];
+  home.packages = [ python3 ];
 }
