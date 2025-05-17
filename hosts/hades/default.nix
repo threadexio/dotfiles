@@ -30,8 +30,8 @@
   security.sudo.wheelNeedsPassword = false;
 
   users.users.kat.openssh.authorizedKeys.keyFiles = [
-    ../../home/ares/ssh.pub
-    ../../home/hermes/ssh.pub
+    ../../ssh/ares.pub
+    ../../ssh/hermes.pub
   ];
 
   custom.services.watchpuppy = {
