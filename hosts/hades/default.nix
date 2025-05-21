@@ -14,8 +14,6 @@
     ../modules/builder
   ];
 
-  boot.plymouth.enable = lib.mkForce false;
-
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
   hardware.bluetooth.enable = false;
