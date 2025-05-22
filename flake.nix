@@ -15,6 +15,11 @@
       url = "github:threadexio/rich-presence-wrapper";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    kwin-effects-forceblur = {
+      url = "github:taj-ny/kwin-effects-forceblur/fea9f80f27389aa8a62befb5babf40b28fed328d";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, flake-parts, ... }@inputs:

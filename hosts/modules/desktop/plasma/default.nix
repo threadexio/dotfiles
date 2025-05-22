@@ -1,4 +1,9 @@
-{ pkgs, ... }: {
+{ inputs
+, pkgs
+, ...
+}:
+
+{
   imports = [
     ../common.nix
   ];
@@ -35,6 +40,7 @@
 
   environment.systemPackages = with pkgs; [
     kdePackages.kolourpaint
+    inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
   ];
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
