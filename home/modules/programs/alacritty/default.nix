@@ -16,9 +16,8 @@
         general.live_config_reload = false;
 
         window = {
-          padding = { x = 2; y = 2; };
-          opacity = 0.5;
-          blur = true;
+          opacity = 0.90;
+          blur = false;
           dynamic_title = true;
         };
 

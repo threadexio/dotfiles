@@ -1,37 +1,46 @@
 add_newline = false
-format = "[$username@$hostname](red bold):$directory $nix_shell$git_branch$git_state$git_commit$git_status[»](white bold) "
+format = "$time $username$hostname:$directory ($nix_shell )($git_branch )($git_state )($git_commit )($git_status )[\\$](white) "
+
+[time]
+disabled = false
+format = '[\[$time\]]($style)'
+style = "white"
+time_format = "%T"
+
+[username]
+format = "[$user]($style)"
+style_root = "bright-red"
+style_user = "bright-cyan"
+show_always = true
+
+[hostname]
+format = "@$hostname"
+ssh_only = true
 
 [directory]
-format = "[$read_only]($read_only_style)[$path](blue bold)"
+format = "[$path](green)[$read_only]($read_only_style)"
 truncation_length = 0
 
 [git_branch]
-format = "[$symbol$branch](yellow) "
-symbol = " "
-truncation_length = 6
+format = "[git:\\($branch\\)]($style)"
+style = "yellow"
+truncation_length = 10
 truncation_symbol = "…"
 
 [git_commit]
 commit_hash_length = 7
-format = "[$hash$tag](bold green) "
+format = "[$hash$tag](bold green)"
 only_detached = true
 tag_disabled = false
 tag_max_candidates = 1
-tag_symbol = " 🏷  "
+tag_symbol = ""
 
 [git_status]
-format = "[$all_status$ahead_behind]($style) "
+format = "[$all_status$ahead_behind]($style)"
 style = "green underline"
 
-[hostname]
-format = "$hostname"
-ssh_only = false
-
 [nix_shell]
-format = "[$symbol]($style) "
+format = "[$symbol]($style)"
 heuristic = true
 symbol = "❅"
 
-[username]
-format = "$user"
-show_always = true

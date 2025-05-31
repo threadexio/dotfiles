@@ -30,5 +30,12 @@ in
         extraOptions.UserKnownHostsFile = "/dev/null";
       };
     };
+
+    # Modern terminals like Alacritty and Kitty set their own $TERM. Most
+    # machines do not contain these terminfo entries and as such many interactive
+    # programs fail to work correctly.
+    extraConfig = ''
+      SetEnv TERM=xterm-256color
+    '';
   };
 }

@@ -1,4 +1,4 @@
-theme = "base16_transparent_modified"
+theme = "monokai_soda"
 
 [editor]
 line-number = "relative"
@@ -19,9 +19,6 @@ left = ["mode", "version-control", "spacer", "file-name", "spinner"]
 center = ["diagnostics"]
 right = ["register", "primary-selection-length", "position"]
 separator = "|"
-mode.normal = "NO"
-mode.insert = "IN"
-mode.select = "SE"
 
 [editor.lsp]
 enable = true
