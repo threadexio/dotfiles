@@ -11,7 +11,7 @@
       extraConfig = ''
         Defaults insults
         Defaults passwd_timeout=0
-        Defaults timestamp_timeout=15
+        Defaults timestamp_timeout=-1
       '';
     };
 
