@@ -38,23 +38,18 @@ in
   systemd.tmpfiles.settings.user-private-tmp = with builtins;
     let
       isRealUser = user: user.group == "users";
-
-      makeUserTmpDir = name: "/tmp/${name}";
-
-      makeTmpFilesRule = user: {
-        d = {
-          user = user.name;
-          group = user.group;
-          mode = "0700";
-        };
-      };
-
       users = filter isRealUser (attrValues config.users.users);
 
       final = map
         (user: {
-          name = makeUserTmpDir user.name;
-          value = makeTmpFilesRule user;
+          name = "/tmp/${user.name}";
+          value = {
+            d = {
+              user = user.name;
+              group = user.group;
+              mode = "0700";
+            };
+          };
         })
         users;
     in

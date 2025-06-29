@@ -1,5 +1,4 @@
 { pkgs
-, lib
 , ...
 }: {
   imports = [
@@ -13,6 +12,10 @@
     ../modules/custom
     ../modules/builder
   ];
+
+  boot.tmp.useTmpfs = true;
+  zramSwap.enable = true;
+  zramSwap.algorithm = "zstd";
 
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
