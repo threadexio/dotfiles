@@ -26,6 +26,11 @@
   zramSwap.enable = true;
   zramSwap.algorithm = "zstd";
 
+  boot.binfmt.emulatedSystems = [
+    "armv7l-linux" "aarch64-linux"
+    "riscv32-linux" "riscv64-linux"
+  ];
+
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   boot.kernelParams = [ "net.ifnames=0" "intel_iommu=on" "iommu=pt" "intel_pstate=disable" ];
   boot.kernelModules = [ "hp-wmi" ];
