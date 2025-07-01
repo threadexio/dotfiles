@@ -32,6 +32,7 @@
   home.packages = with pkgs; [
     wol
     hackvm
+    distrobox
   ];
 
   home.stateVersion = "24.05";
