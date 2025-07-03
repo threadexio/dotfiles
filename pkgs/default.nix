@@ -17,6 +17,7 @@ let
       virt-clone-cheap = x ./virt-clone-cheap;
       wallpapers = x ./wallpapers;
       hackvm = x ./hackvm;
+      btrfs-utils = x ./btrfs-utils;
     };
 in
 

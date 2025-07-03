@@ -76,6 +76,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    btrfs-utils
     ethtool
   ];
 

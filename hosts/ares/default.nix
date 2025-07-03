@@ -72,6 +72,7 @@
   environment.systemPackages = with pkgs; [
     wireshark-qt
     usbguard-utils
+    btrfs-utils
   ];
 
   networking.hostName = "ares";
