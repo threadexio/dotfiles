@@ -1,7 +1,5 @@
 { stdenv
-, lib
-, makeWrapper
-, procps
+, python3
 , ...
 }:
 stdenv.mkDerivation rec {
@@ -10,15 +8,14 @@ stdenv.mkDerivation rec {
 
   src = ./.;
 
-  buildInputs = [ procps ];
-  nativeBuildInputs = [ makeWrapper ];
+  buildInputs = [ python3 ];
 
   dontConfigure = true;
   dontBuild = true;
 
   installPhase = ''
-    mkdir -p $out/bin
-    install -Dm755 watchpuppy.sh $out/bin/watchpuppy
-    wrapProgram $out/bin/watchpuppy --prefix PATH : ${lib.makeBinPath buildInputs}
+    runHook preInstall
+    install -Dm755 watchpuppy $out/bin/watchpuppy
+    runHook postInstall
   '';
 }

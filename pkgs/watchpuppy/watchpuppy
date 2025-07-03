@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+from typing import *
+import subprocess
+import argparse
+from logging import debug, info, warning, error
+import logging
+import glob
+import time
+import os
+
+class hooks:
+    _hooks: Iterable[str]
+    _args: List[str]
+
+    def __init__(self, path: str, args: List[str]):
+        pattern = os.path.join(path, "*")
+        self._hooks = iter(glob.glob(pattern, recursive=False))
+        self._args = args
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> int:
+        while True:
+            hook = next(self._hooks)
+            cmd = [hook] + self._args
+            info(f"running {cmd}")
+
+            try:
+                p = subprocess.Popen(cmd, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+                try:
+                    while True:
+                        line = p.stdout.readline()
+                        if not line:
+                            break
+
+                        line = line.decode("utf-8").rstrip()
+                        if len(line) != 0:
+                            info(f"{hook}: {line}")
+                except UnicodeDecodeError as e:
+                    error(f"failed to decode output of {hook}: not valid utf-8")
+                    p.kill()
+                    continue
+
+                code = p.wait(1)
+                return code
+            except Exception as e:
+                error(f"failed to run {hook}: {e}")
+
+def _main(args):
+    while True:
+        time.sleep(args.every)
+
+        info("===========================")
+        info("checking...")
+        r = list(hooks(args.check, []))
+        if len(r) == 0:
+            error("failed to run any checks")
+            continue
+
+        should_run = all(map(lambda code: code == 42, r))
+
+        if should_run:
+            info("running hooks...")
+            _ = list(hooks(args.run, []))
+
+            if args.once:
+                info("ran once. exiting...")
+                return
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--check", required=True)
+    parser.add_argument("--every", type=int, required=True)
+    parser.add_argument("--run", required=True)
+
+    parser.add_argument("--once", action="store_true")
+    parser.add_argument("--debug", action="store_true")
+    args = parser.parse_args()
+
+    level = "DEBUG" if args.debug else "INFO"
+    logging.basicConfig(format="%(asctime)s | %(levelname)s | %(message)s", level=level)
+    info("starting...")
+
+    try:
+        _main(args)
+    except KeyboardInterrupt:
+        pass
+
+if __name__ == "__main__":
+    main()
