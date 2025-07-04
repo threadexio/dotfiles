@@ -35,6 +35,14 @@
     ../../ssh/hermes.pub
   ];
 
+  services.minecraft-server = {
+    enable = true;
+    package = pkgs.papermcServers.papermc-1_21_4;
+
+    eula = true;
+    jvmOpts = "-Xmx4096M -Xms2048M";
+  };
+
   systemd.services.watchpuppy = let
     misc = pkgs.callPackage ./watchpuppy-misc {};
   in {
@@ -56,6 +64,7 @@
       #!${pkgs.runtimeShell}
 
       if [ "$1" = "post" ]; then
+        ${pkgs.systemd}/bin/systemctl start minecraft-server.service
         ${pkgs.systemd}/bin/systemctl start watchpuppy.service
       fi
     '';

@@ -2,6 +2,7 @@
 , makeWrapper
 , lib
 , btrfs-progs
+, gawk
 , ...
 }:
 
@@ -24,7 +25,7 @@ stdenvNoCC.mkDerivation {
 
     install -Dm755 ./btrfs-snapshot.sh $out/bin/btrfs-snapshot
     wrapProgram $out/bin/btrfs-snapshot \
-      --prefix PATH : ${makeBinPath [btrfs-progs]}
+      --prefix PATH : ${makeBinPath [gawk btrfs-progs]}
 
     runHook postInstall
   '';
