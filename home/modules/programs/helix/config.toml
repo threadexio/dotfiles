@@ -13,6 +13,7 @@ text-width = 100
 insert-final-newline = true
 popup-border = "all"
 indent-heuristic = "hybrid"
+true-color = true
 
 [editor.statusline]
 left = ["mode", "version-control", "spacer", "file-name", "spinner"]
