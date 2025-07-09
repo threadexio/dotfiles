@@ -36,6 +36,27 @@
     ../../ssh/hermes.pub
   ];
 
+  # sudo nft insert rule filter FORWARD position 0 ip daddr 10.0.0.0/24 meta iifname virbr0 reject with icmp type admin-prohibited
+  networking.nftables.ruleset = ''
+    table ip filter {
+      # Restrict the VMs in `virbr1` from accessing devices on the local network
+      # of the host. Is this 100% safe? Probably not...
+      chain virbr1-local-firewall {
+        type filter hook prerouting priority dstnat; policy accept;
+
+        # Only allow packets of established connections to pass. This is needed
+        # so you can initiate connections to the VMs from outside their network
+        # and get a reply back.
+        meta iifname virbr1 ip daddr 10.0.0.0/24 ct state { established, related } accept
+
+        # Reject all other packets. This means that VMs are not able to initiate
+        # connections to the host's local network. This also rejects any
+        # connection-less protocols, like UDP.
+        meta iifname virbr1 ip daddr 10.0.0.0/24 reject with icmp admin-prohibited
+      }
+    }
+  '';
+
   services.minecraft-server = {
     enable = true;
     package = pkgs.papermcServers.papermc-1_21_4;
