@@ -1,4 +1,5 @@
-{ pkgs
+{ config
+, pkgs
 , ...
 }: {
   imports = [
@@ -42,6 +43,10 @@
     eula = true;
     jvmOpts = "-Xmx4096M -Xms2048M";
   };
+
+  systemd.services.minecraft-server.serviceConfig.ExecStopPost = [
+    "+${pkgs.btrfs-utils}/bin/btrfs-snapshot ${config.services.minecraft-server.dataDir}"
+  ];
 
   systemd.services.watchpuppy = let
     misc = pkgs.callPackage ./watchpuppy-misc {};

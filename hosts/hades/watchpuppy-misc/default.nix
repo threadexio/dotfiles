@@ -5,7 +5,6 @@
 , iproute2
 , gawk
 , systemd
-, btrfs-utils
 , lib
 , ...
 }:
@@ -33,7 +32,7 @@ stdenvNoCC.mkDerivation {
 
     install -Dm755 ./run/80-minecraft-server.sh $out/share/watchpuppy/run/80-minecraft-server.sh
     wrapProgram $out/share/watchpuppy/run/80-minecraft-server.sh \
-      --prefix PATH : ${makeBinPath [systemd btrfs-utils]}
+      --prefix PATH : ${makeBinPath [systemd]}
 
     install -Dm755 ./run/99-suspend.sh $out/share/watchpuppy/run/99-suspend.sh
     wrapProgram $out/share/watchpuppy/run/99-suspend.sh \
