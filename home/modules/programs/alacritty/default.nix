@@ -8,7 +8,7 @@
 
     settings =
       let
-        fontFamily = "Cascadia Code";
+        fontFamily = "Comic Mono";
 
         mkFontStyle = style: { family = fontFamily; inherit style; };
       in
@@ -35,6 +35,6 @@
   };
 
   home.packages = [
-    pkgs.nerd-fonts.caskaydia-cove
+    pkgs.comic-mono
   ];
 }
