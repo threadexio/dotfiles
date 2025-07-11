@@ -7,6 +7,8 @@
     enable = true;
     onBoot = "ignore";
 
+    nss.enableGuest = true;
+
     qemu = {
       package = pkgs.qemu_full;
 
