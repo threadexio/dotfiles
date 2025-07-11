@@ -46,4 +46,6 @@
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     oxygen
   ];
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }
