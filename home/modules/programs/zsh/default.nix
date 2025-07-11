@@ -2,13 +2,18 @@
 , pkgs
 , lib
 , ...
-}: {
+}:
+
+with builtins;
+with lib;
+
+{
   home.shell.enableZshIntegration = true;
 
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    settings = builtins.fromTOML (builtins.readFile ./starship.toml);
+    settings = fromTOML (readFile ./starship.toml);
   };
 
   programs.fzf = {
@@ -44,7 +49,7 @@
       chown = "chown --verbose";
     };
 
-    envExtra = lib.concatLines [
+    envExtra = concatLines [
       "export GPG_TTY=$(tty)"
       "export EDITOR=hx"
     ];
@@ -87,7 +92,11 @@
       }
       {
         name = "colored-man-pages";
-        src = ./colored-man-pages.plugin.zsh;
+        src = pkgs.writeTextFile {
+          name = "colored-man-pages";
+          text = readFile ./colored-man-pages.plugin.zsh;
+          destination = "/colored-man-pages.plugin.zsh";
+        };
       }
     ];
 

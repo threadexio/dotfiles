@@ -10,8 +10,10 @@
 # us       start underline
 # ue       stop underline
 
+# https://github.com/jedsoft/most/issues/9#issuecomment-2558517596
 function man() {
         env \
+                MANROFFOPT=-c \
                 LESS_TERMCAP_md=$(tput bold; tput setaf 4) \
                 LESS_TERMCAP_me=$(tput sgr0) \
                 LESS_TERMCAP_mb=$(tput blink) \
@@ -19,6 +21,6 @@ function man() {
                 LESS_TERMCAP_ue=$(tput sgr0) \
                 LESS_TERMCAP_so=$(tput smso) \
                 LESS_TERMCAP_se=$(tput rmso) \
-                PAGER=\"$${commands[less]:-$PAGER}\" \
+                PAGER="${commands[less]:-$PAGER}" \
                 man "$@"
 }
