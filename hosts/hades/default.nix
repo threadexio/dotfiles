@@ -22,6 +22,8 @@
   hardware.enableRedistributableFirmware = true;
   hardware.bluetooth.enable = false;
 
+  boot.blacklistedKernelModules = ["nouveau"];
+
   services.hardware.bolt.enable = true;
   services.fstrim.enable = true;
   services.tailscale.useRoutingFeatures = "client";
