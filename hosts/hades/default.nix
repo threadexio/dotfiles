@@ -61,7 +61,7 @@
 
   services.minecraft-server = {
     enable = true;
-    package = pkgs.papermcServers.papermc-1_21_4;
+    package = pkgs.fabric-server;
 
     eula = true;
     jvmOpts = "-Xmx4096M -Xms2048M";
