@@ -14,5 +14,10 @@
 
     userName = "threadexio";
     userEmail = "pzarganitis@gmail.com";
+
+    difftastic = {
+      enable = true;
+      enableAsDifftool = true;
+    };
   };
 }
