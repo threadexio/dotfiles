@@ -1,20 +1,22 @@
-{ pkgs, ... }: {
-  imports = [
-    ./fonts.nix
-  ];
+{ pkgs
+, ...
+}:
 
-  xdg.dataFile."wallpapers" = {
-    recursive = true;
-    source = "${pkgs.wallpapers}/share/wallpapers";
-  };
+{
+  fonts = {
+    fontconfig = {
+      enable = true;
 
-  xdg.dataFile."backgrounds" = {
-    recursive = true;
-    source = "${pkgs.wallpapers}/share/wallpapers";
+      defaultFonts = {
+        emoji = [ "Noto Color Emoji" ];
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Inter" ];
+        monospace = [ "CaskaydiaCove Nerd Font Mono" ];
+      };
+    };
   };
 
   home.packages = with pkgs; [
-    keepassxc
     libreoffice
     mpv
 
@@ -23,6 +25,7 @@
     ffmpeg
     imagemagick
 
-    wallpapers
+    inter
+    nerd-fonts.caskaydia-cove
   ];
 }

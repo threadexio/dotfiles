@@ -1,4 +1,4 @@
-theme = "monokai_soda"
+theme = "base16_transparent_modified"
 
 [editor]
 line-number = "relative"

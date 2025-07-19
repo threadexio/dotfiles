@@ -16,9 +16,14 @@
         general.live_config_reload = false;
 
         window = {
-          opacity = 0.90;
+          opacity = 1.0;
           blur = false;
           dynamic_title = true;
+
+          padding = {
+            x = 5;
+            y = 2;
+          };
         };
 
         font = {
@@ -32,6 +37,8 @@
 
         cursor.thickness = 0.1;
       };
+
+      theme = "vesper";
   };
 
   home.packages = [
