@@ -23,10 +23,10 @@
   nix.package = lib.mkDefault pkgs.nix;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  nix.settings.substituters = lib.mkBefore [ "http://hades:5000" ];
+  nix.settings.substituters = lib.mkAfter [ "http://atlas:15000" ];
 
   nix.settings.builders-use-substitutes = true;
-  nix.settings.builders = [ "ssh-ng://kat@hades aarch64-linux" ];
+  nix.settings.builders = [ "ssh-ng://kat@hades x86_64-linux,aarch64-linux - - - nixos-test,benchmark,big-parallel,kvm" ];
   nix.settings.trusted-public-keys = [ "hades:j8p0UaxcNZ2UamilDop0OUYpwIfY4zFJROdo2kKib9Y=" ];
 
   home.stateVersion = "24.05";
