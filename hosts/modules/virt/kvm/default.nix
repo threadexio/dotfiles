@@ -10,8 +10,6 @@
     nss.enableGuest = true;
 
     qemu = {
-      package = pkgs.qemu_full;
-
       ovmf = {
         enable = true;
         packages = [
