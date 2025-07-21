@@ -29,6 +29,7 @@
     kdePackages.konsole
     kdePackages.yakuake
     kdePackages.plasma-browser-integration
+    kdePackages.krohnkite
 
     work-sans
   ];
