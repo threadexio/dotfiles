@@ -34,9 +34,6 @@
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   boot.kernelParams = [ "net.ifnames=0" "intel_iommu=on" "iommu=pt" ];
   boot.kernelModules = [ "hp-wmi" ];
-  boot.extraModprobeConfig = ''
-    options snd_intel_dspcfg dsp_driver=1
-  '';
 
   # Hardware
   hardware.enableAllFirmware = true;
