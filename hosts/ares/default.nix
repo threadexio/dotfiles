@@ -32,12 +32,13 @@
   ];
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-  boot.kernelParams = [ "net.ifnames=0" "intel_iommu=on" "iommu=pt" "intel_pstate=disable" ];
+  boot.kernelParams = [ "net.ifnames=0" "intel_iommu=on" "iommu=pt" ];
   boot.kernelModules = [ "hp-wmi" ];
   boot.extraModprobeConfig = ''
     options snd_intel_dspcfg dsp_driver=1
   '';
 
+  # Hardware
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
   hardware.bluetooth = {
@@ -48,21 +49,39 @@
   services.hardware.bolt.enable = true;
   services.fwupd.enable = true;
   services.fstrim.enable = true;
-  services.tailscale.useRoutingFeatures = "client";
-
-  powerManagement.enable = lib.mkForce true;
-  powerManagement.cpuFreqGovernor = "ondemand";
-  services.power-profiles-daemon.enable = true;
-  services.thermald.enable = true;
-
-  services.flatpak.enable = true;
-  hardware.ckb-next.enable = true;
 
   services.usbguard = {
     enable = true;
     rules = lib.readFile ./usbguard-rules.conf;
   };
 
+  # Power Management
+  powerManagement.enable = lib.mkForce true;
+  services.power-profiles-daemon.enable = lib.mkForce false;
+  services.tlp = {
+    enable = true;
+
+    settings = {
+      # Battery Care
+      START_CHARGE_THRESH_BAT0 = 75;
+      STOP_CHARGE_THRESH_BAT0 = 80;
+
+      # Graphics
+      INTEL_GPU_BOOST_FREQ_ON_AC = 1;
+      INTEL_GPU_BOOST_FREQ_ON_BAT = 0;
+
+      # Kernel
+      NMI_WATCHDOG = 0;
+
+      # Processor
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+    };
+  };
+
+  services.tailscale.useRoutingFeatures = "client";
+  services.flatpak.enable = true;
+  hardware.ckb-next.enable = true;
   programs.ydotool.enable = true;
   programs.wireshark.enable = true;
   programs.adb.enable = true;
