@@ -1,4 +1,5 @@
-{ pkgs
+{ config
+, pkgs
 , lib
 , ...
 }: {
@@ -62,10 +63,6 @@
       # Battery Care
       START_CHARGE_THRESH_BAT0 = 75;
       STOP_CHARGE_THRESH_BAT0 = 80;
-
-      # Graphics
-      INTEL_GPU_BOOST_FREQ_ON_AC = 1;
-      INTEL_GPU_BOOST_FREQ_ON_BAT = 0;
 
       # Kernel
       NMI_WATCHDOG = 0;
