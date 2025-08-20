@@ -17,7 +17,7 @@
     };
 
     kwin-effects-forceblur = {
-      url = "github:taj-ny/kwin-effects-forceblur/fea9f80f27389aa8a62befb5babf40b28fed328d";
+      url = "github:taj-ny/kwin-effects-forceblur/caac68328a0d10c35dee1cc1a8acfd613e02f8a1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
