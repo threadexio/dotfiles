@@ -16,7 +16,7 @@
     userEmail = "pzarganitis@gmail.com";
 
     difftastic = {
-      enable = true;
+      enable = false;
       enableAsDifftool = true;
     };
   };
