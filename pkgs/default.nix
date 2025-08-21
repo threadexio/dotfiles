@@ -27,18 +27,12 @@ in
   _module.args = {
     overlays = [
       inputs.fabric-servers.overlays.default
-      self.overlays.packages
-      (final: _: {
-        rich-presence-wrapper = inputs.rich-presence-wrapper.packages.${final.system}.default.override {
-          programs = [
-            "helix"
-            "zed"
-          ];
-        };
 
-        helix = final.rich-presence-wrapper;
-        zed-editor = final.rich-presence-wrapper;
-      })
+      inputs.rich-presence-wrapper.overlays.default
+      inputs.rich-presence-wrapper.overlays.helix
+      inputs.rich-presence-wrapper.overlays.zed-editor
+
+      self.overlays.packages
     ];
 
     specialArgs = { inherit self inputs; };
