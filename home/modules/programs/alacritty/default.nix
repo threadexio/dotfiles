@@ -38,7 +38,7 @@
         cursor.thickness = 0.1;
       };
 
-      theme = "vesper";
+    theme = "vesper";
   };
 
   home.packages = [

@@ -1,35 +1,46 @@
-{ self
-, inputs
+{ inputs
 , homes
 , systems
+, overlays
+, specialArgs
 , ...
 }:
 with builtins;
 
 let
-  lib = inputs.nixpkgs.lib;
+  inherit (inputs.nixpkgs) lib;
 
-  nixosSystem = { modules, homes ? [] }:
+  nixosSystem =
+    { modules
+    , homes ? [ ]
+    ,
+    }:
     let
-      nixosHomeModules = (if length homes == 0 then [] else [
-        inputs.hm.nixosModules.default
-        {
-          home-manager.extraSpecialArgs = { inherit self inputs; };
-          home-manager.users.kat.imports = [
-            { nixpkgs.overlays = [ self.overlays.packages inputs.fabric-servers.overlays.default ]; }
+      nixosHomeModules = (
+        if length homes == 0 then
+          [ ]
+        else
+          [
+            inputs.hm.nixosModules.default
+            {
+              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.useGlobalPkgs = true;
+              home-manager.users.kat.imports = lib.lists.flatten (map (home: home.modules) homes);
+            }
           ]
-          ++ (lib.lists.flatten (map (home: home.modules) homes));
-        }
-      ]);
+      );
     in
     inputs.nixpkgs.lib.nixosSystem {
+      inherit specialArgs;
+
       modules = [
-        { nixpkgs.overlays = [ self.overlays.packages inputs.fabric-servers.overlays.default ]; }
+        {
+          nixpkgs.overlays = overlays;
+          nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "discord" ];
+        }
       ]
       ++ modules
       ++ nixosHomeModules;
-
-      specialArgs = { inherit self inputs; };
     };
 in
 
@@ -46,7 +57,5 @@ in
     };
   };
 
-  flake.nixosConfigurations = mapAttrs
-    (_: nixosSystem)
-    systems;
+  flake.nixosConfigurations = mapAttrs (_: nixosSystem) systems;
 }

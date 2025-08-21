@@ -22,7 +22,7 @@
   hardware.enableRedistributableFirmware = true;
   hardware.bluetooth.enable = false;
 
-  boot.blacklistedKernelModules = ["nouveau"];
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
   services.hardware.bolt.enable = true;
   services.fstrim.enable = true;
@@ -71,20 +71,22 @@
     "+${pkgs.btrfs-utils}/bin/btrfs-snapshot ${config.services.minecraft-server.dataDir}"
   ];
 
-  systemd.services.watchpuppy = let
-    misc = pkgs.callPackage ./watchpuppy-misc {};
-  in {
-    description = "Suspend on inactivity";
-    after = [ "multi-user.target" ];
+  systemd.services.watchpuppy =
+    let
+      misc = pkgs.callPackage ./watchpuppy-misc { };
+    in
+    {
+      description = "Suspend on inactivity";
+      after = [ "multi-user.target" ];
 
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.watchpuppy}/bin/watchpuppy --check ${misc}/share/watchpuppy/check --every 120 --run ${misc}/share/watchpuppy/run --once";
-      RemainAfterExit = false;
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.watchpuppy}/bin/watchpuppy --check ${misc}/share/watchpuppy/check --every 120 --run ${misc}/share/watchpuppy/run --once";
+        RemainAfterExit = false;
+      };
+
+      wantedBy = [ "multi-user.target" ];
     };
-
-    wantedBy = [ "multi-user.target" ];
-  };
 
   environment.etc."systemd/system-sleep/watchpuppy" = {
     mode = "0755";

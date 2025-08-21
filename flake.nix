@@ -27,7 +27,8 @@
     };
   };
 
-  outputs = { nixpkgs, flake-parts, ... }@inputs:
+  outputs =
+    { nixpkgs, flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./hosts
@@ -40,8 +41,10 @@
         "aarch64-linux"
       ];
 
-      perSystem = { pkgs, ... }: {
-        formatter = pkgs.nixpkgs-fmt;
-      };
+      perSystem =
+        { pkgs, ... }:
+        {
+          formatter = pkgs.nixpkgs-fmt;
+        };
     };
 }

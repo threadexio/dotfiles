@@ -28,8 +28,10 @@
   zramSwap.algorithm = "zstd";
 
   boot.binfmt.emulatedSystems = [
-    "armv7l-linux" "aarch64-linux"
-    "riscv32-linux" "riscv64-linux"
+    "armv7l-linux"
+    "aarch64-linux"
+    "riscv32-linux"
+    "riscv64-linux"
   ];
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;

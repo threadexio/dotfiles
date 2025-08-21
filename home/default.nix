@@ -1,19 +1,27 @@
-{ self
-, inputs
+{ inputs
 , homes
+, overlays
+, specialArgs
 , ...
 }:
 
 let
-  homeConfiguration = { modules, system }:
+  inherit (inputs.nixpkgs) lib;
+
+  homeConfiguration =
+    { modules, system }:
     inputs.hm.lib.homeManagerConfiguration {
       pkgs = import inputs.nixpkgs { inherit system; };
 
       modules = [
-        { nixpkgs.overlays = [ self.overlays.packages ]; }
-      ] ++ modules;
+        {
+          nixpkgs.overlays = overlays;
+          nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "discord" ];
+        }
+      ]
+      ++ modules;
 
-      extraSpecialArgs = { inherit self inputs; };
+      extraSpecialArgs = specialArgs;
     };
 in
 
@@ -35,7 +43,5 @@ in
     };
   };
 
-  flake.homeConfigurations = builtins.mapAttrs
-    (_: homeConfiguration)
-    homes;
+  flake.homeConfigurations = builtins.mapAttrs (_: homeConfiguration) homes;
 }

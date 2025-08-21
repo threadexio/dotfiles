@@ -1,9 +1,11 @@
-{ inputs
+{ self
+, inputs
 , ...
 }:
 
 let
-  mkPackages = pkgs:
+  mkPackages =
+    pkgs:
     let
       x = p: pkgs.callPackage p { };
     in
@@ -22,20 +24,33 @@ let
 in
 
 {
+  _module.args = {
+    overlays = [
+      inputs.fabric-servers.overlays.default
+      self.overlays.packages
+      (final: _: {
+        rich-presence-wrapper = inputs.rich-presence-wrapper.packages.${final.system}.default.override {
+          programs = [
+            "helix"
+            "zed"
+          ];
+        };
+
+        helix = final.rich-presence-wrapper;
+        zed-editor = final.rich-presence-wrapper;
+      })
+    ];
+
+    specialArgs = { inherit self inputs; };
+  };
+
   flake.overlays = {
     packages = (final: _: mkPackages final);
-
-    rich-presence-wrapper = (final: _: {
-      rich-presence-wrapper = inputs.rich-presence-wrapper.packages.${final.system}.default.override {
-        programs = [ "helix" "zed" ];
-      };
-
-      helix = final.rich-presence-wrapper;
-      zed-editor = final.rich-presence-wrapper;
-    });
   };
 
-  perSystem = { pkgs, ... }: {
-    packages = mkPackages pkgs;
-  };
+  perSystem =
+    { pkgs, ... }:
+    {
+      packages = mkPackages pkgs;
+    };
 }
