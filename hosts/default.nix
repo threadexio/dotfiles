@@ -16,7 +16,7 @@ let
         {
           home-manager.extraSpecialArgs = { inherit self inputs; };
           home-manager.users.kat.imports = [
-            { nixpkgs.overlays = [ self.overlays.packages ]; }
+            { nixpkgs.overlays = [ self.overlays.packages inputs.fabric-servers.overlays.default ]; }
           ]
           ++ (lib.lists.flatten (map (home: home.modules) homes));
         }
@@ -24,7 +24,7 @@ let
     in
     inputs.nixpkgs.lib.nixosSystem {
       modules = [
-        { nixpkgs.overlays = [ self.overlays.packages ]; }
+        { nixpkgs.overlays = [ self.overlays.packages inputs.fabric-servers.overlays.default ]; }
       ]
       ++ modules
       ++ nixosHomeModules;

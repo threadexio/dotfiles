@@ -18,7 +18,6 @@ let
       wallpapers = x ./wallpapers;
       hackvm = x ./hackvm;
       btrfs-utils = x ./btrfs-utils;
-      fabric-server = x ./fabric-server;
     };
 in
 

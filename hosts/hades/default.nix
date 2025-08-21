@@ -61,7 +61,7 @@
 
   services.minecraft-server = {
     enable = true;
-    package = pkgs.fabric-server;
+    package = pkgs.fabricServers.fabric-1_21_4;
 
     eula = true;
     jvmOpts = "-Xmx4096M -Xms2048M";

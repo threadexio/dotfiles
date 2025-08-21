@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "fabric-servers": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755756618,
+        "narHash": "sha256-cPtqddGURsH6U0HFYP26ULcsOzM8lvvsMeq3RxtGavs=",
+        "owner": "threadexio",
+        "repo": "nixpkgs",
+        "rev": "401567f836876c108b5277db433cde329412cb51",
+        "type": "github"
+      },
+      "original": {
+        "owner": "threadexio",
+        "ref": "fabric-servers-overlay",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -133,6 +154,7 @@
     },
     "root": {
       "inputs": {
+        "fabric-servers": "fabric-servers",
         "flake-parts": "flake-parts",
         "hm": "hm",
         "kwin-effects-forceblur": "kwin-effects-forceblur",

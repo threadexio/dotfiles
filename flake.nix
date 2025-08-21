@@ -20,6 +20,11 @@
       url = "github:taj-ny/kwin-effects-forceblur/caac68328a0d10c35dee1cc1a8acfd613e02f8a1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    fabric-servers = {
+      url = "github:threadexio/nixpkgs/fabric-servers-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, flake-parts, ... }@inputs:
