@@ -4,6 +4,7 @@
     # Man pages
     man-pages
     man-pages-posix
+    nixpkgs-manual
 
     # Debuggers & Profilers
     gdb

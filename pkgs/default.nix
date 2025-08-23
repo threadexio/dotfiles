@@ -3,26 +3,6 @@
 , ...
 }:
 
-let
-  mkPackages =
-    pkgs:
-    let
-      x = p: pkgs.callPackage p { };
-    in
-    {
-      wol = x ./wol;
-      watchpuppy = x ./watchpuppy;
-      usbguard-utils = x ./usbguard-utils;
-      firefox-mod-blur = x ./firefox-mod-blur;
-      firefox-gnome-theme = x ./firefox-gnome-theme;
-      bali-firefoxcxx = x ./bali-firefoxcss;
-      virt-clone-cheap = x ./virt-clone-cheap;
-      wallpapers = x ./wallpapers;
-      hackvm = x ./hackvm;
-      btrfs-utils = x ./btrfs-utils;
-    };
-in
-
 {
   _module.args = {
     overlays = [
@@ -33,18 +13,46 @@ in
       inputs.rich-presence-wrapper.overlays.zed-editor
 
       self.overlays.packages
+      self.overlays.nixpkgs-manual
     ];
 
     specialArgs = { inherit self inputs; };
   };
 
-  flake.overlays = {
-    packages = (final: _: mkPackages final);
-  };
-
   perSystem =
     { pkgs, ... }:
     {
-      packages = mkPackages pkgs;
+      packages = {
+        bali-firefoxcxx = pkgs.callPackage ./bali-firefoxcss { };
+        btrfs-utils = pkgs.callPackage ./btrfs-utils { };
+        firefox-gnome-theme = pkgs.callPackage ./firefox-gnome-theme { };
+        firefox-mod-blur = pkgs.callPackage ./firefox-mod-blur { };
+        hackvm = pkgs.callPackage ./hackvm { };
+        nixpkgs-manual = pkgs.callPackage ./nixpkgs-manual { };
+        usbguard-utils = pkgs.callPackage ./usbguard-utils { };
+        virt-clone-cheap = pkgs.callPackage ./virt-clone-cheap { };
+        wallpapers = pkgs.callPackage ./wallpapers { };
+        watchpuppy = pkgs.callPackage ./watchpuppy { };
+        wol = pkgs.callPackage ./wol { };
+      };
     };
+
+  flake.overlays = {
+    packages = final: prev: {
+      bali-firefoxcxx = final.callPackage ./bali-firefoxcss { };
+      btrfs-utils = final.callPackage ./btrfs-utils { };
+      firefox-gnome-theme = final.callPackage ./firefox-gnome-theme { };
+      firefox-mod-blur = final.callPackage ./firefox-mod-blur { };
+      hackvm = final.callPackage ./hackvm { };
+      usbguard-utils = final.callPackage ./usbguard-utils { };
+      virt-clone-cheap = final.callPackage ./virt-clone-cheap { };
+      wallpapers = final.callPackage ./wallpapers { };
+      watchpuppy = final.callPackage ./watchpuppy { };
+      wol = final.callPackage ./wol { };
+    };
+
+    nixpkgs-manual = final: prev: {
+      nixpkgs-manual = final.callPackage ./nixpkgs-manual { inherit (prev) nixpkgs-manual; };
+    };
+  };
 }
