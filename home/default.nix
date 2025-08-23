@@ -41,6 +41,11 @@ in
       modules = [ ./hermes ];
       system = "aarch64-linux";
     };
+
+    cerberus = {
+      modules = [ ./cerberus ];
+      system = "x86_64-linux";
+    };
   };
 
   flake.homeConfigurations = builtins.mapAttrs (_: homeConfiguration) homes;
