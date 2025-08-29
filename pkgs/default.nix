@@ -1,24 +1,7 @@
-{ self
-, inputs
-, ...
+{ ...
 }:
 
 {
-  _module.args = {
-    overlays = [
-      inputs.fabric-servers.overlays.default
-
-      inputs.rich-presence-wrapper.overlays.default
-      inputs.rich-presence-wrapper.overlays.helix
-      inputs.rich-presence-wrapper.overlays.zed-editor
-
-      self.overlays.packages
-      self.overlays.nixpkgs-manual
-    ];
-
-    specialArgs = { inherit self inputs; };
-  };
-
   perSystem =
     { pkgs, ... }:
     {

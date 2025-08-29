@@ -1,18 +1,21 @@
-{ config
+{ self
+, inputs
 , pkgs
 , lib
 , ...
-}: {
+}:
+
+{
   imports = [
     ./hardware-configuration.nix
 
-    ../modules/core
-    ../modules/efi
-    ../modules/hardware/intel
-    ../modules/desktop/plasma
-    ../modules/virt/kvm
-    ../modules/virt/podman
-    ../modules/custom
+    ../../modules/nixos/core
+    ../../modules/nixos/custom
+    ../../modules/nixos/efi
+    ../../modules/nixos/hardware/intel
+    ../../modules/nixos/desktop/plasma
+    ../../modules/nixos/virt/kvm
+    ../../modules/nixos/virt/podman
   ];
 
   custom.boot.luksUsbUnlock = {
@@ -35,7 +38,11 @@
   ];
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-  boot.kernelParams = [ "net.ifnames=0" "intel_iommu=on" "iommu=pt" ];
+  boot.kernelParams = [
+    "net.ifnames=0"
+    "intel_iommu=on"
+    "iommu=pt"
+  ];
   boot.kernelModules = [ "hp-wmi" ];
 
   # Hardware
@@ -82,12 +89,24 @@
   programs.wireshark.enable = true;
   programs.adb.enable = true;
 
-  users.users.kat.extraGroups = [ "ydotool" "wireshark" "adbusers" ];
+  users.users.kat.extraGroups = [
+    "ydotool"
+    "wireshark"
+    "adbusers"
+  ];
 
   environment.systemPackages = with pkgs; [
     wireshark-qt
     usbguard-utils
     btrfs-utils
+  ];
+
+  nixpkgs.overlays = [
+    self.overlays.packages
+    self.overlays.nixpkgs-manual
+    inputs.rich-presence-wrapper.overlays.default
+    inputs.rich-presence-wrapper.overlays.helix
+    inputs.rich-presence-wrapper.overlays.zed-editor
   ];
 
   networking.hostName = "ares";

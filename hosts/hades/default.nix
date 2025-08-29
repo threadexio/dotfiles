@@ -1,17 +1,21 @@
-{ config
+{ self
+, inputs
+, config
 , pkgs
 , ...
-}: {
+}:
+
+{
   imports = [
     ./hardware-configuration.nix
 
-    ../modules/core
-    ../modules/efi
-    ../modules/hardware/intel
-    ../modules/virt/kvm
-    ../modules/virt/podman
-    ../modules/custom
-    ../modules/builder
+    ../../modules/nixos/core
+    ../../modules/nixos/efi
+    ../../modules/nixos/hardware/intel
+    ../../modules/nixos/virt/kvm
+    ../../modules/nixos/virt/podman
+    ../../modules/nixos/custom
+    ../../modules/nixos/builder
   ];
 
   boot.tmp.useTmpfs = true;
@@ -117,6 +121,11 @@
   environment.systemPackages = with pkgs; [
     btrfs-utils
     ethtool
+  ];
+
+  nixpkgs.overlays = [
+    self.overlays.packages
+    inputs.fabric-servers.overlays.default
   ];
 
   networking.hostName = "hades";

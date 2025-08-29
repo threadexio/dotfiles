@@ -1,52 +1,37 @@
 { inputs
-, homes
-, overlays
 , specialArgs
 , ...
 }:
 
 let
   inherit (inputs.nixpkgs) lib;
-
-  homeConfiguration =
-    { modules, system }:
-    inputs.hm.lib.homeManagerConfiguration {
-      pkgs = import inputs.nixpkgs { inherit system; };
-
-      modules = [
-        {
-          nixpkgs.overlays = overlays;
-          nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "discord" ];
-        }
-      ]
-      ++ modules;
-
-      extraSpecialArgs = specialArgs;
-    };
 in
 
 {
-  _module.args.homes = {
-    ares = {
-      modules = [ ./ares ];
-      system = "x86_64-linux";
-    };
+  flake.homeConfigurations =
+    let
+      homeConfiguration =
+        { home, system }:
+        inputs.hm.lib.homeManagerConfiguration {
+          pkgs = import inputs.nixpkgs { inherit system; };
 
-    hades = {
-      modules = [ ./hades ];
-      system = "x86_64-linux";
-    };
+          modules = [
+            ./${home}
+          ];
 
-    hermes = {
-      modules = [ ./hermes ];
-      system = "aarch64-linux";
-    };
+          extraSpecialArgs = specialArgs;
+        };
 
-    cerberus = {
-      modules = [ ./cerberus ];
-      system = "x86_64-linux";
-    };
-  };
-
-  flake.homeConfigurations = builtins.mapAttrs (_: homeConfiguration) homes;
+      homes = [
+        {
+          home = "hermes";
+          system = "aarch64-linux";
+        }
+        {
+          home = "cerberus";
+          system = "x86_64-linux";
+        }
+      ];
+    in
+    lib.listToAttrs (map (x: lib.nameValuePair x.home (homeConfiguration x)) homes);
 }

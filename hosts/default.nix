@@ -1,61 +1,35 @@
 { inputs
-, homes
-, systems
-, overlays
 , specialArgs
 , ...
 }:
-with builtins;
 
 let
   inherit (inputs.nixpkgs) lib;
-
-  nixosSystem =
-    { modules
-    , homes ? [ ]
-    ,
-    }:
-    let
-      nixosHomeModules = (
-        if length homes == 0 then
-          [ ]
-        else
-          [
-            inputs.hm.nixosModules.default
-            {
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.useGlobalPkgs = true;
-              home-manager.users.kat.imports = lib.lists.flatten (map (home: home.modules) homes);
-            }
-          ]
-      );
-    in
-    inputs.nixpkgs.lib.nixosSystem {
-      inherit specialArgs;
-
-      modules = [
-        {
-          nixpkgs.overlays = overlays;
-          nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "discord" ];
-        }
-      ]
-      ++ modules
-      ++ nixosHomeModules;
-    };
 in
 
 {
-  _module.args.systems = {
-    ares = {
-      modules = [ ./ares ];
-      homes = [ homes.ares ];
-    };
+  flake.nixosConfigurations =
+    let
+      nixosConfiguration =
+        host:
+        lib.nixosSystem {
+          inherit specialArgs;
 
-    hades = {
-      modules = [ ./hades ];
-      homes = [ homes.hades ];
-    };
-  };
+          modules = [
+            inputs.hm.nixosModules.default
 
-  flake.nixosConfigurations = mapAttrs (_: nixosSystem) systems;
+            {
+              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.useGlobalPkgs = true;
+            }
+            ./${host}
+            {
+              home-manager.users.kat.imports = [ ./${host}/home.nix ];
+            }
+          ];
+        };
+
+      hosts = lib.attrNames (lib.filterAttrs (path: type: type == "directory") (builtins.readDir ./.));
+    in
+    lib.genAttrs hosts nixosConfiguration;
 }

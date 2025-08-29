@@ -28,7 +28,11 @@
   };
 
   outputs =
-    { nixpkgs, flake-parts, ... }@inputs:
+    { self
+    , nixpkgs
+    , flake-parts
+    , ...
+    }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./hosts
@@ -46,5 +50,7 @@
         {
           formatter = pkgs.nixpkgs-fmt;
         };
+
+      _module.args.specialArgs = { inherit self inputs; };
     };
 }

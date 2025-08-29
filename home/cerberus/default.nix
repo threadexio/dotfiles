@@ -5,11 +5,11 @@
 
 {
   imports = [
-    ../modules/core
+    ../../modules/home/core
 
-    ../modules/programs/zsh
-    ../modules/programs/tmux
-    ../modules/programs/helix
+    ../../modules/home/programs/zsh
+    ../../modules/home/programs/tmux
+    ../../modules/home/programs/helix
   ];
 
   home.packages = with pkgs; [
@@ -24,7 +24,10 @@
   ];
 
   nix.package = lib.mkDefault pkgs.nix;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   home.stateVersion = "25.05";
 }
