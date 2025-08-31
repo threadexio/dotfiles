@@ -1,8 +1,7 @@
-{ ... }: {
-  systemd.coredump.enable = false;
-  nix.settings.allowed-users = [ "@wheel" ];
+{ ...
+}:
 
-
+{
   security = {
     sudo = {
       enable = true;
@@ -90,7 +89,6 @@
     "kernel.randomize_va_space" = "2";
     "kernel.sysrq" = "0";
     "kernel.core_uses_pid" = "1";
-    "kernel.core_pattern" = "|/bin/false";
     "kernel.kptr_restrict" = "2";
     "kernel.yama.ptrace_scope" = "2";
     "kernel.dmesg_restrict" = "1";

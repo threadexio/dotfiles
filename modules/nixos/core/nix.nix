@@ -7,18 +7,25 @@
     package = pkgs.nixVersions.latest;
 
     distributedBuilds = true;
-    settings.builders-use-substitutes = true;
 
-    settings.trusted-public-keys = [
-      "hades:j8p0UaxcNZ2UamilDop0OUYpwIfY4zFJROdo2kKib9Y="
-    ];
+    settings = {
+      builders-use-substitutes = true;
 
-    settings.experimental-features = [ "nix-command" "flakes" ];
-    settings.trusted-users = [ "root" "@wheel" ];
+      trusted-public-keys = [
+        "hades:j8p0UaxcNZ2UamilDop0OUYpwIfY4zFJROdo2kKib9Y="
+      ];
 
-    optimise = {
-      automatic = true;
-      dates = [ "weekly" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
+
+      allowed-users = [ "@wheel" ];
     };
   };
 

@@ -22,21 +22,31 @@
   zramSwap.enable = true;
   zramSwap.algorithm = "zstd";
 
-  hardware.enableAllFirmware = true;
-  hardware.enableRedistributableFirmware = true;
-  hardware.bluetooth.enable = false;
+  boot.binfmt.emulatedSystems = [
+    "armv7l-linux"
+    "aarch64-linux"
+    "riscv32-linux"
+    "riscv64-linux"
+  ];
 
   boot.blacklistedKernelModules = [ "nouveau" ];
 
   services.hardware.bolt.enable = true;
   services.fstrim.enable = true;
-  services.tailscale.useRoutingFeatures = "client";
+
+  hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
+  hardware.bluetooth.enable = false;
 
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
 
   security.sudo.wheelNeedsPassword = false;
 
+  services.openssh.enable = true;
+  services.tailscale.enable = true;
+  services.tailscale.extraUpFlags = [ "--accept-routes" ];
+  services.tailscale.useRoutingFeatures = "client";
   users.users.kat.openssh.authorizedKeys.keyFiles = [
     ../../ssh/ares.pub
     ../../ssh/hermes.pub
@@ -127,6 +137,11 @@
     self.overlays.packages
     inputs.fabric-servers.overlays.default
   ];
+
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ];
+  };
 
   networking.hostName = "hades";
   system.stateVersion = "24.05";

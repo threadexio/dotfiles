@@ -1,20 +1,20 @@
-{ ... }: {
-  imports = [
-    ./fwupd.nix
-    ./edk2-shell.nix
-    ./memtest86plus.nix
-  ];
+{ ...
+}:
 
-  boot = {
-    loader = {
-      timeout = 3;
+{
+  imports = [ ./fwupd.nix ];
 
-      efi.canTouchEfiVariables = true;
+  boot.loader = {
+    timeout = 3;
 
-      systemd-boot = {
-        enable = true;
-        editor = false;
-      };
+    efi.canTouchEfiVariables = true;
+
+    systemd-boot = {
+      enable = true;
+      editor = false;
+
+      edk2-uefi-shell.enable = true;
+      memtest86.enable = true;
     };
   };
 }

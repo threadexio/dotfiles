@@ -1,4 +1,6 @@
-{ ... }: {
+{ ... }:
+
+{
   time.timeZone = "Europe/Athens";
 
   i18n = {

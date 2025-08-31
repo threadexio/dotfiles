@@ -10,8 +10,8 @@
     ./hardware-configuration.nix
 
     ../../modules/nixos/core
-    ../../modules/nixos/custom
     ../../modules/nixos/efi
+    ../../modules/nixos/custom
     ../../modules/nixos/hardware/intel
     ../../modules/nixos/desktop/plasma
     ../../modules/nixos/virt/kvm
@@ -45,14 +45,6 @@
   ];
   boot.kernelModules = [ "hp-wmi" ];
 
-  # Hardware
-  hardware.enableAllFirmware = true;
-  hardware.enableRedistributableFirmware = true;
-  hardware.bluetooth = {
-    enable = true;
-    settings.General.Experimental = true;
-  };
-
   services.hardware.bolt.enable = true;
   services.fwupd.enable = true;
   services.fstrim.enable = true;
@@ -62,7 +54,13 @@
     rules = lib.readFile ./usbguard-rules.conf;
   };
 
-  # Power Management
+  hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
+  hardware.bluetooth = {
+    enable = true;
+    settings.General.Experimental = true;
+  };
+
   powerManagement.enable = lib.mkForce true;
   services.power-profiles-daemon.enable = lib.mkForce false;
   services.tlp = {
@@ -82,7 +80,11 @@
     };
   };
 
+  services.openssh.enable = true;
+  services.tailscale.enable = true;
+  services.tailscale.extraUpFlags = [ "--accept-routes" ];
   services.tailscale.useRoutingFeatures = "client";
+
   services.flatpak.enable = true;
   hardware.ckb-next.enable = true;
   programs.ydotool.enable = true;
@@ -108,6 +110,11 @@
     inputs.rich-presence-wrapper.overlays.helix
     inputs.rich-presence-wrapper.overlays.zed-editor
   ];
+
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ];
+  };
 
   networking.hostName = "ares";
   system.stateVersion = "24.05";

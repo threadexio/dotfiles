@@ -12,21 +12,24 @@ in
     let
       nixosConfiguration =
         host:
+        let
+          hasHome = lib.pathExists ./${host}/home.nix;
+        in
         lib.nixosSystem {
           inherit specialArgs;
 
           modules = [
+            ./${host}
+          ]
+          ++ (lib.optionals hasHome [
+            ../modules/nixos/user
             inputs.hm.nixosModules.default
-
             {
               home-manager.extraSpecialArgs = specialArgs;
               home-manager.useGlobalPkgs = true;
-            }
-            ./${host}
-            {
               home-manager.users.kat.imports = [ ./${host}/home.nix ];
             }
-          ];
+          ]);
         };
 
       hosts = lib.attrNames (lib.filterAttrs (path: type: type == "directory") (builtins.readDir ./.));
