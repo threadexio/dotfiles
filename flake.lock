@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1755756618,
-        "narHash": "sha256-cPtqddGURsH6U0HFYP26ULcsOzM8lvvsMeq3RxtGavs=",
+        "lastModified": 1756751162,
+        "narHash": "sha256-/Mu0EqsMa+CFC4vyI3DfNDoNNR+FJ5w10jDE56TnvbQ=",
         "owner": "threadexio",
         "repo": "nixpkgs",
-        "rev": "401567f836876c108b5277db433cde329412cb51",
+        "rev": "792b1f4bed3bfaba2c1dddd2d4a5e35422374fa1",
         "type": "github"
       },
       "original": {
