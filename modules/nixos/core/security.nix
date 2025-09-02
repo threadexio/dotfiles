@@ -90,7 +90,7 @@
     "kernel.sysrq" = "0";
     "kernel.core_uses_pid" = "1";
     "kernel.kptr_restrict" = "2";
-    "kernel.yama.ptrace_scope" = "2";
+    "kernel.yama.ptrace_scope" = "1";
     "kernel.dmesg_restrict" = "1";
     "kernel.printk" = "3 3 3 3";
     "kernel.unprivileged_bpf_disabled" = "1";
