@@ -11,10 +11,6 @@
     settings = {
       builders-use-substitutes = true;
 
-      trusted-public-keys = [
-        "hades:j8p0UaxcNZ2UamilDop0OUYpwIfY4zFJROdo2kKib9Y="
-      ];
-
       experimental-features = [
         "nix-command"
         "flakes"

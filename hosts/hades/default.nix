@@ -1,9 +1,8 @@
-{
-  self,
-  inputs,
-  config,
-  pkgs,
-  ...
+{ self
+, inputs
+, config
+, pkgs
+, ...
 }:
 
 {
@@ -51,6 +50,7 @@
   users.users.kat.openssh.authorizedKeys.keyFiles = [
     ../../ssh/ares.pub
     ../../ssh/hermes.pub
+    ../../ssh/cerberus.pub
   ];
 
   # sudo nft insert rule filter FORWARD position 0 ip daddr 10.0.0.0/24 meta iifname virbr0 reject with icmp type admin-prohibited
