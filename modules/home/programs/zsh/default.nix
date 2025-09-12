@@ -21,6 +21,11 @@ with lib;
     enableZshIntegration = true;
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.zsh = {
     enable = true;
 
@@ -30,6 +35,8 @@ with lib;
     autocd = true;
 
     shellAliases = {
+      cd = "z";
+
       ls = "lsd -h --color=auto";
       l = "lsd -lAFh --color=auto";
       la = "lsd -ha --color=auto";
