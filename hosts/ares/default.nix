@@ -30,6 +30,7 @@
   zramSwap.enable = true;
   zramSwap.algorithm = "zstd";
 
+  boot.binfmt.preferStaticEmulators = true;
   boot.binfmt.emulatedSystems = [
     "armv7l-linux"
     "aarch64-linux"

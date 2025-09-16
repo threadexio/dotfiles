@@ -25,6 +25,16 @@
       url = "github:threadexio/nixpkgs/fabric-servers-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    wolly = {
+      url = "github:threadexio/wolly/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    rswd = {
+      url = "git+ssh://git@github.com/threadexio/rswd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

@@ -22,6 +22,22 @@ in
         setEnv.TERM = "xterm-256color";
       };
 
+      "hades" = {
+        hostname = "atlas";
+        port = 10022;
+      };
+
+      ".hades" = {
+        hostname = "hades";
+      };
+
+      "privategit" = {
+        user = "gitea";
+        hostname = "q0.ddns.net";
+        port = 2222;
+        identityFile = "${sshPath}/privategit";
+      };
+
       "github.com" = {
         user = "git";
         identityFile = "${sshPath}/github";

@@ -12,12 +12,6 @@
     dockerSocket.enable = true; # for docker-compose
   };
 
-  # Allow for running containers of other platforms.
-  boot.binfmt.preferStaticEmulators = true;
-  boot.binfmt.emulatedSystems = [
-    "aarch64-linux"
-  ];
-
   environment.systemPackages = with pkgs; [ docker-compose ];
 
   # Rootless podman
