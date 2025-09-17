@@ -38,7 +38,6 @@
     "riscv64-linux"
   ];
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   boot.kernelParams = [
     "net.ifnames=0"
     "intel_iommu=on"
@@ -62,24 +61,8 @@
     settings.General.Experimental = true;
   };
 
-  powerManagement.enable = lib.mkForce true;
-  services.power-profiles-daemon.enable = lib.mkForce false;
-  services.tlp = {
-    enable = true;
-
-    settings = {
-      # Battery Care
-      START_CHARGE_THRESH_BAT0 = 75;
-      STOP_CHARGE_THRESH_BAT0 = 80;
-
-      # Kernel
-      NMI_WATCHDOG = 0;
-
-      # Processor
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-    };
-  };
+  powerManagement.enable = true;
+  services.thermald.enable = true;
 
   services.openssh.enable = true;
   services.tailscale.enable = true;
