@@ -17,8 +17,8 @@
 
       listener = {
         bind = "0.0.0.0:50001";
-        ping_interval = 5;
-        update_interval = 10;
+        ping-interval = 5;
+        update-interval = 10;
       };
 
       storage = {
