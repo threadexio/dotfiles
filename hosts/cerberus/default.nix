@@ -10,6 +10,10 @@
     ../../modules/nixos/builder/hades
   ];
 
+  sops.secrets = {
+    "ssh/cerberus".owner = "kat";
+  };
+
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
 

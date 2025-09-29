@@ -1,0 +1,38 @@
+keys:
+  - &user_kat age1dd89lt7l8cjcknt9kjsq59jlw3y9gtt7x6rawc7n4h5ce4xe2slshz6pyy
+  - &host_ares age10mfw3h4q3f3y2p9umvjruq5ey3kxqdryt32ruay440ne8lpccenqlqewsw
+  - &host_hades age1c2qnntqerdjqfmg8y2kxacr5ta5yvpq0jm07la0myj7ad39cgpasjse56r
+  - &host_atlas age1ardndrmetnspzst9ca42rttlf2fc5x6t0w6j9hfjfaqfcn0gefxqpna8ny
+  - &host_cerberus age1857t6vlmuhgct46qgd2a8yaavk6sj78hq6s37m0p5q3kg05rn9pq6flvyc
+
+creation_rules:
+  - path_regex: secrets/common.yaml
+    key_groups:
+    - age:
+        - *user_kat
+        - *host_ares
+        - *host_hades
+
+  - path_regex: hosts/ares/secrets.yaml
+    key_groups:
+    - age:
+        - *user_kat
+        - *host_ares
+
+  - path_regex: hosts/hades/secrets.yaml
+    key_groups:
+    - age:
+        - *user_kat
+        - *host_hades
+
+  - path_regex: hosts/atlas/secrets.yaml
+    key_groups:
+    - age:
+        - *user_kat
+        - *host_atlas
+
+  - path_regex: hosts/cerberus/secrets.yaml
+    key_groups:
+    - age:
+        - *user_kat
+        - *host_cerberus

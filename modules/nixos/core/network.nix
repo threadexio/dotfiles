@@ -1,4 +1,5 @@
-{ ...
+{ config
+, ...
 }:
 
 {
@@ -27,8 +28,25 @@
   # systemd-resolved handles mDNS
   services.avahi.enable = false;
 
-  services.openssh.settings = {
-    UseDns = false;
-    PermitRootLogin = "prohibit-password";
+  services.openssh = {
+    settings = {
+      UseDns = false;
+      PermitRootLogin = "prohibit-password";
+    };
+
+    hostKeys = let
+      hostKeyFromSops = type: {
+        path = config.sops.secrets."ssh/host_${type}_key".path;
+        inherit type;
+      };
+    in [
+      (hostKeyFromSops "ed25519")
+      (hostKeyFromSops "rsa")
+    ];
+  };
+
+  sops.secrets = {
+    "ssh/host_ed25519_key" = {};
+    "ssh/host_rsa_key" = {};
   };
 }

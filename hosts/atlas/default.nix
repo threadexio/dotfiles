@@ -18,6 +18,10 @@
     ./services/rswd
   ];
 
+  sops.secrets = {
+    "ssh/atlas".owner = "kat";
+  };
+
   _module.args = {
     btrfsDataMount = subvol: {
       device = "/dev/disk/by-label/data";

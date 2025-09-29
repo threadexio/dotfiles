@@ -2,6 +2,7 @@
 , inputs
 , config
 , pkgs
+, sopsSecretsFrom
 , ...
 }:
 
@@ -17,6 +18,13 @@
     ../../modules/nixos/custom
     ../../modules/nixos/builder
   ];
+
+  sops.secrets = {
+    "ssh/hades".owner = "kat";
+  } // (sopsSecretsFrom ../../secrets/common.yaml {
+    "ssh/privategit".owner = "kat";
+    "ssh/github".owner = "kat";
+  });
 
   boot.tmp.useTmpfs = true;
   zramSwap.enable = true;

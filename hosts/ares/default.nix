@@ -2,6 +2,7 @@
 , inputs
 , pkgs
 , lib
+, sopsSecretsFrom
 , ...
 }:
 
@@ -25,6 +26,14 @@
       usbDevice = "by-label/BOOTKEY";
     };
   };
+
+  sops.secrets = {
+    "ssh/ares".owner = "kat";
+  } // (sopsSecretsFrom ../../secrets/common.yaml {
+    "ssh/github".owner = "kat";
+    "ssh/privategit".owner = "kat";
+    "ssh/aws".owner = "kat";
+  });
 
   boot.tmp.useTmpfs = true;
   boot.binfmt.preferStaticEmulators = true;

@@ -1,4 +1,6 @@
-{ ... }:
+{ config
+, ...
+}:
 
 {
   nix = {
@@ -21,7 +23,9 @@
 
   services.nix-serve = {
     enable = true;
-    secretKeyFile = "/var/secrets/cache-private-key.pem";
+    secretKeyFile = config.sops.secrets."nix_cache_private_key".path;
     openFirewall = true;
   };
+
+  sops.secrets."nix_cache_private_key" = {};
 }

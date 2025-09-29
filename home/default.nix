@@ -19,7 +19,9 @@ in
             ./${home}
           ];
 
-          extraSpecialArgs = specialArgs;
+          extraSpecialArgs = specialArgs // {
+            hostName = home;
+          };
         };
 
       homes = [

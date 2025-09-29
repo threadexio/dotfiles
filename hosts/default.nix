@@ -11,24 +11,47 @@ in
   flake.nixosConfigurations =
     let
       nixosConfiguration =
-        host:
+        hostName:
         let
-          hasHome = lib.pathExists ./${host}/home.nix;
+          hasHome = lib.pathExists ./${hostName}/home.nix;
+
+          specialArgs' = specialArgs // {
+            inherit hostName;
+          };
         in
         lib.nixosSystem {
-          inherit specialArgs;
+          specialArgs = specialArgs';
 
           modules = [
-            ./${host}
+            ./${hostName}
+            {
+              networking.hostName = hostName;
+            }
+          ]
+          ++ [
+            inputs.sops-nix.nixosModules.sops
+            ({ pkgs, lib, ... }: {
+              _module.args = {
+                sopsSecretsFrom = file: secrets: lib.mapAttrs (_: secret: secret // { sopsFile = file; }) secrets;
+              };
+
+              sops.defaultSopsFile = ./${hostName}/secrets.yaml;
+              sops.age.keyFile = "/var/lib/sops-nix/key.txt";
+              environment.systemPackages = with pkgs; [ sops ];
+
+              systemd.tmpfiles.rules = [
+                "d /var/lib/sops-nix 0700 root root - -"
+              ];
+            })
           ]
           ++ (lib.optionals hasHome [
             ../modules/nixos/user
             inputs.hm.nixosModules.default
-            {
-              home-manager.extraSpecialArgs = specialArgs;
+            ({ config, ... }: {
+              home-manager.extraSpecialArgs = specialArgs' // { nixosConfig = config; };
               home-manager.useGlobalPkgs = true;
-              home-manager.users.kat.imports = [ ./${host}/home.nix ];
-            }
+              home-manager.users.kat.imports = [ ./${hostName}/home.nix ];
+            })
           ]);
         };
 

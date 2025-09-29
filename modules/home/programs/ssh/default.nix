@@ -1,9 +1,14 @@
 { config
+, hostName
+, nixosConfig ? null
 , ...
 }:
 
 let
   sshPath = "${config.home.homeDirectory}/.ssh";
+
+  sshKeyPath = key:
+    if nixosConfig == null then "${sshPath}/${key}" else nixosConfig.sops.secrets."ssh/${key}".path;
 in
 
 {
@@ -20,6 +25,7 @@ in
         # machines do not contain these terminfo entries and as such many interactive
         # programs fail to work correctly.
         setEnv.TERM = "xterm-256color";
+        identityFile = sshKeyPath hostName;
       };
 
       "hades" = {
@@ -29,18 +35,6 @@ in
 
       ".hades" = {
         hostname = "hades";
-      };
-
-      "privategit" = {
-        user = "gitea";
-        hostname = "q0.ddns.net";
-        port = 2222;
-        identityFile = "${sshPath}/privategit";
-      };
-
-      "github.com" = {
-        user = "git";
-        identityFile = "${sshPath}/github";
       };
 
       "172.0.0.*" = {

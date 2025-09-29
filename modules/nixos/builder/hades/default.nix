@@ -1,5 +1,6 @@
 { config
 , lib
+, hostName
 , ...
 }:
 
@@ -15,7 +16,7 @@
       hostName = "hades";
       systems = [ "x86_64-linux" "aarch64-linux" ];
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      sshKey = "${config.users.users.kat.home}/.ssh/${config.networking.hostName}";
+      sshKey = config.sops.secrets."ssh/${hostName}".path;
       publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUhaSVMvMTRSS0ZSQVlIM3pVam90dk5qdmtJTGF4K0kvL2orS2EyaFcwSzkgcm9vdEBoYWRlcwo=";
     }
   ];

@@ -1,4 +1,9 @@
-{ ... }: {
+{ config
+, nixosConfig ? null
+, ...
+}:
+
+{
   imports = [
     ../gpg
   ];
@@ -20,4 +25,22 @@
       enableAsDifftool = true;
     };
   };
+
+  programs.ssh.matchBlocks =
+    let
+      sshKeyPath = key: if nixosConfig == null then "${config.home.homDirectory}/.ssh/${key}" else nixosConfig.sops.secrets."ssh/${key}".path;
+    in
+    {
+      "privategit" = {
+        user = "gitea";
+        hostname = "q0.ddns.net";
+        port = 2222;
+        identityFile = sshKeyPath "privategit";
+      };
+
+      "github.com" = {
+        user = "git";
+        identityFile = sshKeyPath "github";
+      };
+    };
 }
