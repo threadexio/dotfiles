@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs
+, ...
+}:
+
+{
   boot.extraModprobeConfig = ''
     options kvm_intel nested=1
   '';
@@ -10,16 +14,6 @@
     nss.enableGuest = true;
 
     qemu = {
-      ovmf = {
-        enable = true;
-        packages = [
-          (pkgs.OVMFFull.override {
-            secureBoot = true;
-            tpmSupport = true;
-          }).fd
-        ];
-      };
-
       swtpm.enable = true;
       vhostUserPackages = [ pkgs.virtiofsd ];
 

@@ -27,5 +27,5 @@
     openFirewall = true;
   };
 
-  sops.secrets."nix_cache_private_key" = {};
+  sops.secrets."nix_cache_private_key" = { };
 }

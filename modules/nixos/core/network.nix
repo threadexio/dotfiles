@@ -34,19 +34,21 @@
       PermitRootLogin = "prohibit-password";
     };
 
-    hostKeys = let
-      hostKeyFromSops = type: {
-        path = config.sops.secrets."ssh/host_${type}_key".path;
-        inherit type;
-      };
-    in [
-      (hostKeyFromSops "ed25519")
-      (hostKeyFromSops "rsa")
-    ];
+    hostKeys =
+      let
+        hostKeyFromSops = type: {
+          path = config.sops.secrets."ssh/host_${type}_key".path;
+          inherit type;
+        };
+      in
+      [
+        (hostKeyFromSops "ed25519")
+        (hostKeyFromSops "rsa")
+      ];
   };
 
   sops.secrets = {
-    "ssh/host_ed25519_key" = {};
-    "ssh/host_rsa_key" = {};
+    "ssh/host_ed25519_key" = { };
+    "ssh/host_rsa_key" = { };
   };
 }

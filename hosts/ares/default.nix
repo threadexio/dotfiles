@@ -77,6 +77,9 @@
 
   services.flatpak.enable = true;
   hardware.ckb-next.enable = true;
+  hardware.ckb-next.package = lib.warn "Using temporary a patch for ckb-next due to https://github.com/NixOS/nixpkgs/issues/444209." (pkgs.ckb-next.overrideAttrs (old: {
+    cmakeFlags = (old.cmakeFlags or [ ]) ++ [ "-DUSE_DBUS_MENU=0" ];
+  }));
   programs.ydotool.enable = true;
   programs.wireshark.enable = true;
   programs.adb.enable = true;
