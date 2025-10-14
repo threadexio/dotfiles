@@ -151,11 +151,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1755777554,
-        "narHash": "sha256-gkKCV0/3pvzZv+yk4g8oNC4F6XwdsPdJWckBzNJ0mAg=",
+        "lastModified": 1760435198,
+        "narHash": "sha256-Ur04uzMJf7FTwl7Lftp0YIPfqG8sKhpR4j2brfkpOX0=",
         "owner": "threadexio",
         "repo": "rich-presence-wrapper",
-        "rev": "797cfd2c8d3502d54021592901257c01800686e6",
+        "rev": "bcbf105eb87ce3b3f79a5eb6cf3094cb28183e75",
         "type": "github"
       },
       "original": {
