@@ -39,6 +39,10 @@
 
         STATIC_URL_PREFIX = "/git";
       };
+
+      "git.config" = {
+        "receive.shallowUpdate" = true;
+      };
     };
   };
 
