@@ -19,6 +19,7 @@
     ../../modules/home/programs/zed
     ../../modules/home/programs/chromium
     ../../modules/home/programs/discord
+    ../../modules/home/programs/obs
 
     ../../modules/home/dev/common
     ../../modules/home/dev/c
