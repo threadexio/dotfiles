@@ -14,7 +14,7 @@
     ../../modules/nixos/efi
     ../../modules/nixos/custom
     ../../modules/nixos/hardware/intel
-    ../../modules/nixos/desktop/cosmic
+    ../../modules/nixos/desktop/plasma
     ../../modules/nixos/virt/kvm
     ../../modules/nixos/virt/podman
   ];
