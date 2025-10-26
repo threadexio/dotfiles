@@ -9,6 +9,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    inputs.nixos-hardware.nixosModules.hp-elibook-830g6
 
     ../../modules/nixos/core
     ../../modules/nixos/efi
