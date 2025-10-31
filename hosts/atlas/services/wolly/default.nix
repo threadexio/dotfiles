@@ -35,8 +35,8 @@
 
       # Minecraft Server
       {
-        from = "0.0.0.0:50000";
-        to = "10.0.0.17:50000";
+        from = "0.0.0.0:25565";
+        to = "10.0.0.17:25565";
         wait-for = 10;
         max-attempts = 10;
       }
