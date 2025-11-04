@@ -15,7 +15,6 @@
         usbguard-utils = pkgs.callPackage ./usbguard-utils { };
         virt-clone-cheap = pkgs.callPackage ./virt-clone-cheap { };
         wallpapers = pkgs.callPackage ./wallpapers { };
-        watchpuppy = pkgs.callPackage ./watchpuppy { };
         wol = pkgs.callPackage ./wol { };
       };
     };
@@ -30,7 +29,6 @@
       usbguard-utils = final.callPackage ./usbguard-utils { };
       virt-clone-cheap = final.callPackage ./virt-clone-cheap { };
       wallpapers = final.callPackage ./wallpapers { };
-      watchpuppy = final.callPackage ./watchpuppy { };
       wol = final.callPackage ./wol { };
     };
 

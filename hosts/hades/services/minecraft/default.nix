@@ -137,6 +137,8 @@
     };
   };
 
+  services.sleep-on-inactivity.check.tcp.ports = [ 25565 ];
+
   nixpkgs.overlays = [
     inputs.fabric-servers.overlays.default
   ];

@@ -1,1 +1,4 @@
 result
+
+# VM disks
+*.qcow2

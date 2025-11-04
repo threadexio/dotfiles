@@ -83,32 +83,10 @@
     }
   '';
 
-  systemd.services.watchpuppy =
-    let
-      misc = pkgs.callPackage ./watchpuppy-misc { };
-    in
-    {
-      description = "Suspend on inactivity";
-      after = [ "multi-user.target" ];
-
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = "${pkgs.watchpuppy}/bin/watchpuppy --check ${misc}/share/watchpuppy/check --every 120 --run ${misc}/share/watchpuppy/run --once";
-        RemainAfterExit = false;
-      };
-
-      wantedBy = [ "multi-user.target" ];
-    };
-
-  environment.etc."systemd/system-sleep/watchpuppy" = {
-    mode = "0755";
-    source = pkgs.writeScript "watchpuppy-sleep-hook" ''
-      #!${pkgs.runtimeShell}
-
-      if [ "$1" = "post" ]; then
-        ${pkgs.systemd}/bin/systemctl start watchpuppy.service
-      fi
-    '';
+  services.sleep-on-inactivity = {
+    enable = true;
+    poll = "*-*-* *:0/10:00";
+    check.tcp.enable = true;
   };
 
   systemd.services.wol = {
