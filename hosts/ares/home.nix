@@ -16,6 +16,7 @@
 
     ../../modules/home/programs/kitty
     ../../modules/home/programs/alacritty
+    ../../modules/home/programs/ghostty
     ../../modules/home/programs/zed
     ../../modules/home/programs/chromium
     ../../modules/home/programs/discord
