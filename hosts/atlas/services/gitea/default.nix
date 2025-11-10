@@ -25,8 +25,8 @@
       };
 
       server = rec {
-        ROOT_URL = "https://${DOMAIN}/git/";
-        DOMAIN = "q0.ddns.net";
+        ROOT_URL = "https://${DOMAIN}/";
+        DOMAIN = "git.31c0.org";
 
         HTTP_ADDR = "127.0.0.42";
         HTTP_PORT = 3000;
@@ -36,8 +36,6 @@
         START_SSH_SERVER = true;
         SSH_PORT = 2222;
         SSH_LISTEN_PORT = 2222;
-
-        STATIC_URL_PREFIX = "/git";
       };
 
       "git.config" = {

@@ -12,7 +12,7 @@
     recommendedTlsSettings = true;
 
     virtualHosts = {
-      "q0.ddns.net" = {
+      "31c0.org" = {
         listen = [
           {
             addr = "0.0.0.0";
@@ -27,26 +27,59 @@
         ];
 
         forceSSL = true;
-        enableACME = true;
+        useACMEHost = "31c0.org";
 
-        locations = {
-          "/" = {
-            root = ./www/public;
-            index = "index.html";
-            tryFiles = "$uri $uri/ =404";
-          };
+        locations."/" = {
+          root = ./www/public;
+          index = "index.html";
+          tryFiles = "$uri $uri/ =404";
+        };
+      };
 
-          "/git/" = with config.services.gitea.settings.server; {
-            proxyPass = "http://${HTTP_ADDR}:${toString HTTP_PORT}/";
-            extraConfig = ''
-              client_max_body_size 512M;
-              rewrite ^/git(/.*) $1 break;
-            '';
-          };
+      "git.31c0.org" = {
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 80;
+            ssl = false;
+          }
+          {
+            addr = "0.0.0.0";
+            port = 443;
+            ssl = true;
+          }
+        ];
 
-          "/vault/" = with config.services.vaultwarden.config; {
-            proxyPass = "http://${ROCKET_ADDRESS}:${toString ROCKET_PORT}";
-          };
+        forceSSL = true;
+        useACMEHost = "31c0.org";
+
+        locations."/" = with config.services.gitea.settings.server; {
+          proxyPass = "http://${HTTP_ADDR}:${toString HTTP_PORT}/";
+          extraConfig = ''
+            client_max_body_size 512M;
+          '';
+        };
+      };
+
+      "vault.31c0.org" = {
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 80;
+            ssl = false;
+          }
+          {
+            addr = "0.0.0.0";
+            port = 443;
+            ssl = true;
+          }
+        ];
+
+        forceSSL = true;
+        useACMEHost = "31c0.org";
+
+        locations."/" = with config.services.vaultwarden.config; {
+          proxyPass = "http://${ROCKET_ADDRESS}:${toString ROCKET_PORT}";
         };
       };
     };
@@ -60,12 +93,24 @@
       ];
     in
     {
-      wants = dependencies;
+      requires = dependencies;
       after = dependencies;
     };
 
   security.acme = {
     acceptTerms = true;
     defaults.email = "pzarganitis@gmail.com";
+
+    certs."31c0.org" = {
+      domain = "31c0.org";
+      extraDomainNames = [ "*.31c0.org" ];
+      dnsProvider = "cloudflare";
+      dnsPropagationCheck = true;
+      credentialFiles = {
+        "CLOUDFLARE_DNS_API_TOKEN_FILE" = config.sops.secrets.cloudflare_api_token.path;
+      };
+    };
   };
+
+  users.users.nginx.extraGroups = [ "acme" ];
 }

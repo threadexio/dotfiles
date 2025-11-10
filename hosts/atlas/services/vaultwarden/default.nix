@@ -8,7 +8,7 @@
     enable = true;
 
     config = {
-      DOMAIN = "https://q0.ddns.net/vault";
+      DOMAIN = "https://vault.31c0.org";
       SIGNUPS_ALLOWED = false;
 
       ROCKET_ADDRESS = "127.0.0.42";

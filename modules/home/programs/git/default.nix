@@ -33,7 +33,7 @@
     {
       "privategit" = {
         user = "gitea";
-        hostname = "q0.ddns.net";
+        hostname = "31c0.org";
         port = 2222;
         identityFile = sshKeyPath "privategit";
       };

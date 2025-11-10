@@ -12,6 +12,7 @@
     ./services/gitea
     ./services/vaultwarden
     ./services/syncthing
+    ./services/cloudflare
 
     ./services/vsftpd
     ./services/wolly
