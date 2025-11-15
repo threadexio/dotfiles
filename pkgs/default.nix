@@ -8,6 +8,7 @@
       packages = {
         bali-firefoxcxx = pkgs.callPackage ./bali-firefoxcss { };
         btrfs-utils = pkgs.callPackage ./btrfs-utils { };
+        cloudflare-dns = pkgs.callPackage ./cloudflare-dns { };
         firefox-gnome-theme = pkgs.callPackage ./firefox-gnome-theme { };
         firefox-mod-blur = pkgs.callPackage ./firefox-mod-blur { };
         hackvm = pkgs.callPackage ./hackvm { };
@@ -23,6 +24,7 @@
     packages = final: prev: {
       bali-firefoxcxx = final.callPackage ./bali-firefoxcss { };
       btrfs-utils = final.callPackage ./btrfs-utils { };
+      cloudflare-dns = final.callPackage ./cloudflare-dns { };
       firefox-gnome-theme = final.callPackage ./firefox-gnome-theme { };
       firefox-mod-blur = final.callPackage ./firefox-mod-blur { };
       hackvm = final.callPackage ./hackvm { };
