@@ -11,6 +11,22 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
+    upstreams = {
+      gitea = with config.services.gitea.settings.server; {
+        servers."${HTTP_ADDR}:${toString HTTP_PORT}" = {
+          fail_timeout = "10s";
+          max_fails = 5;
+        };
+      };
+
+      vaultwarden = with config.services.vaultwarden.config; {
+        servers."${ROCKET_ADDRESS}:${toString ROCKET_PORT}" = {
+          fail_timeout = "10s";
+          max_fails = 5;
+        };
+      };
+    };
+
     virtualHosts = {
       "31c0.org" = {
         listen = [
@@ -53,8 +69,8 @@
         forceSSL = true;
         useACMEHost = "31c0.org";
 
-        locations."/" = with config.services.gitea.settings.server; {
-          proxyPass = "http://${HTTP_ADDR}:${toString HTTP_PORT}/";
+        locations."/" = {
+          proxyPass = "http://gitea";
           extraConfig = ''
             client_max_body_size 512M;
           '';
@@ -78,8 +94,8 @@
         forceSSL = true;
         useACMEHost = "31c0.org";
 
-        locations."/" = with config.services.vaultwarden.config; {
-          proxyPass = "http://${ROCKET_ADDRESS}:${toString ROCKET_PORT}";
+        locations."/" = {
+          proxyPass = "http://vaultwarden";
         };
       };
     };
