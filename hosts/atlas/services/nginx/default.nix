@@ -101,18 +101,6 @@
     };
   };
 
-  systemd.services.nginx =
-    let
-      dependencies = [
-        "gitea.service"
-        "vaultwarden.service"
-      ];
-    in
-    {
-      requires = dependencies;
-      after = dependencies;
-    };
-
   security.acme = {
     acceptTerms = true;
     defaults.email = "pzarganitis@gmail.com";
