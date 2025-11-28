@@ -70,6 +70,7 @@ let
             environment.pathsToLink = [ "/share/zsh" ];
 
             home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = specialArgs // {
               nixosConfig = config;
             };
@@ -146,6 +147,10 @@ in
 
     cerberus = nixosConfiguration {
       hostName = "cerberus";
+    };
+
+    test = nixosConfiguration {
+      hostName = "test";
     };
   };
 }
