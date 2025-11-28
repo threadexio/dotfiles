@@ -1,17 +1,15 @@
-{
-  self,
-  inputs,
-  ...
+{ self
+, inputs
+, ...
 }:
 
 let
   inherit (inputs.nixpkgs) lib;
 
   nixosConfiguration =
-    {
-      hostName,
-      extraModules ? [ ],
-      ...
+    { hostName
+    , extraModules ? [ ]
+    , ...
     }:
     let
       specialArgs = {
@@ -45,13 +43,15 @@ let
 
             _module.args.sopsSecretsFrom =
               path: secrets:
-              lib.mapAttrs (
-                secret: options:
-                options
-                // {
-                  sopsFile = path;
-                }
-              ) secrets;
+              lib.mapAttrs
+                (
+                  secret: options:
+                  options
+                  // {
+                    sopsFile = path;
+                  }
+                )
+                secrets;
           }
         )
       ];
@@ -59,11 +59,10 @@ let
       homeManagerModules = lib.optionals (lib.pathExists ./${hostName}/home.nix) [
         inputs.hm.nixosModules.default
         (
-          {
-            config,
-            lib,
-            pkgs,
-            ...
+          { config
+          , lib
+          , pkgs
+          , ...
           }:
           {
             users.mutableUsers = false;

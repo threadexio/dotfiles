@@ -9,7 +9,7 @@
   sops.secrets = {
     "vaultwarden/backup_key".owner = "vaultwarden";
   };
-  
+
   services.vaultwarden = {
     enable = true;
 

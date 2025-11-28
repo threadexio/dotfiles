@@ -16,5 +16,5 @@
     isSystemUser = true;
     group = "cloudflare";
   };
-  users.groups.cloudflare = {};
+  users.groups.cloudflare = { };
 }

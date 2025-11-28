@@ -10,7 +10,8 @@ let
     let
       toJSON = lib.generators.toJSON { };
       inherit (builtins) toFile;
-    in toFile name (toJSON content);
+    in
+    toFile name (toJSON content);
 
   dnsConfig = {
     rules = [
@@ -30,7 +31,7 @@ in
   sops.secrets = {
     "cloudflare_api_token".restartUnits = [ "cloudflare-dns.service" ];
   };
-  
+
   systemd.tmpfiles.rules = [
     "d /var/lib/cloudflare-dns 770 cloudflare cloudflare -"
   ];

@@ -23,7 +23,7 @@
 
   sops.secrets = {
     "ssh/hades".owner = "kat";
-    "nix/cache_key" = {};
+    "nix/cache_key" = { };
   } // (sopsSecretsFrom ../../secrets/common.yaml {
     "ssh/privategit".owner = "kat";
     "ssh/github".owner = "kat";
