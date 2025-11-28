@@ -67,7 +67,5 @@
         {
           formatter = pkgs.nixpkgs-fmt;
         };
-
-      _module.args.specialArgs = { inherit self inputs; };
     };
 }

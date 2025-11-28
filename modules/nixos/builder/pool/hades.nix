@@ -5,7 +5,6 @@
 }:
 
 {
-  # Is also a binary cache.
   nix.settings.substituters = lib.mkAfter [ "http://atlas:15000" ];
   nix.settings.trusted-public-keys = [ "hades:j8p0UaxcNZ2UamilDop0OUYpwIfY4zFJROdo2kKib9Y=" ];
 

@@ -1,4 +1,5 @@
 { self
+, config
 , pkgs
 , sopsSecretsFrom
 , ...
@@ -10,26 +11,29 @@
 
     ../../modules/nixos/core
     ../../modules/nixos/efi
-    ../../modules/nixos/hardware/intel
-    ../../modules/nixos/virt/kvm
-    ../../modules/nixos/virt/podman
+    ../../modules/nixos/networking
     ../../modules/nixos/custom
-    ../../modules/nixos/builder
+    ../../modules/nixos/services/openssh
+    ../../modules/nixos/virtualisation/kvm
+    ../../modules/nixos/virtualisation/podman
+    ../../modules/nixos/builder/setup
 
     ./services/minecraft
   ];
 
   sops.secrets = {
     "ssh/hades".owner = "kat";
+    "nix/cache_key" = {};
   } // (sopsSecretsFrom ../../secrets/common.yaml {
     "ssh/privategit".owner = "kat";
     "ssh/github".owner = "kat";
   });
 
-  boot.tmp.useTmpfs = true;
+
   zramSwap.enable = true;
   zramSwap.algorithm = "zstd";
-
+  boot.tmp.useTmpfs = true;
+  boot.blacklistedKernelModules = [ "nouveau" ];
   boot.binfmt.preferStaticEmulators = true;
   boot.binfmt.emulatedSystems = [
     "armv7l-linux"
@@ -37,11 +41,6 @@
     "riscv32-linux"
     "riscv64-linux"
   ];
-
-  boot.blacklistedKernelModules = [ "nouveau" ];
-
-  services.hardware.bolt.enable = true;
-  services.fstrim.enable = true;
 
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
@@ -52,17 +51,16 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  services.openssh.enable = true;
   services.tailscale.enable = true;
   services.tailscale.extraUpFlags = [ "--accept-routes" ];
   services.tailscale.useRoutingFeatures = "client";
+
   users.users.kat.openssh.authorizedKeys.keyFiles = [
     ../../ssh/ares.pub
     ../../ssh/hermes.pub
     ../../ssh/cerberus.pub
   ];
 
-  # sudo nft insert rule filter FORWARD position 0 ip daddr 10.0.0.0/24 meta iifname virbr0 reject with icmp type admin-prohibited
   networking.nftables.ruleset = ''
     table ip filter {
       # Restrict the VMs in `virbr1` from accessing devices on the local network
@@ -103,6 +101,8 @@
     wantedBy = [ "multi-user.target" ];
   };
 
+  builder.cache.keyPath = config.sops.secrets."nix/cache_key".path;
+
   environment.systemPackages = with pkgs; [
     btrfs-utils
     ethtool
@@ -117,6 +117,5 @@
     dates = [ "weekly" ];
   };
 
-  networking.hostName = "hades";
   system.stateVersion = "24.05";
 }

@@ -21,7 +21,9 @@
         "@wheel"
       ];
 
-      allowed-users = [ "@wheel" ];
+      allowed-users = [
+        "@wheel"
+      ];
     };
   };
 

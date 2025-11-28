@@ -13,11 +13,12 @@
 
     ../../modules/nixos/core
     ../../modules/nixos/efi
+    ../../modules/nixos/networking
+    ../../modules/nixos/services/openssh
     ../../modules/nixos/custom
-    ../../modules/nixos/hardware/intel
     ../../modules/nixos/desktop/plasma
-    ../../modules/nixos/virt/kvm
-    ../../modules/nixos/virt/podman
+    ../../modules/nixos/virtualisation/kvm
+    ../../modules/nixos/virtualisation/podman
   ];
 
   custom.boot.luksUsbUnlock = {
@@ -37,6 +38,7 @@
   });
 
   boot.tmp.useTmpfs = true;
+  boot.kernelParams = [ "intel_iommu=on" "iommu=pt" ];
   boot.binfmt.preferStaticEmulators = true;
   boot.binfmt.emulatedSystems = [
     "armv7l-linux"
@@ -45,33 +47,16 @@
     "riscv64-linux"
   ];
 
-  boot.kernelParams = [
-    "net.ifnames=0"
-    "intel_iommu=on"
-    "iommu=pt"
-  ];
-  boot.kernelModules = [ "hp-wmi" ];
-
-  services.hardware.bolt.enable = true;
-  services.fwupd.enable = true;
-  services.fstrim.enable = true;
-
   services.usbguard = {
     enable = true;
     rules = lib.readFile ./usbguard-rules.conf;
   };
 
-  hardware.enableAllFirmware = true;
-  hardware.enableRedistributableFirmware = true;
   hardware.bluetooth = {
     enable = true;
     settings.General.Experimental = true;
   };
 
-  powerManagement.enable = true;
-  services.thermald.enable = true;
-
-  services.openssh.enable = true;
   services.tailscale.enable = true;
   services.tailscale.extraUpFlags = [ "--accept-routes" ];
   services.tailscale.useRoutingFeatures = "client";
@@ -87,7 +72,6 @@
 
   users.users.kat.extraGroups = [
     "ydotool"
-    "wireshark"
     "adbusers"
   ];
 
@@ -110,6 +94,5 @@
     dates = [ "weekly" ];
   };
 
-  networking.hostName = "ares";
   system.stateVersion = "24.05";
 }

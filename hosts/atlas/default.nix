@@ -6,14 +6,15 @@
     ./hardware-configuration.nix
 
     ../../modules/nixos/core
-    ../../modules/nixos/virt/podman
+    ../../modules/nixos/networking
+    ../../modules/nixos/services/openssh
+    ../../modules/nixos/virtualisation/podman
 
     ./services/nginx
     ./services/gitea
     ./services/vaultwarden
     ./services/syncthing
     ./services/cloudflare
-
     ./services/vsftpd
     ./services/wolly
     ./services/rswd
@@ -43,9 +44,9 @@
   hardware.bluetooth.enable = false;
   networking.wireless.enable = false;
 
-  services.openssh.enable = true;
   services.tailscale.enable = true;
   services.tailscale.useRoutingFeatures = "server";
+
   users.users.kat.openssh.authorizedKeys.keyFiles = [
     ../../ssh/ares.pub
     ../../ssh/hermes.pub
@@ -53,6 +54,5 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  networking.hostName = "atlas";
   system.stateVersion = "25.05";
 }
