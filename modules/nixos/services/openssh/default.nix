@@ -3,6 +3,11 @@
 }:
 
 {
+  sops.secrets = {
+    "ssh/host_ed25519_key" = { };
+    "ssh/host_rsa_key" = { };
+  };
+
   services.openssh = {
     enable = true;
 
