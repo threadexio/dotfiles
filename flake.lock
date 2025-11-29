@@ -22,11 +22,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1756751162,
-        "narHash": "sha256-/Mu0EqsMa+CFC4vyI3DfNDoNNR+FJ5w10jDE56TnvbQ=",
+        "lastModified": 1764409129,
+        "narHash": "sha256-0ht2LpM/gsdFhmqMSrLgea59ufOAgfBIM338+h4zznE=",
         "owner": "threadexio",
         "repo": "nixpkgs",
-        "rev": "792b1f4bed3bfaba2c1dddd2d4a5e35422374fa1",
+        "rev": "83c3b35e43ef82e739883956fee18d52feab27cc",
         "type": "github"
       },
       "original": {

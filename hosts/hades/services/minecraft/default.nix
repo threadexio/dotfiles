@@ -6,10 +6,21 @@
 }:
 
 {
+  imports = [
+    ../../../../modules/nixos/services/minecraft-server
+  ];
+
   services.minecraft-server = {
     enable = true;
-    package = pkgs.fabricServers.fabric-1_21_4.withMods (
-      { pkgs, version, ... }:
+    package = pkgs.fabricServers.fabric-1_21_4;
+
+    eula = true;
+    jvmOpts = "-Xmx4096M -Xms2048M";
+
+    mods =
+      let
+        inherit (config.services.minecraft-server.package) version;
+      in
       [
         (pkgs.fetchurl {
           pname = "architectury";
@@ -83,11 +94,7 @@
           url = "https://cdn.modrinth.com/data/1u6JkXh5/versions/bxlboAan/worldedit-mod-7.3.11.jar";
           hash = "sha256-V+8eKjmJ9N1o4AGTYVpvRV1mHUG2cD8Ghxo3P7S9FmU=";
         })
-      ]
-    );
-
-    eula = true;
-    jvmOpts = "-Xmx4096M -Xms2048M";
+      ];
   };
 
   systemd.services.minecraft-server = {
