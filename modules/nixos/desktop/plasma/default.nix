@@ -6,6 +6,8 @@
 {
   imports = [
     ../common.nix
+
+    ./fix-126590.nix
   ];
 
   services.xserver.enable = true;
