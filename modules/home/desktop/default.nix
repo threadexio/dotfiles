@@ -16,6 +16,10 @@
     };
   };
 
+  # home-manager seems to create this file and then forget it exists and later
+  # fails when it tries to re-create it.
+  xdg.configFile."fontconfig/conf.d/10-hm-fonts.conf".force = true;
+
   home.packages = with pkgs; [
     libreoffice
     mpv
