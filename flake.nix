@@ -18,10 +18,6 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    rich-presence-wrapper = {
-      url = "github:threadexio/rich-presence-wrapper";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     kwin-effects-forceblur = {
       url = "github:taj-ny/kwin-effects-forceblur/caac68328a0d10c35dee1cc1a8acfd613e02f8a1";
@@ -33,15 +29,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    wolly = {
-      url = "github:threadexio/wolly/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    rswd = {
-      url = "git+ssh://git@github.com/threadexio/rswd";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    rich-presence-wrapper.url = "github:threadexio/rich-presence-wrapper";
+    wolly.url = "github:threadexio/wolly";
+    rswd.url = "git+ssh://git@github.com/threadexio/rswd";
   };
 
   outputs =
