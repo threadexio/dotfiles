@@ -44,5 +44,6 @@
     };
   };
 
+  networking.firewall.allowedTCPPorts = [ 2222 ];
   fileSystems.${config.services.gitea.stateDir} = btrfsDataMount "@gitea";
 }
