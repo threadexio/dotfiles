@@ -1,4 +1,5 @@
 { inputs
+, config
 , btrfsDataMount
 , ...
 }:
@@ -8,12 +9,27 @@
     inputs.rswd.nixosModules.default
   ];
 
+  sops.secrets."rswd/keyring" = {
+    owner = config.systemd.services."rswd".serviceConfig.User;
+  };
+
   services.rswd = {
     enable = true;
 
     settings = {
-      http.bind = "0.0.0.0:8001";
-      shell.bind = "0.0.0.0:50002";
+      imports = [
+        "${config.sops.secrets."rswd/keyring".path}"
+      ];
+      
+      http = {
+        enable = true;
+        bind = "0.0.0.0:8001";
+      };
+
+      shell = {
+        enable = true;
+        bind = "0.0.0.0:50002";
+      };
 
       listener = {
         bind = "0.0.0.0:50001";
@@ -21,13 +37,11 @@
         update_interval = 10;
       };
 
-      storage = {
+      storage.autosave = {
+        enable = true;
         path = "/var/lib/rswd/state.json";
-        autosave = true;
         interval = 600;
       };
-
-      keyring.path = "/var/lib/rswd/keyring";
     };
   };
 
