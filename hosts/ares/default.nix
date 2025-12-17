@@ -60,6 +60,7 @@
   services.tailscale.enable = true;
   services.tailscale.extraUpFlags = [ "--accept-routes" ];
   services.tailscale.useRoutingFeatures = "client";
+  networking.firewall.enable = false;
 
   services.flatpak.enable = true;
   hardware.ckb-next.enable = true;
