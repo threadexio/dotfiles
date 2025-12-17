@@ -40,9 +40,12 @@
 
   qt.platformTheme = "kde";
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; let
+    inherit (stdenv.hostPlatform) system;
+  in
+  [
     kdePackages.kolourpaint
-    inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
+    inputs.kwin-effects-forceblur.packages.${system}.default
   ];
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [

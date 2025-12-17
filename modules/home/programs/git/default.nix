@@ -12,18 +12,21 @@
     enable = true;
 
     signing = {
-      # GnuPG will decide based on the author's email.
       key = "D4751508457E41726D4A4F247FAD5F3A3702647C";
       signByDefault = true;
     };
 
-    userName = "threadexio";
-    userEmail = "pzarganitis@gmail.com";
-
-    difftastic = {
-      enable = false;
-      enableAsDifftool = true;
+    settings = {
+      user = {
+        name = "threadexio";
+        email = "pzarganitis@gmail.com";
+      };
     };
+  };
+
+  programs.difftastic = {
+    enable = true;
+    git.diffToolMode = false;
   };
 
   programs.ssh.matchBlocks =
@@ -33,7 +36,7 @@
     {
       "privategit" = {
         user = "gitea";
-        hostname = "31c0.org";
+        hostname = "git.31c0.org";
         port = 2222;
         identityFile = sshKeyPath "privategit";
       };
