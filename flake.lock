@@ -204,11 +204,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1759660851,
-        "narHash": "sha256-1H8Q1kfsHrNcxA5eLiS0d4NAoY+8vWRueVbBVmSXL6k=",
+        "lastModified": 1765968759,
+        "narHash": "sha256-SmX52PKXD3hcmWRkf6LNItNtyF7+XKq8X7QE752rrMQ=",
         "ref": "refs/heads/master",
-        "rev": "b9e49bce57c0450f49e6da79f8391058dfa2a175",
-        "revCount": 136,
+        "rev": "cda3a960da68f0b314ec499876bdd279a029bf34",
+        "revCount": 137,
         "type": "git",
         "url": "ssh://git@github.com/threadexio/rswd"
       },
