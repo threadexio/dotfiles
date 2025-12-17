@@ -19,4 +19,6 @@
     llmnr = "resolve";
     dnsovertls = "true";
   };
+
+  networking.nftables.enable = true;
 }

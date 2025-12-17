@@ -20,7 +20,7 @@
       imports = [
         "${config.sops.secrets."rswd/keyring".path}"
       ];
-      
+
       http = {
         enable = true;
         bind = "0.0.0.0:8001";
@@ -45,5 +45,6 @@
     };
   };
 
+  networking.firewall.allowedTCPPorts = [ 8001 50001 50002 ];
   fileSystems."/var/lib/rswd" = btrfsDataMount "@rswd";
 }

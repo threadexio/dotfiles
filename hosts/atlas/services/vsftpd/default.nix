@@ -76,5 +76,6 @@
     "d /var/lib/vsftpd 770 root root -"
   ];
 
+  networking.firewall.allowedTCPPorts = [ 21 ];
   fileSystems."/var/lib/vsftpd" = btrfsDataMount "@vsftpd";
 }

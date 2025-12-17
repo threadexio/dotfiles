@@ -19,4 +19,5 @@
   ];
 
   fileSystems.${config.services.syncthing.dataDir} = btrfsDataMount "@syncthing";
+  networking.firewall.allowedTCPPorts = [ 8000 ];
 }
