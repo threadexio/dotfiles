@@ -60,6 +60,13 @@
           }
         ]
       '')
+      (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-bluez-config.conf" ''
+        monitor.bluez.properties = {
+          bluez5.enable-sbc-xq = true
+          bluez5.enable-msbc = true
+          bluez5.codecs = [ sbc sbc_xq ]
+        }
+      '')
     ];
   };
 
