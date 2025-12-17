@@ -101,6 +101,15 @@
     };
   };
 
+  systemd.services.nginx.requires = [
+    "gitea.service"
+    "vaultwarden.service"
+  ];
+  systemd.services.nginx.after = [
+    "gitea.service"
+    "vaultwarden.service"
+  ];
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "pzarganitis@gmail.com";
