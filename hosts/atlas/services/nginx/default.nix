@@ -101,7 +101,7 @@
     };
   };
 
-  systemd.services.nginx.requires = [
+  systemd.services.nginx.wants = [
     "gitea.service"
     "vaultwarden.service"
   ];
