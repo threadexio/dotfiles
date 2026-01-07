@@ -5,7 +5,6 @@
 {
   imports = [
     ../../modules/home/core
-    ../../modules/home/desktop/plasma
 
     ../../modules/home/programs/zsh
     ../../modules/home/programs/tmux

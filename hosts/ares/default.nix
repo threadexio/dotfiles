@@ -16,7 +16,7 @@
     ../../modules/nixos/networking
     ../../modules/nixos/services/openssh
     ../../modules/nixos/custom
-    ../../modules/nixos/desktop/plasma
+    ../../modules/nixos/desktop/cosmic
     ../../modules/nixos/virtualisation/kvm
     ../../modules/nixos/virtualisation/podman
   ];
