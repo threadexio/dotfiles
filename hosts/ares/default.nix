@@ -61,7 +61,7 @@
     enable = true;
     extraPackages = with pkgs; [ intel-media-driver ];
   };
-  
+
 
   services.system76-scheduler.enable = true;
   services.tailscale.enable = true;
