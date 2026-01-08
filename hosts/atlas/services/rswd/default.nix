@@ -23,16 +23,16 @@
 
       http = {
         enable = true;
-        bind = "0.0.0.0:8001";
+        bind = "tcp://0.0.0.0:8001";
       };
 
       shell = {
         enable = true;
-        bind = "0.0.0.0:50002";
+        bind = "unix:///run/rswd/shell.sock";
       };
 
       listener = {
-        bind = "0.0.0.0:50001";
+        bind = "tcp://0.0.0.0:50001";
         ping_interval = 5;
         update_interval = 10;
       };
@@ -43,6 +43,11 @@
         interval = 600;
       };
     };
+  };
+
+  systemd.services.rswd.serviceConfig = {
+    RuntimeDirectory = "rswd";
+    RuntimeDirectoryMode = "0700";
   };
 
   networking.firewall.allowedTCPPorts = [ 8001 50001 50002 ];

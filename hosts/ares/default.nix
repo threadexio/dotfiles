@@ -76,7 +76,6 @@
   }));
   programs.ydotool.enable = true;
   programs.wireshark.enable = true;
-  programs.adb.enable = true;
 
   users.users.kat.extraGroups = [
     "ydotool"
@@ -87,6 +86,7 @@
     wireshark-qt
     usbguard-utils
     btrfs-utils
+    android-tools
   ];
 
   environment.sessionVariables = {

@@ -1,4 +1,5 @@
-{ ...
+{ lib
+, ...
 }:
 
 {
@@ -41,8 +42,8 @@
   boot.loader.generic-extlinux-compatible.enable = true;
 
   hardware.enableRedistributableFirmware = true;
-  hardware.bluetooth.enable = false;
-  networking.wireless.enable = false;
+  hardware.bluetooth.enable = lib.mkForce false;
+  networking.wireless.enable = lib.mkForce false;
 
   services.tailscale.enable = true;
   services.tailscale.useRoutingFeatures = "server";
