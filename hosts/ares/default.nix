@@ -57,6 +57,12 @@
     settings.General.Experimental = true;
   };
 
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [ intel-media-driver ];
+  };
+  
+
   services.system76-scheduler.enable = true;
   services.tailscale.enable = true;
   services.tailscale.extraUpFlags = [ "--accept-routes" ];
@@ -82,6 +88,10 @@
     usbguard-utils
     btrfs-utils
   ];
+
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  };
 
   nixpkgs.overlays = [
     self.overlays.packages
