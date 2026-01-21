@@ -15,9 +15,14 @@
   services.avahi.enable = false;
   services.resolved = {
     enable = true;
-    dnssec = "true";
-    llmnr = "resolve";
-    dnsovertls = "true";
+
+    settings = {
+      Resolve = {
+        DNSSEC = true;
+        DNSOverTLS = true;
+        LLMNR = "resolve";
+      };
+    };
   };
 
   networking.nftables.enable = true;
