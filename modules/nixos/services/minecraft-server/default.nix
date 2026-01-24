@@ -1,6 +1,8 @@
-{ config
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }:
 
 let
@@ -9,6 +11,8 @@ let
 
   user = config.systemd.services."minecraft-server".serviceConfig.User;
   group = user;
+
+  wait-up = pkgs.callPackage ./wait-up { };
 in
 
 {
@@ -48,20 +52,24 @@ in
         inherit user group;
         mode = "0755";
       };
-    } // (lib.genAttrs' cfg.mods
-
-      (mod:
+    }
+    // (lib.genAttrs' cfg.mods
+      (
+        mod:
         let
-          name = mod.name or (builtins.baseNameOf (toString mod));
+          name = mod.name or (baseNameOf (toString mod));
         in
-        lib.nameValuePair
-          "${modsDir}/${name}.jar"
-          {
-            L = {
-              argument = toString mod;
-            };
-          }
+        lib.nameValuePair "${modsDir}/${name}.jar" {
+          L = {
+            argument = toString mod;
+          };
+        }
       )
     );
+
+    systemd.services.minecraft-server.serviceConfig = {
+      ExecStartPost = [ "${lib.getExe wait-up}" ];
+      PrivateTmp = true;
+    };
   };
 }

@@ -98,27 +98,14 @@
   };
 
   systemd.services.minecraft-server = {
+    before = [ "sleep.target" ];
+    conflicts = [ "sleep.target" ];
     wantedBy = lib.mkForce [ ];
 
     serviceConfig = {
-      ExecStartPost =
-        let
-          wait-tcp = pkgs.writeShellScriptBin "wait-tcp" (with pkgs; ''
-            while ! ${libressl.nc}/bin/nc -z "''${1:?missing host}" "''${2:?missing port}" >/dev/null 2>&1; do
-              ${coreutils}/bin/sleep 1
-            done
-          '');
-        in
-        [
-          "${wait-tcp}/bin/wait-tcp 127.0.0.1 50000"
-        ];
-
       ExecStopPost = [
         "+${pkgs.btrfs-utils}/bin/btrfs-snapshot ${config.services.minecraft-server.dataDir}"
       ];
-
-      PrivateTmp = true;
-      PrivateNetwork = true;
     };
   };
 
@@ -133,15 +120,10 @@
     requires = [ "proxy-minecraft-server.socket" "minecraft-server.service" ];
     after = [ "proxy-minecraft-server.socket" "minecraft-server.service" ];
 
-    unitConfig = {
-      JoinsNamespaceOf = "minecraft-server.service";
-    };
-
     serviceConfig = {
       Type = "notify";
       ExecStart = "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd 127.0.0.1:50000";
       PrivateTmp = true;
-      PrivateNetwork = true;
     };
   };
 

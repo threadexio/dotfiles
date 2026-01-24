@@ -8,7 +8,7 @@ subvol_path="${1:?expected path to subvolume to snapshot}"
 umask 077
 
 if [ ! -d "$SNAPSHOTS" ]; then
-  log "snapshots directory not found. creating..." 
+  echo "snapshots directory not found. creating..." 
   mkdir -p "$SNAPSHOTS"
 fi
 
