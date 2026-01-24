@@ -11,7 +11,6 @@
       "--enable-features=VaapiVideoDecodeLinuxGL"
       "--disk-cache-dir=${config.xdg.cacheHome}/chromium-cache"
       "--enable-features=AcceleratedVideoEncoder"
-      "--ignore-gpu-blocklist"
       "--enable-zero-copy"
     ];
 
