@@ -23,7 +23,7 @@
       {
         from = "0.0.0.0:10022";
         to = "10.0.0.17:22";
-        wait-for = 10;
+        wait-for = 1;
         max-attempts = 10;
         retry-delay = 5;
         retry-factor = 1.1;
@@ -33,7 +33,7 @@
       {
         from = "0.0.0.0:15000";
         to = "10.0.0.17:5000";
-        wait-for = 10;
+        wait-for = 1;
         max-attempts = 10;
         retry-delay = 5;
         retry-factor = 1.1;
@@ -43,7 +43,7 @@
       {
         from = "0.0.0.0:25565";
         to = "10.0.0.17:25565";
-        wait-for = 10;
+        wait-for = 1;
         max-attempts = 20;
         retry-delay = 5;
         retry-factor = 1.5;
