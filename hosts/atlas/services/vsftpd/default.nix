@@ -76,6 +76,11 @@
     "d /var/lib/vsftpd 770 root root -"
   ];
 
+  systemd.services."container@vsftpd" = {
+    requires = ["var-lib-vsftpd.mount"];
+    after = ["var-lib-vsftpd.mount"];
+  };
+
   networking.firewall.allowedTCPPorts = [ 21 ];
   fileSystems."/var/lib/vsftpd" = btrfsDataMount "@vsftpd";
 }

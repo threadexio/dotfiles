@@ -18,6 +18,11 @@
     "d ${config.services.syncthing.dataDir} 750 ${config.services.syncthing.user} ${config.services.syncthing.group} -"
   ];
 
-  fileSystems.${config.services.syncthing.dataDir} = btrfsDataMount "@syncthing";
+  systemd.services.syncthing = {
+    requires = ["var-lib-syncthing.mount"];
+    after = ["var-lib-syncthing.mount"];
+  };
+
   networking.firewall.allowedTCPPorts = [ 8000 ];
+  fileSystems.${config.services.syncthing.dataDir} = btrfsDataMount "@syncthing";
 }

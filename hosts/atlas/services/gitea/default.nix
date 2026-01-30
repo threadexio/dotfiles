@@ -44,6 +44,11 @@
     };
   };
 
+  systemd.services.gitea = {
+    requires = ["var-lib-gitea.mount"];
+    after = ["var-lib-gitea.mount"];
+  };
+
   networking.firewall.allowedTCPPorts = [ 2222 ];
   fileSystems.${config.services.gitea.stateDir} = btrfsDataMount "@gitea";
 }

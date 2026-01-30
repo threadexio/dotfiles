@@ -28,6 +28,11 @@
     '';
   };
 
+  systemd.services.vaultwarden = {
+    requires = ["var-lib-vaultwarden.mount"];
+    after = ["var-lib-vaultwarden.mount"];
+  };
+
   fileSystems."/var/lib/vaultwarden" = btrfsDataMount "@vaultwarden";
 
   systemd.timers.vaultwarden-backup = {

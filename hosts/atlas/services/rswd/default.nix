@@ -45,9 +45,14 @@
     };
   };
 
-  systemd.services.rswd.serviceConfig = {
-    RuntimeDirectory = "rswd";
-    RuntimeDirectoryMode = "0700";
+  systemd.services.rswd = {
+    requires = ["var-lib-rswd.mount"];
+    after = ["var-lib-rswd.mount"];
+
+    serviceConfig = {
+      RuntimeDirectory = "rswd";
+      RuntimeDirectoryMode = "0700";
+    };
   };
 
   networking.firewall.allowedTCPPorts = [ 8001 50001 50002 ];
